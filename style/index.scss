@@ -1,0 +1,97 @@
+.nav-bar {
+  background-color: #364744;
+}
+.flight-container {
+  padding: 10vh 0;
+  margin: 0;
+  background-color: #e6be50;
+  .search-form {
+    width: 75%;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 8px rgb(170, 165, 165);
+  }
+  .fa-plane {
+    font-size: 30px;
+  }
+  .checkbox {
+    display: flex;
+    align-items: center;
+    input {
+      height: 22px;
+      width: 22px;
+      margin: 0 5px 0 0;
+    }
+  }
+  .filter-search-position {
+    display: flex;
+    justify-content: space-between;
+    .filter-search-passenger {
+      width: 30%;
+      display: inline-block;
+      position: relative;
+      p {
+        text-align: center;
+      }
+      .object {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid gray;
+        padding: 4px 4px;
+        color: rgb(216, 166, 73);
+        font-size: 25px;
+        border-radius: 5px;
+        .fa-plus,
+        .fa-minus {
+          border-radius: inherit;
+          padding: 1px;
+          border: 2px solid rgb(238, 157, 65);
+          cursor: pointer;
+        }
+      }
+      .tooltip-adult,
+      .tooltip-toddler,
+      .tooltip-children {
+        display: none;
+        position: absolute;
+        color: rgb(206, 160, 74);
+        top: -40px;
+        left: -60px;
+        box-shadow: 0 3px 7px rgba(58, 55, 55, 0.5);
+        text-align: center;
+        padding: 5px 0;
+        background-color: white;
+        border-radius: 5px;
+      }
+      .tooltip-adult::after,
+      .tooltip-children::after,
+      .tooltip-toddler::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        bottom: -4px;
+        right: 43px;
+        transform: rotate(45deg);
+        background-color: white;
+      }
+      .adult:hover + .tooltip-adult {
+        display: block;
+      }
+      .children:hover + .tooltip-children {
+        display: block;
+      }
+      .toddler:hover + .tooltip-toddler {
+        display: block;
+      }
+    }
+  }
+  .fa-search,
+  .search-button {
+    font-size: 25px;
+    color: white;
+    margin-left: 10px;
+    text-decoration: none;
+  }
+}

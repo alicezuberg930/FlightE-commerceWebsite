@@ -1,0 +1,719 @@
+.nav-bar {
+  background-color: #364744;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.container .filter-container {
+  width: 30%;
+}
+
+.container .filter-container .filter-box-wraper .filter-box-temp {
+  display: block;
+  height: 353px;
+  -webkit-box-shadow: 0 5px 8px #aaa5a5;
+          box-shadow: 0 5px 8px #aaa5a5;
+  border-radius: 10px 10px 0 0;
+}
+
+.container .filter-container .filter-box-wraper .filter-box-temp .filter-box-sort {
+  padding: 0 10px;
+  width: 100%;
+}
+
+.container .filter-container .filter-box-wraper .filter-box-temp .filter-box-sort li {
+  height: 19%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.container .filter-container .filter-box-wraper .filter-box-temp .filter-box-sort li label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  line-height: 59.5px;
+  margin: 0;
+  position: relative;
+}
+
+.container .filter-container .filter-box-wraper .filter-box-temp .filter-box-sort li label input {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.container .filter-container .filter-box-wraper .filter-box-temp .filter-box-sort li label input:checked:after {
+  width: 18px;
+  height: 18px;
+  border-radius: 100%;
+  left: 1px;
+  bottom: 20.7px;
+  position: absolute;
+  background-color: #ffa500;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 1px solid white;
+}
+
+.container .filter-container .filter-box-wraper .filter-base-airline {
+  border-radius: 10px 10px 0 0;
+  margin-top: 20px;
+  display: block;
+  -webkit-box-shadow: 0 5px 8px #aaa5a5;
+          box-shadow: 0 5px 8px #aaa5a5;
+}
+
+.container .filter-container .filter-box-wraper .filter-base-airline .filter-base-content {
+  border-radius: 10px 10px 0 0;
+}
+
+.container .filter-container .filter-box-wraper .filter-base-airline .filter-base-content .filter-base-label {
+  padding: 0 10px;
+  width: 100%;
+  height: 50px;
+  background-color: #c6dbee;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.container .filter-container .filter-box-wraper .filter-base-airline .filter-base-content .filter-base-airline-content .base-filter {
+  padding: 0 10px;
+}
+
+.container .filter-container .filter-box-wraper .filter-base-airline .filter-base-content .filter-base-airline-content .base-filter li {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 59.5px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.container .filter-container .filter-box-wraper .filter-base-airline .filter-base-content .filter-base-airline-content .base-filter li .checkbox {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.container .filter-container .filter-box-wraper .filter-base-airline .filter-base-content .filter-base-airline-content .base-filter li .checkbox:checked::after {
+  bottom: 21px;
+  left: 2px;
+  border-radius: 100%;
+  content: "";
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  visibility: visible;
+  background-color: #ffa500;
+}
+
+.container .filter-container .filter-box-wraper .filter-base-airline .filter-base-content .filter-range-slider {
+  height: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .filter-container .filter-box-wraper .filter-base-airline .filter-base-content .filter-range-slider #takeoff-time-range,
+.container .filter-container .filter-box-wraper .filter-base-airline .filter-base-content .filter-range-slider #landing-time-range {
+  width: 80%;
+}
+
+.container .filter-container .filter-box-wraper .filter-base-airline .filter-base-content .filter-range-slider .ftl-range-label {
+  color: #ffa500;
+}
+
+.container .filter-container .filter-Search {
+  margin-top: 20px;
+  width: 100%;
+  -webkit-box-shadow: 0 5px 8px #aaa5a5;
+          box-shadow: 0 5px 8px #aaa5a5;
+  border-radius: 10px 10px 0 0;
+}
+
+.container .filter-container .filter-Search .filter-search-option {
+  margin: 0;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 50px;
+  padding-left: 7px;
+  background-color: #c3edfa;
+}
+
+.container .filter-container .filter-Search .filter-search-option li {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  width: 40%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-right: 10px;
+}
+
+.container .filter-container .filter-Search .filter-search-option li input {
+  width: 20px;
+  height: 20px;
+  margin-right: 7px;
+}
+
+.container .filter-container .filter-Search .filter-search-main .filter-search-flight {
+  padding: 0 7px;
+}
+
+.container .filter-container .filter-Search .filter-search-main .filter-search-wrapper {
+  padding: 0 7px 20px 7px;
+}
+
+.container .filter-container .filter-Search .filter-search-main .filter-search-wrapper .filter-search-position {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.container .filter-container .filter-Search .filter-search-main .filter-search-wrapper .filter-search-position .filter-search-passenger {
+  width: 30%;
+  display: inline-block;
+  position: relative;
+}
+
+.container .filter-container .filter-Search .filter-search-main .filter-search-wrapper .filter-search-position .filter-search-passenger p {
+  text-align: center;
+}
+
+.container .filter-container .filter-Search .filter-search-main .filter-search-wrapper .filter-search-position .filter-search-passenger .object {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 1px solid gray;
+  padding: 4px 4px;
+  color: #d8a649;
+  font-size: 25px;
+  border-radius: 5px;
+}
+
+.container .filter-container .filter-Search .filter-search-main .filter-search-wrapper .filter-search-position .filter-search-passenger .object .fa-plus,
+.container .filter-container .filter-Search .filter-search-main .filter-search-wrapper .filter-search-position .filter-search-passenger .object .fa-minus {
+  border-radius: inherit;
+  padding: 1px;
+  border: 2px solid #ee9d41;
+  cursor: pointer;
+}
+
+.container .filter-container .filter-Search .filter-search-main .filter-search-wrapper .filter-search-position .filter-search-passenger .tooltip-adult,
+.container .filter-container .filter-Search .filter-search-main .filter-search-wrapper .filter-search-position .filter-search-passenger .tooltip-toddler,
+.container .filter-container .filter-Search .filter-search-main .filter-search-wrapper .filter-search-position .filter-search-passenger .tooltip-children {
+  display: none;
+  position: absolute;
+  color: #cea04a;
+  top: -40px;
+  left: -60px;
+  -webkit-box-shadow: 0 3px 7px rgba(58, 55, 55, 0.5);
+          box-shadow: 0 3px 7px rgba(58, 55, 55, 0.5);
+  text-align: center;
+  padding: 5px 0;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.container .filter-container .filter-Search .filter-search-main .filter-search-wrapper .filter-search-position .filter-search-passenger .tooltip-adult::after,
+.container .filter-container .filter-Search .filter-search-main .filter-search-wrapper .filter-search-position .filter-search-passenger .tooltip-children::after,
+.container .filter-container .filter-Search .filter-search-main .filter-search-wrapper .filter-search-position .filter-search-passenger .tooltip-toddler::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  bottom: -4px;
+  right: 43px;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  background-color: white;
+}
+
+.container .filter-container .filter-Search .filter-search-main .filter-search-wrapper .filter-search-position .filter-search-passenger .adult:hover + .tooltip-adult {
+  display: block;
+}
+
+.container .filter-container .filter-Search .filter-search-main .filter-search-wrapper .filter-search-position .filter-search-passenger .children:hover + .tooltip-children {
+  display: block;
+}
+
+.container .filter-container .filter-Search .filter-search-main .filter-search-wrapper .filter-search-position .filter-search-passenger .toddler:hover + .tooltip-toddler {
+  display: block;
+}
+
+.container .filter-container .filter-Search .filter-search-main .filter-search-wrapper #SearchButton {
+  outline: none;
+  border: none;
+  margin-top: 20px;
+  height: 50px;
+  background: linear-gradient(45deg, #ffdf77, #9b7c42);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: white;
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.container .filter-container .filter-Search .filter-search-main .filter-search-wrapper #SearchButton .fa-search {
+  margin-right: 7px;
+}
+
+.container .filter-container .filter-Search .filter-search-main .filter-search-wrapper .search-button:hover {
+  background: -webkit-gradient(linear, left top, right top, from(#f0aa29), to(#e7bb6a));
+  background: linear-gradient(90deg, #f0aa29, #e7bb6a);
+}
+
+.container .flight-container {
+  width: 68%;
+}
+
+.container .flight-container .fare-wrapper {
+  -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.199);
+          box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.199);
+  margin-bottom: 3vh;
+  display: flow-root;
+  padding-bottom: 5px;
+  background-color: whitesmoke;
+}
+
+.container .flight-container .fare-wrapper .title {
+  text-transform: uppercase;
+  color: white;
+  margin-bottom: 20px;
+  background-color: #ffca39;
+  border-radius: 10px 10px 0 0;
+  padding: 10px 0 10px 15px;
+  font-size: 20px;
+}
+
+.container .flight-container .fare-wrapper .flight-list {
+  width: 97%;
+  margin: 0 auto;
+}
+
+.container .flight-container .fare-wrapper .reservation-info {
+  background-color: whitesmoke;
+  display: block;
+}
+
+.container .flight-container .fare-wrapper .reservation-info .seat-list {
+  float: left;
+  width: 45%;
+}
+
+.container .flight-container .fare-wrapper .reservation-info .customer-list {
+  float: right;
+  width: 55%;
+}
+
+.container .flight-container .fare-wrapper .reservation-info .customer-list .seat-state ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .flight-container .fare-wrapper .reservation-info .customer-list .box-option .info {
+  width: 100%;
+}
+
+.container .flight-container .fare-wrapper .reservation-info .customer-list .box-option .info tbody .fillout-warning th {
+  padding: 0 15px;
+  background-color: #ffca39;
+  border-radius: 10px 10px 0 0;
+  color: white;
+  height: 3rem;
+}
+
+.container .flight-container .fare-wrapper .reservation-info .customer-list .box-option .info tbody td {
+  padding: 5px 6px 5px 0;
+}
+
+.container .flight-container .fare-wrapper .reservation-info .customer-list .box-option .info tbody td:nth-child(1) {
+  width: 25%;
+}
+
+.container .flight-container .fare-wrapper .reservation-info .customer-list .box-option .info tbody td:nth-child(2) {
+  width: 75%;
+}
+
+.container .flight-container .fare-wrapper .reservation-info .customer-list .box-option .contact-info {
+  margin-top: 10px;
+}
+
+.container .flight-container .fare-wrapper .reservation-info .customer-list .box-option .contact-info tbody .fillout-warning th {
+  padding: 0 15px;
+  background-color: #ffca39;
+  border-radius: 10px 10px 0 0;
+  color: white;
+  height: 3rem;
+}
+
+.container .flight-container .fare-wrapper .reservation-info .customer-list .box-option .contact-info tbody td {
+  padding: 5px 6px 5px 0;
+}
+
+.container .flight-container .plane-body {
+  width: 70%;
+}
+
+.container .flight-container .flight-header {
+  color: white;
+  display: block;
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+  margin-bottom: 9px;
+  background-color: #ffca39;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.container .flight-container .flight-header .fa-plane-departure {
+  font-size: 30px;
+  margin: 0 15px;
+}
+
+.container .flight-container .flight-header .flight-title {
+  font-size: 20px;
+}
+
+.container .flight-container .flight-header .flight-title h3 {
+  padding: 8px 0 0 30px;
+}
+
+.container .flight-container .date-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 70px;
+  padding: 0;
+}
+
+.container .flight-container .date-list li {
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  display: inline-block;
+  height: 100%;
+  width: 14.28571%;
+  text-align: center;
+}
+
+.container .flight-container .date-list li:hover {
+  cursor: pointer;
+}
+
+.container .flight-container .flight-list .flight-item {
+  text-align: center;
+  height: 100%;
+  width: 100%;
+}
+
+.container .flight-container .flight-list .flight-item .flight-info {
+  height: 115px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+}
+
+.container .flight-container .flight-list .flight-item .flight-info li:nth-child(1) {
+  width: 19%;
+  border-right: 1px dashed rgba(187, 187, 187, 0.7);
+}
+
+.container .flight-container .flight-list .flight-item .flight-info li:nth-child(3) {
+  color: rgba(255, 166, 0, 0.7);
+}
+
+.container .flight-container .flight-list .flight-item .flight-info li:nth-child(2),
+.container .flight-container .flight-list .flight-item .flight-info li:nth-child(3),
+.container .flight-container .flight-list .flight-item .flight-info li:nth-child(4) {
+  width: 17%;
+  border-right: 1px dashed rgba(187, 187, 187, 0.7);
+}
+
+.container .flight-container .flight-list .flight-item .flight-info li:nth-child(5) {
+  width: 30%;
+}
+
+.container .flight-container .flight-list .flight-item .flight-info li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 10px;
+}
+
+.container .flight-container .flight-list .flight-item .flight-info li img {
+  width: 70%;
+}
+
+.container .flight-container .flight-list .flight-item .flight-info li .ftl-flight-line {
+  position: relative;
+  width: 100%;
+  height: 1px;
+}
+
+.container .flight-container .flight-list .flight-item .flight-info li .ftl-flight-line .flight-line {
+  background-color: rgba(255, 166, 0, 0.7);
+  height: 1px;
+}
+
+.container .flight-container .flight-list .flight-item .flight-info li .ftl-flight-line .flight-line::after {
+  position: absolute;
+  content: ">";
+  right: -2px;
+  top: -13px;
+}
+
+.container .flight-container .flight-list .flight-item .flight-info li .expand-details .fa-chevron-down {
+  -webkit-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+}
+
+.container .flight-container .flight-list .flight-item .flight-info li .expand-details:hover {
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+  color: #00646b;
+  cursor: pointer;
+}
+
+.container .flight-container .flight-list .flight-item .flight-info li button {
+  width: 90%;
+  height: 40px;
+  background-color: #5aa0a5;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+
+.container .flight-container .flight-list .flight-item .flight-info li button:hover {
+  cursor: pointer;
+  background-color: #003d7e;
+}
+
+.container .flight-container .flight-list .flight-item .flight-box-detail {
+  -webkit-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+  display: none;
+  background-color: rgba(233, 233, 233, 0.7);
+  margin-bottom: 10px;
+  padding: 2px 0;
+}
+
+.container .flight-container .flight-list .flight-item .flight-box-detail .box-item {
+  margin: 5px auto;
+  width: 98%;
+  background-color: white;
+  padding: 4px 7px;
+}
+
+.container .flight-container .flight-list .flight-item .flight-box-detail .box-item .flight-box-detail-header,
+.container .flight-container .flight-list .flight-item .flight-box-detail .box-item .box-item-fare-header {
+  text-align: start;
+  margin: 0 0 8px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.container .flight-container .flight-list .flight-item .flight-box-detail .box-item .box-item-flight {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.container .flight-container .flight-list .flight-item .flight-box-detail .box-item .box-item-flight li:nth-child(1) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.container .flight-container .flight-list .flight-item .flight-box-detail .box-item .box-item-flight li {
+  width: 25%;
+  display: inline-block;
+  text-align: center;
+}
+
+.container .flight-container .flight-list .flight-item .flight-box-detail .box-item .box-item-flight li img {
+  width: 130px;
+}
+
+.container .flight-container .flight-list .flight-item .flight-box-detail .box-item .box-item-flight li span {
+  display: inline-block;
+}
+
+.container .flight-container .flight-list .flight-item .flight-box-detail .box-item .box-item-fare {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  margin: 2px 0;
+}
+
+.container .flight-container .flight-list .flight-item .flight-box-detail .box-item .box-item-fare li {
+  display: inline-block;
+  width: 19.6%;
+}
+
+.container .flight-container .flight-list .flight-item .flight-box-detail .box-item .total-price {
+  color: #ffa500;
+  font-size: large;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-right: 9.2vh;
+}
+
+.filter-base-header {
+  text-transform: uppercase;
+  border-radius: 10px 10px 0 0;
+  color: white;
+  padding-left: 10px;
+  text-align: start;
+  line-height: 50px;
+  display: inline-block;
+  background-color: #ffca39;
+  width: 100%;
+}
+
+.rotate {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.Economy {
+  background-color: aquamarine;
+}
+
+.Business {
+  background-color: greenyellow;
+}
+
+.Occupied {
+  background-color: grey;
+}
+
+.warning {
+  border: 1px solid red;
+}
+
+.seat {
+  cursor: pointer;
+  margin: 5px;
+  width: 35px;
+  height: 35px;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 35px;
+  display: inline-block;
+}
+
+@media (max-width: 900px) {
+  .container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .container .flight-container,
+  .container .filter-container,
+  .container .form-control {
+    width: 100%;
+  }
+  .container .flight-container {
+    -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1;
+  }
+  .container .filter-container {
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
+  }
+}
+/*# sourceMappingURL=flight-result.css.map */
