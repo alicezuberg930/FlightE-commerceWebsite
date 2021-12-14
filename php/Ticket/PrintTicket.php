@@ -2,6 +2,10 @@
 require_once("../../class/plane.php");
 require_once("../../class/flight.php");
 require_once("../../class/flightpath.php");
+session_start();
+if (!isset($_SESSION["Member"]) || !isset($_SESSION["Member"])) {
+    die("Error");
+}
 $TicketList = $TicketObject->GetTicket("where FlightID = '" . $_POST["FlightID"] . "'");
 $Plane = $PlaneObject->GetPlane("where PlaneID = '" . $_POST["PlaneID"] . "'")[0];
 $FlightList = $FlightObject->SearchFlight(" and FlightID = '" . $_POST["FlightID"] . "'");
@@ -156,6 +160,7 @@ $String .= '</div>
                     <tr class="fillout-warning"><th colspan=2>Nhập thông tin hành khách</th></tr>
                 </tbody>
             </table>
+
             <table class="contact-info">
                 <tbody>
                     <tr class="fillout-warning"><th colspan=3>Thông tin liên hệ</th></tr>

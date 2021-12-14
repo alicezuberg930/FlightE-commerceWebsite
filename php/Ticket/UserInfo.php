@@ -3,12 +3,13 @@ $BaggageList = $BaggageObject->GetBaggage();
 $SeatCode = $_POST["SeatCode"];
 $Ticket = $_POST["Ticket"];
 $Class = $_POST["Class"];
+$Type = $_POST["Type"];
 $UserInfoString = '
 <tr>
     <th>Khách hàng</th>      
     <th>Họ tên *</th>
 </tr>
-<tr class="row-1 ' . $SeatCode . '">  
+<tr data-type="' . $Type . '" class="row-1 ' . $SeatCode . '">  
     <td class="customer-age">
         <div class="input-group">                       
             <select class="input-age form-control">           

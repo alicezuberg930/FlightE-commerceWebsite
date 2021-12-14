@@ -1,5 +1,5 @@
 .nav-bar {
-  background-color: #364744;
+  background-color: var(--header);
 }
 
 .container {
@@ -561,12 +561,12 @@
 }
 
 .container .flight-container .flight-list .flight-item .flight-box-detail {
-  -webkit-transition: 0.5s ease-in-out;
-  transition: 0.5s ease-in-out;
-  display: none;
+  height: 0;
+  overflow: hidden;
+  -webkit-transition: height 0.5s ease-in-out;
+  transition: height 0.5s ease-in-out;
   background-color: rgba(233, 233, 233, 0.7);
   margin-bottom: 10px;
-  padding: 2px 0;
 }
 
 .container .flight-container .flight-list .flight-item .flight-box-detail .box-item {

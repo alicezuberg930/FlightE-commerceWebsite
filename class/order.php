@@ -1,20 +1,21 @@
 <?php require_once("../../connection.php");
 class order
 {
-    public function getAllOrder($cusID)
+    public function GetOrder($SQL)
     {
-        $query = mysqli_query(connection(), "SELECT * FROM orders WHERE CustomerID = '$cusID'");
+        $connect = connection();
+        $query = mysqli_query($connect, "SELECT * FROM orders" . $SQL);
         $OrderArray = array();
         while ($Row = mysqli_fetch_assoc($query)) {
             $OrderArray[] = $Row;
         }
-        connection()->close();
+        $connect->close();
         return $OrderArray;
     }
-    public function getOrderDetail($orderid)
+    public function GetOrderDetail($ID)
     {
-        $query = mysqli_query(connection(), "SELECT * FROM orderdetail, vegetable WHERE orderdetail.OrderID = '$orderid'
-        AND orderdetail.VegetableID = vegetable.VegetableID");
+        $connect = connection();
+        $query = mysqli_query($connect, "SELECT * FROM orderdetail, vegetable WHERE orderdetail.OrderID = '" . $ID . "'");
         $DetailArray = array();
         while ($Row = mysqli_fetch_assoc($query)) {
             $DetailArray[] = $Row;
@@ -44,6 +45,7 @@ class order
     }
     public function AddOrderDetails($orderdetails)
     {
+        $connect = connection();
         foreach ($orderdetails as $detail) {
             $OrderID = $detail["OrderID"];
             $TicketID = $detail["TicketID"];
@@ -54,11 +56,12 @@ class order
             $BaggageWeight = $detail["BaggageWeight"];
             $SeatCode = $detail["SeatCode"];
             $Class = $detail["Class"];
-            mysqli_query(connection(), "UPDATE ticket SET State = 'Occupied' WHERE TicketID = '" . $TicketID . "'");
-            $query = mysqli_query(connection(), "INSERT INTO orderdetails(OrderID,TicketID,PassengerName,Age,TicketPrice,BaggagePrice,BaggageWeight,SeatCode,Class) 
+            mysqli_query($connect, "UPDATE ticket SET State = 'Occupied' WHERE TicketID = '" . $TicketID . "'");
+            $query = mysqli_query($connect, "INSERT INTO orderdetails(OrderID,TicketID,PassengerName,Age,TicketPrice,BaggagePrice,BaggageWeight,SeatCode,Class) 
             VALUES('" . $OrderID . "','" . $TicketID . "','" . $PassengerName . "','" . $Age . "','" . $TicketPrice . "','" . $BaggagePrice . "','" . $BaggageWeight . "',
             '" . $SeatCode . "','" . $Class . "')");
         }
+        $connect->close();
         return $query;
     }
 }

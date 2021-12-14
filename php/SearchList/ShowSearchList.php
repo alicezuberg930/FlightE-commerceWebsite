@@ -2,7 +2,8 @@
 require_once("../../class/flightpath.php");
 $SearchResult = $_POST["SearchResult"];
 $StartDate = $SearchResult["StartDate"];
-$SortValue = $StartTime = $EndTime = $Airline = '';
+$Array = array("Error" => '', "FirstList" => '', "SecondList" => '');
+$SortValue = $StartTime = $EndDate = $EndTime = $Airline = $FlightListHTML = '';
 if (isset($SearchResult["StartTime"]) && !empty($SearchResult["StartTime"])) {
   $Explode = explode("-", $SearchResult["StartTime"]);
   $StartTime = " and StartTime between '" . $Explode[0] . "' and '" . $Explode[1] . "'";
@@ -17,70 +18,79 @@ if (isset($SearchResult["SortValue"]) && !empty($SearchResult["SortValue"])) {
 if (isset($SearchResult["AirlineID"]) && !empty($SearchResult["AirlineID"])) {
   $Airline = " and a.AirlineID = '" . $SearchResult["AirlineID"] . "'";
 }
+
 $Path = " and fp.PathID = '" . $SearchResult["StartAirport"] . "-" . $SearchResult["EndAirport"] . "'";
 $FlightList = $FlightObject->SearchFlight("$StartTime$EndTime$Path$Airline and StartDate = '" . $StartDate  . "'$SortValue");
 $HeaderPath = $FlightPathObject->GetFlightPath(' where PathID = "' . $SearchResult["StartAirport"] . "-" . $SearchResult["EndAirport"] . '"');
-$FlightListHTML = '<div class="flight-header">';
-if (!empty($HeaderPath)) {
-  $HeaderPath = $HeaderPath[0];
-  $FlightListHTML .= '
+
+function HeaderHTML($SD, $HeaderPath)
+{
+  $String = '<div class="flight-header">';
+  if (!empty($HeaderPath)) {
+    $HeaderPath = $HeaderPath[0];
+    $String .= '
 <i class="fas fa-plane-departure"></i>
 <div class="flight-title">
     <p>' . $HeaderPath["CN1"] . ', ' . $HeaderPath["CCN1"] . ' (' . $HeaderPath["StartAirport"] . ') 
     <i class="fas fa-long-arrow-alt-right"></i>
     ' . $HeaderPath["CN2"] . ', ' . $HeaderPath["CCN2"] . ' (' . $HeaderPath["EndAirport"] . ')</p> 
-    <span>' . date("d-m-Y", strtotime($StartDate)) . '</span>
+    <span>' . date("d-m-Y", strtotime($SD)) . '</span>
 </div>';
-} else {
-  $FlightListHTML .= '<div class="flight-title"><h3>Không có đường bay</h3></div>';
-}
-$FlightListHTML .= '</div>
+  } else {
+    $String .= '<div class="flight-title"><h3>Không có đường bay</h3></div>';
+  }
+  $String .= '</div>
 <ul class="date-list">';
-for ($i = -3; $i <= 3; $i++) {
-  $CurrentDateClass = new DateTime($StartDate);
-  $CurrentDateClass->modify('+' . $i . ' day');
-  $DateOfWeek  = $CurrentDateClass->format("l");
-  switch ($DateOfWeek) {
-    case "Monday":
-      $DateOfWeek = "Thứ 2";
-      break;
-    case "Tuesday":
-      $DateOfWeek = "Thứ 3";
-      break;
-    case "Wednesday":
-      $DateOfWeek = "Thứ 4";
-      break;
-    case "Thursday":
-      $DateOfWeek = "Thứ 5";
-      break;
-    case "Friday":
-      $DateOfWeek = "Thứ 6";
-      break;
-    case "Saturday":
-      $DateOfWeek = "Thứ 7";
-      break;
-    default:
-      $DateOfWeek = "Chủ nhật";
-      break;
-  }
-  $Class = '';
-  if ($i == 0) {
-    $Class = "style='background-color: aliceblue'";
-  }
-  $FlightListHTML .= '
+  for ($i = -3; $i <= 3; $i++) {
+    $CurrentDateClass = new DateTime($SD);
+    $CurrentDateClass->modify('+' . $i . ' day');
+    $DateOfWeek  = $CurrentDateClass->format("l");
+    switch ($DateOfWeek) {
+      case "Monday":
+        $DateOfWeek = "Thứ 2";
+        break;
+      case "Tuesday":
+        $DateOfWeek = "Thứ 3";
+        break;
+      case "Wednesday":
+        $DateOfWeek = "Thứ 4";
+        break;
+      case "Thursday":
+        $DateOfWeek = "Thứ 5";
+        break;
+      case "Friday":
+        $DateOfWeek = "Thứ 6";
+        break;
+      case "Saturday":
+        $DateOfWeek = "Thứ 7";
+        break;
+      default:
+        $DateOfWeek = "Chủ nhật";
+        break;
+    }
+    $Class = '';
+    if ($i == 0) {
+      $Class = "style='background-color: aliceblue'";
+    }
+    $String .= '
     <li class="date-value" ' . $Class . '>
       <span>' . $CurrentDateClass->format("d-m-Y") . '</span>
       <span>' . $DateOfWeek . '</span>
     </li>';
+  }
+  $String .= '</ul>';
+  return $String;
 }
-$FlightListHTML .= '</ul>
-<div class="flight-list">';
-if (empty($FlightList)) {
-  $FlightListHTML .= '<div class="flight-item"><h1>Không có chuyến bay<h1></div>';
-} else {
-  foreach ($FlightList as $Flight) {
-    $Flightpath = $FlightPathObject->GetFlightPath(' where PathID = "' . $Flight["PathID"] . '"')[0];
-    $FlightListHTML .= '
+
+function BodyHTML($FlightList, $FPO)
+{
+  $String = '<div class="flight-list">';
+  if (empty($FlightList)) {
+    $String .= '<div class="flight-item"><h1>Không có chuyến bay<h1></div>';
+  } else {
+    foreach ($FlightList as $Flight) {
+      $Flightpath = $FPO->GetFlightPath(' where PathID = "' . $Flight["PathID"] . '"')[0];
+      $String .= '
   <div id="" class="flight-item">
     <ul class="flight-info">
         <li>
@@ -113,7 +123,7 @@ if (empty($FlightList)) {
         </li>
     </ul>
 
-    <div class="flight-box-detail">
+    <div data-expand=0 class="flight-box-detail">
         <div class="box-item">
             <div class="flight-box-detail-header">
                 <i class="fa fa-info-circle"></i>
@@ -176,7 +186,16 @@ if (empty($FlightList)) {
         </div>
     </div>
   </div>';
+    }
   }
+  $String .= '</div>';
+  return $String;
 }
-$FlightListHTML .= '</div>';
-die($FlightListHTML);
+$Array["FirstList"] = HeaderHTML($StartDate, $HeaderPath) . BodyHTML($FlightList, $FlightPathObject);
+if (!empty($SearchResult["EndDate"])) {
+  $EndPath = " and fp.PathID = '" . $SearchResult["EndAirport"] . "-" . $SearchResult["StartAirport"] . "'";;
+  $ReturnFlightList = $FlightObject->SearchFlight("$StartTime$EndTime$EndPath$Airline and EndDate = '" . $SearchResult["EndDate"]  . "'$SortValue");
+  $ReversePath = $FlightPathObject->GetFlightPath(' where PathID = "' . $SearchResult["EndAirport"] . "-" . $SearchResult["StartAirport"] . '"');
+  $Array["SecondList"] = HeaderHTML($SearchResult["EndDate"], $ReversePath) . BodyHTML($ReturnFlightList, $FlightPathObject);
+}
+die(json_encode($Array));

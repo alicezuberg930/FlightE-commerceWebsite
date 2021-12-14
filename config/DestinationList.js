@@ -95,7 +95,7 @@ $("#round-trip").click(() => {
 let DateObject = new Date(), DayofMonth = DateObject.getDate()
 if (DayofMonth < 10) {
     DayofMonth = "0" + DayofMonth
-} 
+}
 let CurrentDate = DateObject.getFullYear() + "-" + (DateObject.getMonth() + 1) + "-" + DayofMonth
 // , CurrentDate = new Date(MyDate)
 // $(document).on('change', "input[type='date']", function () {

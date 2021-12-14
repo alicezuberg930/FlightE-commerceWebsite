@@ -5,28 +5,41 @@ let DisplayData = () => {
         method: "post",
         data: { SearchResult: SearchResult },
         success: function (result) {
-            $(".flight-main-0").html(result)
+            let Obj = JSON.parse(result)
+            $(".flight-main-0").html(Obj.FirstList)
+            if (Obj.SecondList != '') {
+                $(".flight-main-1").html(Obj.SecondList)
+            }
         }
     })
 }
 DisplayData()
 $(document).on('click', '.expand-details', function () {
     let details = $(this).parent().parent().parent().find(".flight-box-detail"), arrow = $(this).find(".fa-chevron-down")
-    if (details.css('display') == 'inline-block') {
-        details.css("opacity", "0")
-        setTimeout(() => { details.css("display", "none") }, 500)
-        arrow.removeClass("rotate")
-    } else {
-        details.css("display", "inline-block")
-        setTimeout(() => { details.css("opacity", "1") }, 200)
+    if (details.attr("data-expand") == 0) {
+        details.attr("data-expand", 1)
+        details.css("height", "20.5rem")
         arrow.addClass("rotate")
+    } else {
+        details.attr("data-expand", 0)
+        details.css("height", "0")
+        arrow.removeClass("rotate")
     }
 })
-$(document).on("click", ".date-value", function () {
+$(document).on("click", ".flight-main-0 .date-value", function () {
     let ChosenDate = $(this).children().eq(0).text().split("-")
-    SearchResult.StartDate = ChosenDate[2] + "-" + ChosenDate[1] + "-" + ChosenDate[0]
-    if (new Date(SearchResult.StartDate) < new Date()) {
-        // return;
+    SearchResult.StartDate = ChosenDate[2] + "-" + ChosenDate[1] + "-" + (ChosenDate[0])
+    if (new Date(parseInt(ChosenDate[2]), parseInt(ChosenDate[1]) - 1, parseInt(ChosenDate[0]), 23, 59, 59) < new Date()) {
+        return;
+    }
+    localStorage.setItem("SearchInfo", JSON.stringify(SearchResult))
+    DisplayData()
+})
+$(document).on("click", ".flight-main-1 .date-value", function () {
+    let ChosenDate = $(this).children().eq(0).text().split("-")
+    SearchResult.EndDate = ChosenDate[2] + "-" + ChosenDate[1] + "-" + ChosenDate[0]
+    if (new Date(SearchResult.EndDate) < new Date()) {
+        return;
     }
     localStorage.setItem("SearchInfo", JSON.stringify(SearchResult))
     DisplayData()

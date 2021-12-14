@@ -1,5 +1,5 @@
 .nav-bar {
-  background-color: #364744;
+  background-color: var(--header);
 }
 .container {
   display: flex;
@@ -434,11 +434,11 @@
           }
         }
         .flight-box-detail {
-          transition: 0.5s ease-in-out;
-          display: none;
+          height: 0;
+          overflow: hidden;
+          transition: height 0.5s ease-in-out;
           background-color: rgba(233, 233, 233, 0.7);
           margin-bottom: 10px;
-          padding: 2px 0;
           .box-item {
             margin: 5px auto;
             width: 98%;

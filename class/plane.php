@@ -14,20 +14,23 @@ class plane
     }
     public function DeletePlane($ID)
     {
-        $query = mysqli_query($connect = connection(), "delete from ticket where FlightID = '$ID'");
+        $connect = connection();
+        $query = mysqli_query($connect, "delete from ticket where FlightID = '$ID'");
         $connect->close();
         return $query;
     }
     public function EditPlane($ID)
     {
-        $query = mysqli_query($connect = connection(), "delete from ticket where FlightID = '$ID'");
+        $connect = connection();
+        $query = mysqli_query($connect, "delete from ticket where FlightID = '$ID'");
         $connect->close();
         return $query;
     }
     public function GetPlane($SQL)
     {
+        $connect = connection();
         $arr = array();
-        $query = mysqli_query($connect = connection(), "select * from plane " . $SQL);
+        $query = mysqli_query($connect, "select * from plane " . $SQL);
         while ($Row = mysqli_fetch_array($query)) {
             $arr[] = $Row;
         }

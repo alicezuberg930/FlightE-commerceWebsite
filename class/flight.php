@@ -3,8 +3,9 @@ class flight
 {
     public function AirPlanes($SQL)
     {
+        $connect = connection();
         $arr = array();
-        $query = mysqli_query($connect = connection(), "select * from plane " . $SQL);
+        $query = mysqli_query($connect, "select * from plane " . $SQL);
         while ($Row = mysqli_fetch_array($query)) {
             $arr[] = $Row;
         }
@@ -13,8 +14,9 @@ class flight
     }
     public function Airlines()
     {
+        $connect = connection();
         $arr = array();
-        $query = mysqli_query($connect = connection(), "select * from airline");
+        $query = mysqli_query($connect, "select * from airline");
         while ($Row = mysqli_fetch_array($query)) {
             $arr[] = $Row;
         }
@@ -23,8 +25,9 @@ class flight
     }
     public function Countries()
     {
+        $connect = connection();
         $arr = array();
-        $query = mysqli_query($connect = connection(), "select * from country order by CountryName desc");
+        $query = mysqli_query($connect, "select * from country order by CountryName desc");
         while ($Row = mysqli_fetch_array($query)) {
             $arr[] = $Row;
         }
@@ -33,8 +36,9 @@ class flight
     }
     public function CitiesAndAirports($StartAirport)
     {
+        $connect = connection();
         $arr = array();
-        $query = mysqli_query($connect = connection(), "select * from city c, airport a where c.CityID = a.CityID and a.AirportID != '$StartAirport'");
+        $query = mysqli_query($connect, "select * from city c, airport a where c.CityID = a.CityID and a.AirportID != '$StartAirport'");
         while ($Row = mysqli_fetch_array($query)) {
             $arr[] = $Row;
         }
@@ -43,6 +47,7 @@ class flight
     }
     public function AddFlight($Obj)
     {
+        $connect = connection();
         $StartDate = $Obj["StartDate"];
         $StartTime = $Obj["StartTime"];
         $EndTime = $Obj["EndTime"];
@@ -53,13 +58,14 @@ class flight
         $AdultPrice = $Obj["AdultPrice"];
         $ChildrenPrice = $Obj["ChildrenPrice"];
         $ToddlerPrice = $Obj["ToddlerPrice"];
-        $query = mysqli_query($connect = connection(), "insert into flight(StartDate,StartTime,EndTime,PlaneID,AirlineID,PathID,EndDate,AdultPrice,ChildrenPrice,ToddlerPrice) 
+        $query = mysqli_query($connect, "insert into flight(StartDate,StartTime,EndTime,PlaneID,AirlineID,PathID,EndDate,AdultPrice,ChildrenPrice,ToddlerPrice) 
         VALUES('$StartDate','$StartTime','$EndTime','$PlaneID','$AirlineID','$PathID','$EndDate','$AdultPrice','$ChildrenPrice','$ToddlerPrice')");
         $connect->close();
         return $query;
     }
     public function EditFlight($Obj)
     {
+        $connect = connection();
         $StartDate = $Obj["StartDate"];
         $StartTime = $Obj["StartTime"];
         $EndTime = $Obj["EndTime"];
@@ -70,7 +76,7 @@ class flight
         $AdultPrice = $Obj["AdultPrice"];
         $ChildrenPrice = $Obj["ChildrenPrice"];
         $ToddlerPrice = $Obj["ToddlerPrice"];
-        $query = mysqli_query($connect = connection(), "update flight set StartDate='$StartDate', StartTime='$StartTime', EndTime='$EndTime',
+        $query = mysqli_query($connect, "update flight set StartDate='$StartDate', StartTime='$StartTime', EndTime='$EndTime',
         PlaneID='$PlaneID', AirlineID='$AirlineID', PathID='$PathID', EndDate='$EndDate', AdultPrice 
         AdultPrice='$AdultPrice', ChildrenPrice='$ChildrenPrice', ToddlerPrice='$ToddlerPrice'");
         $connect->close();
@@ -78,14 +84,16 @@ class flight
     }
     public function DeleteFlight($FlightID)
     {
-        $query = mysqli_query($connect = connection(), "delete from flight where FlightID = '$FlightID'");
+        $connect = connection();
+        $query = mysqli_query($connect, "delete from flight where FlightID = '$FlightID'");
         $connect->close();
         return $query;
     }
     public function GetFlight($StartFrom, $Quantity)
     {
         $arr = array();
-        $query = mysqli_query($connect = connection(), "select * from flight f, plane p, airline a, flightpath fp where f.PlaneID = p.PlaneID 
+        $connect = connection();
+        $query = mysqli_query($connect, "select * from flight f, plane p, airline a, flightpath fp where f.PlaneID = p.PlaneID 
         and f.AirlineID = a.AirlineID and fp.PathID = f.PathID order by FlightID asc limit $StartFrom,$Quantity");
         while ($Row = mysqli_fetch_assoc($query)) {
             $arr[] = $Row;
@@ -95,8 +103,9 @@ class flight
     }
     public function SearchFlight($SQL)
     {
+        $connect = connection();
         $arr = array();
-        $query = mysqli_query($connect = connection(), "select * from flight f, plane p, airline a, flightpath fp where f.PlaneID = p.PlaneID 
+        $query = mysqli_query($connect, "select * from flight f, plane p, airline a, flightpath fp where f.PlaneID = p.PlaneID 
         and f.AirlineID = a.AirlineID and fp.PathID = f.PathID" . $SQL);
         while ($Row = mysqli_fetch_assoc($query)) {
             $arr[] = $Row;

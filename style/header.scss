@@ -11,6 +11,11 @@ body {
   font-family: "Inconsolata", monospace;
 }
 
+:root {
+  --header: #364744;
+  --footer: #364744;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 6px;

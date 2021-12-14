@@ -2,7 +2,8 @@
 require_once("../../class/flight.php");
 session_start();
 $OrderInfo = $_POST["OrderDetails"];
-$FlightID = $OrderInfo["FlightID"];
+$FlightID = $OrderInfo["StartFlight"];
+$ReturnFlight = $OrderInfo["ReturnFlight"];
 $Quantity = count($OrderInfo["CustomerInfo"]);
 $Flight = $FlightObject->SearchFlight(" and FlightID = '$FlightID'")[0];
 $PriceDetails = [];

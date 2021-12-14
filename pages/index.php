@@ -6,12 +6,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../library/jquery/jquery.min.js"></script>
     <link rel="shortcut icon" href="../icon/favicon.ico">
     <link rel="stylesheet" type="text/css" href="../style/header.css">
     <link rel="stylesheet" type="text/css" href="../style/footer.css">
-
     <meta property="og:image" content="../icon/rem.jpeg">
+
     <link rel="stylesheet" type="text/css" href="../style/index.css">
     <link rel="stylesheet" href="../boostrap/css/bootstrap.css">
 </head>
