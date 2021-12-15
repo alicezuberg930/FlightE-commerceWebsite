@@ -47,7 +47,7 @@ foreach ($FlightList as $Flight) {
                 <button class="ReChoose">Chọn lại</button>
             </li>
         </ul>
-        <div class="flight-box-detail">
+        <div data-expand="0" class="flight-box-detail">
             <div class="box-item">
                 <div class="flight-box-detail-header">
                     <i class="fa fa-info-circle"></i>
@@ -55,7 +55,7 @@ foreach ($FlightList as $Flight) {
                 </div>
                 <ul class="box-item-flight">
                     <li>
-                        <img src="https://ibe.vemaybay.vn/Resources/Images/Airline/vn.gif">
+                        <img src="../icon/' . $Flight["AirlineID"] . '.gif">
                         <p>' . $Flight["AirlineName"] . '</p>
                     </li>
                     <li>
@@ -73,7 +73,7 @@ foreach ($FlightList as $Flight) {
                     <li>
                         <span>Chuyến bay: <b>' . $Flight["AirlineID"] . $Flight["FlightID"] . '</b></span>
                         <span>Thời gian bay: <b>' . date("H", strtotime($Flightpath["Time"])) . 'g ' . date("i", strtotime($Flightpath["Time"])) . 'p</b></span>
-                        <span>Hạng chỗ:<b>ECO, BUSINESS</b></span>
+                        <span>Hạng chỗ:<b>ECO,BUSI</b></span>
                         <span>Máy bay: <b>' . $Flight["PlaneName"] . '</b></span>
                     </li>
                 </ul>

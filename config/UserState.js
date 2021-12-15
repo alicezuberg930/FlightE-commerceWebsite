@@ -3,7 +3,6 @@ $.ajax({
     method: "get",
     success: function (data) {
         let Obj = JSON.parse(data)
-        console.log(Obj)
         if (Obj.Membername != '' || Obj.Employeename != '') {
             $("#login-register").css("display", "none")
         }

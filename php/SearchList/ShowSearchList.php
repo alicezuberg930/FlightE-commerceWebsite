@@ -18,11 +18,9 @@ if (isset($SearchResult["SortValue"]) && !empty($SearchResult["SortValue"])) {
 if (isset($SearchResult["AirlineID"]) && !empty($SearchResult["AirlineID"])) {
   $Airline = " and a.AirlineID = '" . $SearchResult["AirlineID"] . "'";
 }
-
 $Path = " and fp.PathID = '" . $SearchResult["StartAirport"] . "-" . $SearchResult["EndAirport"] . "'";
 $FlightList = $FlightObject->SearchFlight("$StartTime$EndTime$Path$Airline and StartDate = '" . $StartDate  . "'$SortValue");
 $HeaderPath = $FlightPathObject->GetFlightPath(' where PathID = "' . $SearchResult["StartAirport"] . "-" . $SearchResult["EndAirport"] . '"');
-
 function HeaderHTML($SD, $HeaderPath)
 {
   $String = '<div class="flight-header">';
@@ -123,7 +121,7 @@ function BodyHTML($FlightList, $FPO)
         </li>
     </ul>
 
-    <div data-expand=0 class="flight-box-detail">
+    <div data-expand="0" class="flight-box-detail">
         <div class="box-item">
             <div class="flight-box-detail-header">
                 <i class="fa fa-info-circle"></i>

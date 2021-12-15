@@ -1,6 +1,23 @@
+// function Rechoose(element) {
 $(document).on("click", ".ReChoose", function () {
+    // $.ajax({
+    //     url: "../php/SearchList/ShowSearchList.php",
+    //     method: "post",
+    //     data: { SearchResult: SearchResult },
+    //     success: function (result) {
+    //         let Obj = JSON.parse(result)
+    //         $(".flight-main-0").html(Obj.FirstList)
+    //         if (Obj.SecondList != '') {
+    //             $(".flight-main-1").html(Obj.SecondList)
+    //         }
+    //     }
+    // })
+    i = 0, j = 0
     DisplayData()
 })
+// }
+// Rechoose(".flight-main-0 .ReChoose")
+// Rechoose(".flight-main-1 .ReChoose")
 function Order(element, type) {
     $(document).on("click", element, function () {
         $.ajax({
@@ -30,8 +47,8 @@ function Order(element, type) {
         })
     })
 }
-Order(".flight-main-0 .OrderTicket", "One Way")
-Order(".flight-main-1 .OrderTicket", "Round Trip")
+Order(".flight-main-0 .OrderTicket", "Chuyến Đi")
+Order(".flight-main-1 .OrderTicket", "Chuyến Về")
 let i = 0, j = 0, number = parseInt(SearchResult.Adult) + parseInt(SearchResult.Children) + parseInt(SearchResult.Toddler)
 $(document).on("click", ".flight-main-0 .seat", function () {
     let SeatCode = $(this).attr("data-seat"), State = $(this).attr("data-state"), TicketID = $(this).attr("data-ticket"),
@@ -95,18 +112,12 @@ $(document).on("click", "#pay", function () {
         alert("Chưa chọn đủ hành khách")
         return
     }
+    let OrderDetails = { CustomerInfo: [] }
     if (SearchResult.EndDate != '') {
         OrderDetails.ReturnFlight = $(".flight-main-1 .seat-list").attr("data-flight")
         i = i + j;
     }
     OrderDetails.StartFlight = $(".flight-main-0 .seat-list").attr("data-flight")
-    let OrderDetails = {
-        CustomerInfo: [],
-        ContactEmail: '',
-        ContactName: '',
-        Address: '',
-        StartFlight: ''
-    }
     let customerinfo = document.querySelectorAll(".row-1"),
         baggage = document.querySelectorAll(".row-2"),
         contactinfo = document.querySelector(".row-3")
@@ -128,7 +139,6 @@ $(document).on("click", "#pay", function () {
             TicketID: TicketID, PassengerName: PassengerName.value, Age: Age, BaggagePrice: BaggagePrice,
             BaggageWeight: BaggageWeight, SeatCode: SeatCode, Class: Class, Type: Type
         })
-
     }
     let ContactEmail = contactinfo.children[0].children[0].children[0].value, e = 0,
         ContactName = contactinfo.children[1].children[0].children[0].value, c = 0,

@@ -37,6 +37,7 @@
         <thead>
             <tr>
                 <th>#</th>
+                <th>Ngày đặt</th>
                 <th>Tổng tiền</th>
                 <th>Khối lượng hành lý</th>
                 <th>Số người đi</th>

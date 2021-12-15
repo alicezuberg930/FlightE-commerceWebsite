@@ -37,9 +37,10 @@ class order
         $ContactName = $order["ContactName"];
         $Address = $order["Address"];
         $TotalWeight = $order["TotalWeight"];
-        $query = mysqli_query($Connect, "INSERT INTO orders(FlightID,Quantity,TotalPrice,State,EmployeeID,OrderDate,MemberID,ContactEmail,ContactName,Address,TotalWeight) 
+        $ReturnFlight = $order["ReturnFlight"];
+        $query = mysqli_query($Connect, "INSERT INTO orders(FlightID,Quantity,TotalPrice,State,EmployeeID,OrderDate,MemberID,ContactEmail,ContactName,Address,TotalWeight,ReturnFlight) 
         VALUES('" . $FlightID . "','" . $Quantity . "','" . $TotalPrice . "','" . $State . "',$EmployeeID,'" . $OrderDate . "','" . $MemberID . "','" . $ContactEmail . "',
-        '" . $ContactName . "','" . $Address . "','" . $TotalWeight . "')");
+        '" . $ContactName . "','" . $Address . "','" . $TotalWeight . "',$ReturnFlight)");
         $Connect->close();
         return $query;
     }
@@ -56,10 +57,11 @@ class order
             $BaggageWeight = $detail["BaggageWeight"];
             $SeatCode = $detail["SeatCode"];
             $Class = $detail["Class"];
+            $Type = $detail["Type"];
             mysqli_query($connect, "UPDATE ticket SET State = 'Occupied' WHERE TicketID = '" . $TicketID . "'");
-            $query = mysqli_query($connect, "INSERT INTO orderdetails(OrderID,TicketID,PassengerName,Age,TicketPrice,BaggagePrice,BaggageWeight,SeatCode,Class) 
+            $query = mysqli_query($connect, "INSERT INTO orderdetails(OrderID,TicketID,PassengerName,Age,TicketPrice,BaggagePrice,BaggageWeight,SeatCode,Class,Type) 
             VALUES('" . $OrderID . "','" . $TicketID . "','" . $PassengerName . "','" . $Age . "','" . $TicketPrice . "','" . $BaggagePrice . "','" . $BaggageWeight . "',
-            '" . $SeatCode . "','" . $Class . "')");
+            '" . $SeatCode . "','" . $Class . "','" . $Type . "')");
         }
         $connect->close();
         return $query;
