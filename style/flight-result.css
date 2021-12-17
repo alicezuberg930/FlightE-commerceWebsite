@@ -316,7 +316,7 @@
 
 .container .flight-container .fare-wrapper {
   -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.199);
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.199);
+          box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.199);
   margin-bottom: 3vh;
   display: flow-root;
   padding-bottom: 5px;

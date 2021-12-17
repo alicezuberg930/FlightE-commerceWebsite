@@ -122,8 +122,11 @@ $("#SearchButton").click((e) => {
     }
     if (SearchInfo.StartAirport == null || SearchInfo.EndAirport == null) {
         alert("Vui lòng nhập sân bay đi và sân bay đến")
+
+    } else if ($("#round-trip").prop("checked") == true && SearchInfo.EndDate == '') {
+        alert("Vui lòng nhập ngày về")
     } else {
         localStorage.setItem("SearchInfo", JSON.stringify(SearchInfo))
-        window.location.href = "flight-result.php"
+        window.location.href = "flight-result.html"
     }
 })

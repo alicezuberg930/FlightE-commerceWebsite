@@ -4,18 +4,17 @@
 <head>
     <title>Manage Flight</title>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="../style/admin.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../style/admin.css">
+    <script src="../library/jquery/jquery.min.js"></script>
     <link rel="stylesheet" href="../boostrap/css/bootstrap.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../boostrap/js/bootstrap.min.js"></script>
 </head>
 
 <body>
     <style>
-
         button {
             width: 130px;
         }
@@ -116,13 +115,75 @@
         </main>
         <?php require_once("sidebar.html"); ?>
     </div>
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Nhập thông tin cần sửa</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form enctype="multipart/form-data" class="w-100" action="" method="post" id="Form">
+                        <input type="number" id="EmployeeID" hidden>
+                        <div class="form-row mb-2">
+                            <div class="col-md-12">
+                                <lable>Ngày khởi hành:</lable>
+                                <input class="form-control" type="date" id="TempStartDate">
+                            </div>
+                        </div>
+                        <div class="form-row mb-2">
+                            <div class="col-md-12">
+                                <lable>Giờ khởi hành:</lable>
+                                <input class="form-control" type="time" id="TempStartTime">
+                            </div>
+                        </div>
+                        <div class="form-row mb-2">
+                            <div class="col-md-12">
+                                <lable>Hãng hàng không:</lable>
+                                <select id="TempGender" class="form-control">
+                                    <option value="Nữ">Nữ</option>
+                                    <option value="Nam">Nam</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row mb-2">
+                            <div class="col-md-12">
+                                <lable>Đường bay:</lable>
+                                <select id="TempGender" class="form-control">
+                                    <option value="Nữ">Nữ</option>
+                                    <option value="Nam">Nam</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row mb-2">
+                            <div class="col-md-12">
+                                <lable>Giá vé người lớn:</lable>
+                                <input class="form-control" type="text" id="TempAdultPrice">
+                            </div>
+                        </div>
+                        <div class="form-row mb-2">
+                            <div class="col-md-12">
+                                <lable>Giá vé trẻ em:</lable>
+                                <input class="form-control" type="text" id="TempChilrenPrice">
+                            </div>
+                        </div>
+                        <div class="form-row mb-2">
+                            <div class="col-md-12">
+                                <lable>Giá vé em bé:</lable>
+                                <input class="form-control" type="text" id="TempToddler">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger" id="Confirm">Cập nhật</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="../config/AdminResponsive.js"></script>
     <script type="module" src="../config/ManageFlight.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#sidebar').width($('.sidebar_container').width());
-        });
-    </script>
 </body>
 
 </html>

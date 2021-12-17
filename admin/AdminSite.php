@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style/admin.css">
+    <script src="../library/jquery/jquery.min.js"></script>
+    <script src="../library/chart.js/dist/chart.js"></script>
 </head>
 
 <body>
@@ -58,38 +60,24 @@
                         <div class="chars__left__title">
                             <div>
                                 <h1>Báo Cáo Thường Niên</h1>
-                                <p>TP. Hồ Chí Minh</p>
                             </div>
                             <i class="fa fa-usd"></i>
+                            <canvas id="Chart"></canvas>
                         </div>
                         <div id="apex1"></div>
                     </div>
                     <div class="charts__right">
                         <div class="charts___right__title">
                             <div>
-                                <h1>Thông Tin Doanh Thu</h1>
-                                <p>TP. Hồ Chí Minh</p>
+                                <h1>Chọn thông tin cần thống kê</h1>
                             </div>
-                            <i class="fa fa-usd"></i>
-                        </div>
-
-                        <div class="charts__right__cards">
-                            <div class="card1">
-                                <h1>Doanh Thu</h1>
-                                <p>- 10.000.000.000 VND</p>
-                            </div>
-                            <div class="card2">
-                                <h1>Lãi</h1>
-                                <p>- 3.500.000.000 VND</p>
-                            </div>
-                            <div class="card3">
-                                <h1>Khách</h1>
-                                <p>234</p>
-                            </div>
-                            <div class="card4">
-                                <h1>Đơn Hàng</h1>
-                                <p>45</p>
-                            </div>
+                            <select id="choose-stat">
+                                <option value="" disabled selected hidden>Chọn thông tin cần thống kê</option>
+                                <option value="income">Thống kê thu nhập</option>
+                                <option value="orders">Thống kê đơn hàng đã đặt</option>
+                                <option value="ticket">Thống kê vé đã bán</option>
+                                <option value="ticket-type">Thống kê loại vé đã bán</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -97,6 +85,7 @@
         </main>
         <?php require_once("sidebar.html"); ?>
     </div>
+    <script src="../config/Statistics.js"></script>
     <script src="../config/AdminResponsive.js"></script>
 </body>
 

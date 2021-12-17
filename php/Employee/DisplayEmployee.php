@@ -10,8 +10,8 @@ foreach ($EmployeeList as $Employee) {
         <td>' . $Employee["Password"] . '</td>
         <td>' . $Employee["Phonenumber"] . '</td>
         <td>' . $Employee["Gender"] . '</td>
-        <td><button id="Delete" class="btn btn-danger btn-sm">Xóa</button></td>
-        <td><button id="Edit" class="btn btn-warning btn-sm">Sửa</button></td>
+        <td><button id="Delete" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
+        <td><button id="Edit" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></button></td>
     </tr>';
 }
 $NumberOfPages = intval(ceil(mysqli_num_rows(Query("select * from employee")) / 5));

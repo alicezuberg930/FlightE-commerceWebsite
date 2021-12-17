@@ -17,6 +17,7 @@ $.ajax({
             $("#username a span").text(Obj.Membername)
         }
         if (Obj.Employeename != '') {
+            $("#orders").css("display", "none")
             $("#username a span").text(Obj.Employeename)
         }
     }

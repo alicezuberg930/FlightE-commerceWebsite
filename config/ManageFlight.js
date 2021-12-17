@@ -29,6 +29,13 @@ $("#Add").click((e) => {
     })
 })
 $(document).on('click', '#Delete', function () {
+    let StartDate = $(this).parent().parent().find('td:nth-child(3)').text().split("-")
+    let StartTime = $(this).parent().parent().find('td:nth-child(4)').text().split(":")
+    let FlightDate = new Date(StartDate[2] + "-" + StartDate[1] + "-" + StartDate[0] + "T" + StartTime[0] + ":" + StartTime[1] + ":" + StartTime[2])
+    if (FlightDate > new Date()) {
+        alert("Vẫn chưa qua ngày khởi hành")
+        return
+    }
     let ID = $(this).parent().parent().find('td:nth-child(2)').text()
     let c = confirm("Bạn có muốn xóa chuyến bay thứ " + ID + "?")
     if (c == true) {
@@ -44,14 +51,14 @@ $(document).on('click', '#Delete', function () {
     }
 })
 $(document).on('click', '#Edit', function () {
-    ID = $(this).parent().parent().find('td:nth-child(1)').text(),
-        Fullname = $(this).parent().parent().find('td:nth-child(2)').text(),
-        Email = $(this).parent().parent().find('td:nth-child(3)').text(),
-        Password = $(this).parent().parent().find('td:nth-child(4)').text(),
-        Phonenumber = $(this).parent().parent().find('td:nth-child(5)').text(),
-        Gender = $(this).parent().parent().find('td:nth-child(6)').text()
-    $("#TempFullname").val(Fullname), $("#TempEmail").val(Email), $("#TempPassword").val(Password),
-        $("#TempPhonenumber").val(Phonenumber), $("#TempGender").val(Gender).change()
+    let ID = $(this).parent().parent().find('td:nth-child(2)').text(),
+        StartDate = $(this).parent().parent().find('td:nth-child(3)').text(),
+        StartTime = $(this).parent().parent().find('td:nth-child(4)').text(),
+        Airline = $(this).parent().parent().find('td:nth-child(5)').text(),
+        FlightPath = $(this).parent().parent().find('td:nth-child(6)').text(),
+        AdultPrice = $(this).parent().parent().find('td:nth-child(7)').text(),
+        ChildrenPrice = $(this).parent().parent().find('td:nth-child(8)').text(),
+        ToddlerPrice = $(this).parent().parent().find('td:nth-child(9)').text()
     $("#myModal").modal("toggle")
 })
 $("#Confirm").click(() => {
@@ -92,7 +99,6 @@ $.ajax({
             $("#Airline").append("<option value='" + Airline.AirlineID + "'>" + Airline.AirlineName + "</option>");
         });
         Obj.FlightpathArray.forEach((Flightpath) => {
-            console.log(Flightpath)
             $("#Flightpath").append("<option value='" + Flightpath.PathID + "'>" + Flightpath.CN1 + " ( " + Flightpath.AN1 + " ) -> "
                 + Flightpath.CN2 + " ( " + Flightpath.AN2 + " )</option > ");
         });

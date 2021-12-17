@@ -25,10 +25,10 @@ $UserInfoString = '
         </div>      
     </td>
 </tr>    
-<tr class="row-2">  
+<tr class="row-2" data-ticket="' . $Ticket . '">  
     <td class="customer-seatcode">
         <div class="input-group">             
-            <input data-class="' . $Class . '" data-ticket="' . $Ticket . '" class="input-seatcode form-control" type="text" value="' . $SeatCode . '" readonly>          
+            <input data-class="' . $Class . '" class="input-seatcode form-control" type="text" value="' . $SeatCode . '" readonly>          
         </div>   
     </td>
     <td class="customer-baggage" colspan="2">  

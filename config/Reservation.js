@@ -1,23 +1,27 @@
-// function Rechoose(element) {
-$(document).on("click", ".ReChoose", function () {
-    // $.ajax({
-    //     url: "../php/SearchList/ShowSearchList.php",
-    //     method: "post",
-    //     data: { SearchResult: SearchResult },
-    //     success: function (result) {
-    //         let Obj = JSON.parse(result)
-    //         $(".flight-main-0").html(Obj.FirstList)
-    //         if (Obj.SecondList != '') {
-    //             $(".flight-main-1").html(Obj.SecondList)
-    //         }
-    //     }
-    // })
-    i = 0, j = 0
-    DisplayData()
+$(document).on("click", ".flight-main-0 .ReChoose", function () {
+    $.ajax({
+        url: "../php/SearchList/ShowSearchList.php",
+        method: "post",
+        data: { SearchResult: SearchResult },
+        success: function (result) {
+            let Obj = JSON.parse(result)
+            $(".flight-main-0").html(Obj.FirstList)
+        }
+    })
+    i = 0
 })
-// }
-// Rechoose(".flight-main-0 .ReChoose")
-// Rechoose(".flight-main-1 .ReChoose")
+$(document).on("click", ".flight-main-1 .ReChoose", function () {
+    $.ajax({
+        url: "../php/SearchList/ShowSearchList.php",
+        method: "post",
+        data: { SearchResult: SearchResult },
+        success: function (result) {
+            let Obj = JSON.parse(result)
+            $(".flight-main-1").html(Obj.SecondList)
+        }
+    })
+    j = 0
+})
 function Order(element, type) {
     $(document).on("click", element, function () {
         $.ajax({
@@ -25,19 +29,25 @@ function Order(element, type) {
             method: "post",
             data: { PlaneID: $(this).attr("data-plane"), FlightID: $(this).attr("data-flight"), type: type },
             success: function (data) {
-                if (data == "Error") {
+                if (data == "MemberLogin") {
                     Swal.fire({
                         icon: 'warning',
-                        html: '<h4>Bạn phải đăng nhập mới có thể đặt vé</h4>',
+                        html: '<h4>Bạn phải đăng nhập mới có thể đặt vé!</h4>',
                         showCancelButton: true,
                         confirmButtonText: 'Đăng nhập',
                         cancelButtonText: 'Thoát',
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            window.location.href = "login-register.php";
+                            window.location.href = "login-register.html";
                         }
                     })
-                } else {
+                } else if (data == "EmployeeLogin") {
+                    Swal.fire({
+                        icon: 'warning',
+                        html: '<h4>Nhân viên không thể đặt vé!</h4>',
+                    })
+                }
+                else {
                     $(element.split(" ")[0]).html(data)
                     if (SearchResult.EndDate != '') {
                         $(".flight-main-0 .contact-info").remove()
@@ -121,8 +131,9 @@ $(document).on("click", "#pay", function () {
     let customerinfo = document.querySelectorAll(".row-1"),
         baggage = document.querySelectorAll(".row-2"),
         contactinfo = document.querySelector(".row-3")
+    let TicketID, PassengerName, Age, BaggagePrice, BaggageWeight, SeatCode, Class, Type
     for (cus = 0; cus < i; cus++) {
-        let TicketID = baggage[cus].children[0].children[0].children[0].getAttribute("data-ticket"),
+        TicketID = baggage[cus].getAttribute("data-ticket"),
             PassengerName = customerinfo[cus].children[1].children[0].children[0],
             Age = customerinfo[cus].children[0].children[0].children[0].value,
             BaggagePrice = baggage[cus].children[1].children[0].children[0].value.split('-')[0],
@@ -164,6 +175,7 @@ $(document).on("click", "#pay", function () {
                         showConfirmButton: false,
                         timer: 1500
                     })
+                    setTimeout(() => { window.location.href = "member-orders.html" }, 1500)
                 } else {
                     Swal.fire({
                         position: 'center',

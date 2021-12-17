@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -6,10 +6,7 @@
   text-decoration: none;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-}
-
-body {
-  font-family: "Inconsolata", monospace;
+  font-family: "Montserrat", sans-serif;
 }
 
 :root {
@@ -63,7 +60,7 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 90%;
+  width: 70%;
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
@@ -72,5 +69,30 @@ body {
 
 .nav-bar .nav-links-container .nav-link a {
   color: white;
+}
+
+.nav-bar #username {
+  width: 20%;
+}
+
+.nav-bar #username .username {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.nav-bar #username a {
+  color: white;
+  font-size: 17px;
+}
+
+.nav-bar #username a span {
+  margin-right: 10px;
 }
 /*# sourceMappingURL=header.css.map */

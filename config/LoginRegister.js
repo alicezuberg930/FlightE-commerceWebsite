@@ -65,7 +65,7 @@ $("#login").click(() => {
                     showConfirmButton: false,
                     timer: 2000
                 })
-                setTimeout(() => { window.location.href = "./index.php" }, 2000)
+                setTimeout(() => { window.location.href = "./index.html" }, 2000)
             }
         }
     })

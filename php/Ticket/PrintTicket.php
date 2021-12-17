@@ -3,8 +3,10 @@ require_once("../../class/plane.php");
 require_once("../../class/flight.php");
 require_once("../../class/flightpath.php");
 session_start();
-if (!isset($_SESSION["Member"]) || !isset($_SESSION["Member"])) {
-    die("Error");
+if (isset($_SESSION["Employee"])) {
+    die("EmployeeLogin");
+} else if (!isset($_SESSION["Member"])) {
+    die("MemberLogin");
 }
 $TicketList = $TicketObject->GetTicket("where FlightID = '" . $_POST["FlightID"] . "'");
 $Plane = $PlaneObject->GetPlane("where PlaneID = '" . $_POST["PlaneID"] . "'")[0];

@@ -11,7 +11,7 @@ class flightpath
             and cc1.CountryID = c1.CountryID join airport a2 join city c2 join country cc2 on fp.EndAirport = a2.AirportID 
             and a2.CityID = c2.CityID and cc2.CountryID = c2.CountryID" . $SearchString
         );
-        while ($Row = mysqli_fetch_array($query)) {
+        while ($Row = mysqli_fetch_assoc($query)) {
             $arr[] = $Row;
         }
         $connect->close();

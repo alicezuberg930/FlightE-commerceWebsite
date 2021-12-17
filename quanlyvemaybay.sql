@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2021 at 08:32 PM
+-- Generation Time: Dec 17, 2021 at 06:36 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -170,11 +170,11 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`EmployeeID`, `Fullname`, `Email`, `Password`, `Phonenumber`, `Gender`) VALUES
-(1, 'Minh Híu', 'hiu123@vemaybay.com', 'hiu123', '0943028493', 'Nam'),
-(2, 'Nguyễn Vĩnh Tiến', 'tien23851@vemaybay.com', 'toan123', '0932430072', 'Nữ'),
-(3, 'Lê Ngọc Tòn', 'nhanvien2@vemaybay.com', 'werw', '0924559304', 'Nữ'),
-(4, 'trí bi benh', 'starbutterfly652@vemaybay.com', 'toan123', '0932430071', 'Nam'),
-(5, 'trí bi benh', 'starbutterfly652@vemaybay.com', 'toan123', '0932430071', 'Nam'),
+(1, 'Minh Híu', 'hiu123@vemaybay.com', 'hieu123', '0943028493', 'Nam'),
+(2, 'Nguyễn Vĩnh Tiến', 'tien23851@vemaybay.com', 'tien123', '0932430072', 'Nữ'),
+(3, 'Lê Ngọc Toàn', 'nhanvien2@vemaybay.com', 'toan123', '0924559304', 'Nữ'),
+(4, 'trí bi benh', 'tri652@vemaybay.com', 'tri123', '0932430071', 'Nam'),
+(5, 'trí bi benh', 'benh652@vemaybay.com', 'tri123', '0932430071', 'Nam'),
 (10, 'wer3rq34', 'starbutterfly652@gmail.com', 'ercfref', '0932430072', 'Nữ'),
 (11, 'Vinh Tien', 'tien231@gmail.com', 'vinhtien1234', '0932430072', 'Nam'),
 (12, 'Nguyen Vinh Tien', 'tien231@gmail.com', 'vinhtien1234', '0932430072', 'Nam');
@@ -282,6 +282,7 @@ CREATE TABLE `orderdetails` (
 --
 
 INSERT INTO `orderdetails` (`OrderID`, `TicketID`, `PassengerName`, `Age`, `TicketPrice`, `BaggagePrice`, `BaggageWeight`, `SeatCode`, `Class`, `Type`, `BaggageID`) VALUES
+(1, 233, 't43gtgt4', 'Adult', 1900000, 165000, 15, '4E', 'Economy', 'Chuyến Đi', NULL),
 (23, 215, 't43gtgt4', 'Children', 1900000, 165000, 15, '4E', 'Business', 'Chuyến Đi', NULL),
 (23, 216, '4tg34g3t5rg', 'Adult', 2400000, 0, 0, '4F', 'Business', 'Chuyến Đi', NULL),
 (26, 215, '456yjnhbvgb', 'Children', 1900000, 251000, 25, '4E', 'Business', 'Chuyến Đi', NULL),
@@ -294,7 +295,16 @@ INSERT INTO `orderdetails` (`OrderID`, `TicketID`, `PassengerName`, `Age`, `Tick
 (28, 258, 'tvbtbetbsrvr', 'Children', 515000, 165000, 15, '11F', 'Economy', 'Chuyến đi', NULL),
 (28, 408, 'rwfgrtgerrg', 'Children', 1030000, 165000, 15, '4F', 'Business', 'Chuyến Về', NULL),
 (31, 204, 'vtbnymui', 'Children', 1900000, 165000, 15, '2F', 'Business', 'Chuyến đi', NULL),
-(31, 390, 'n bdfcrdrfd', 'Children', 1900000, 0, 0, '1F', 'Business', 'Chuyến Về', NULL);
+(31, 220, 'vregt4h635gtrf', 'Adult', 1200000, 0, 0, '5D', 'Economy', 'Chuyến đi', NULL),
+(31, 228, 'cwevrbhetnryjebt', 'Adult', 1200000, 0, 0, '6F', 'Economy', 'Chuyến đi', NULL),
+(31, 234, 'fr3geweqca', 'Adult', 1200000, 165000, 15, '7F', 'Economy', 'Chuyến đi', NULL),
+(31, 390, 'n bdfcrdrfd', 'Children', 1900000, 0, 0, '1F', 'Business', 'Chuyến Về', NULL),
+(31, 606, 'cvbt2gqfe', 'Adult', 1200000, 0, 0, '6F', 'Economy', 'Chuyến đi', NULL),
+(33, 600, 'dvgbnher', 'Adult', 1200000, 187000, 20, '5F', 'Economy', 'Chuyến đi', NULL),
+(34, 231, 'edgthtgfed', 'Adult', 1200000, 165000, 15, '7C', 'Economy', 'Chuyến đi', NULL),
+(34, 237, 'wretyrrfetr', 'Children', 950000, 0, 0, '8C', 'Economy', 'Chuyến đi', NULL),
+(35, 246, '4tbwgfrcsds', 'Adult', 1200000, 251000, 25, '9F', 'Economy', 'Chuyến đi', NULL),
+(35, 252, 'tvrget vwrc', 'Adult', 1200000, 165000, 15, '10F', 'Economy', 'Chuyến đi', NULL);
 
 -- --------------------------------------------------------
 
@@ -304,7 +314,7 @@ INSERT INTO `orderdetails` (`OrderID`, `TicketID`, `PassengerName`, `Age`, `Tick
 
 CREATE TABLE `orders` (
   `OrderID` int(11) NOT NULL,
-  `FlightID` int(11) NOT NULL,
+  `StartFlight` varchar(50) COLLATE utf8_vietnamese_ci NOT NULL,
   `Quantity` int(11) NOT NULL,
   `TotalPrice` int(11) NOT NULL,
   `State` varchar(20) COLLATE utf8_vietnamese_ci NOT NULL,
@@ -315,19 +325,25 @@ CREATE TABLE `orders` (
   `ContactName` varchar(100) COLLATE utf8_vietnamese_ci NOT NULL,
   `Address` varchar(100) COLLATE utf8_vietnamese_ci NOT NULL,
   `TotalWeight` int(11) NOT NULL,
-  `ReturnFlight` int(11) DEFAULT NULL
+  `ReturnFlight` varchar(50) COLLATE utf8_vietnamese_ci DEFAULT NULL,
+  `StartDate` date DEFAULT NULL,
+  `ReturnDate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`OrderID`, `FlightID`, `Quantity`, `TotalPrice`, `State`, `EmployeeID`, `OrderDate`, `MemberID`, `ContactEmail`, `ContactName`, `Address`, `TotalWeight`, `ReturnFlight`) VALUES
-(23, 3, 2, 4465000, 'Đã Thanh Toán', NULL, '2021-12-11', 5, 'nhanvien2@vemaybay.com', 'Lê Ngọc Tòn', '4trtt4r34tr', 15, NULL),
-(26, 3, 2, 4051000, 'Đã Thanh Toán', NULL, '2021-12-11', 5, 'tien231@gmail.com', 'fghtwgq4', '4trtt4r34tr', 25, NULL),
-(27, 3, 2, 1465000, 'Đã Thanh Toán', NULL, '2021-12-12', 5, 'tien231@gmail.com', '4gbh2q34g', '34gbwt4gea', 15, NULL),
-(28, 2, 1, 2145000, 'Đã Thanh Toán', NULL, '2021-12-14', 5, 'tien231@gmail.com', '4t56h3g', 'f4vr4rvr', 15, NULL),
-(31, 3, 2, 3965000, 'Chưa thanh toán', NULL, '2021-12-15', 1, 'starbutterfly652@gmail.com', 'wer3rq34', 'bhnehvrsae', 15, 4);
+INSERT INTO `orders` (`OrderID`, `StartFlight`, `Quantity`, `TotalPrice`, `State`, `EmployeeID`, `OrderDate`, `MemberID`, `ContactEmail`, `ContactName`, `Address`, `TotalWeight`, `ReturnFlight`, `StartDate`, `ReturnDate`) VALUES
+(1, 'Đà Nẵng (DAD) - Hà Nội (HAN) ', 2, 4465000, 'Đã Thanh Toán', NULL, '2021-11-11', 4, 'tiene@gmail.com', 'Lê Ngọc Tòn', '4trtt4r34tr', 15, '', '2021-12-18', NULL),
+(23, 'Đà Nẵng (DAD) - Hà Nội (HAN) ', 2, 4465000, 'Đã Thanh Toán', NULL, '2021-12-11', 5, 'nhanvien2@vemaybay.com', 'Lê Ngọc Tòn', '4trtt4r34tr', 15, '', '2021-12-18', NULL),
+(26, 'Đà Nẵng (DAD) - Hà Nội (HAN) ', 2, 4051000, 'Đã Thanh Toán', NULL, '2021-12-11', 5, 'tien231@gmail.com', 'fghtwgq4', '4trtt4r34tr', 25, '', '2021-12-18', NULL),
+(27, 'Đà Nẵng (DAD) - Hà Nội (HAN) ', 2, 1465000, 'Đã Thanh Toán', NULL, '2021-10-12', 5, 'tien231@gmail.com', '4gbh2q34g', '34gbwt4gea', 15, '', '2021-12-18', NULL),
+(28, 'Đà Nẵng (DAD) - Hà Nội (HAN) ', 1, 2145000, 'Đã Thanh Toán', NULL, '2021-12-14', 5, 'tien231@gmail.com', '4t56h3g', 'f4vr4rvr', 15, '', '2021-12-18', NULL),
+(31, 'Đà Nẵng (DAD) - Hà Nội (HAN) ', 2, 3965000, 'Chưa thanh toán', NULL, '2021-12-15', 1, 'starbutterfly652@gmail.com', 'wer3rq34', 'bhnehvrsae', 15, 'Hà Nội (HAN) - Đà Nẵng (DAD)', '2021-12-18', '2021-12-20'),
+(33, 'Đà Nẵng (DAD) - Hà Nội (HAN)', 1, 1387000, 'Chưa thanh toán', NULL, '2021-11-17', 1, 'tien23851@gmail.com', 'Nguyễn Vĩnh Tiến', 'frgthy46jgw', 20, NULL, '2021-12-18', NULL),
+(34, 'Đà Nẵng (DAD) - Hà Nội (HAN)', 2, 2315000, 'Chưa thanh toán', NULL, '2021-09-17', 1, 'tien23851@gmail.com', 'Nguyễn Vĩnh Tiến', 'frgty', 15, NULL, '2021-12-18', NULL),
+(35, 'Đà Nẵng (DAD) - Hà Nội (HAN)', 2, 2816000, 'Chưa thanh toán', NULL, '2021-10-17', 1, 'tien23851@gmail.com', 'Nguyễn Vĩnh Tiến', 'vwbvgrfedc', 40, NULL, '2021-12-18', NULL);
 
 -- --------------------------------------------------------
 
@@ -597,7 +613,7 @@ INSERT INTO `ticket` (`TicketID`, `State`, `SeatCode`, `FlightID`, `Class`) VALU
 (217, 'Empty', '5A', 3, 'Economy'),
 (218, 'Occupied', '5B', 3, 'Economy'),
 (219, 'Occupied', '5C', 3, 'Economy'),
-(220, 'Empty', '5D', 3, 'Economy'),
+(220, 'Occupied', '5D', 3, 'Economy'),
 (221, 'Occupied', '5E', 3, 'Economy'),
 (222, 'Occupied', '5F', 3, 'Economy'),
 (223, 'Empty', '6A', 3, 'Economy'),
@@ -605,16 +621,16 @@ INSERT INTO `ticket` (`TicketID`, `State`, `SeatCode`, `FlightID`, `Class`) VALU
 (225, 'Empty', '6C', 3, 'Economy'),
 (226, 'Occupied', '6D', 3, 'Economy'),
 (227, 'Occupied', '6E', 3, 'Economy'),
-(228, 'Empty', '6F', 3, 'Economy'),
+(228, 'Occupied', '6F', 3, 'Economy'),
 (229, 'Empty', '7A', 3, 'Economy'),
 (230, 'Empty', '7B', 3, 'Economy'),
-(231, 'Empty', '7C', 3, 'Economy'),
+(231, 'Occupied', '7C', 3, 'Economy'),
 (232, 'Empty', '7D', 3, 'Economy'),
-(233, 'Empty', '7E', 3, 'Economy'),
-(234, 'Empty', '7F', 3, 'Economy'),
+(233, 'Occupied', '7E', 3, 'Economy'),
+(234, 'Occupied', '7F', 3, 'Economy'),
 (235, 'Empty', '8A', 3, 'Economy'),
 (236, 'Empty', '8B', 3, 'Economy'),
-(237, 'Empty', '8C', 3, 'Economy'),
+(237, 'Occupied', '8C', 3, 'Economy'),
 (238, 'Empty', '8D', 3, 'Economy'),
 (239, 'Empty', '8E', 3, 'Economy'),
 (240, 'Empty', '8F', 3, 'Economy'),
@@ -623,13 +639,13 @@ INSERT INTO `ticket` (`TicketID`, `State`, `SeatCode`, `FlightID`, `Class`) VALU
 (243, 'Empty', '9C', 3, 'Economy'),
 (244, 'Empty', '9D', 3, 'Economy'),
 (245, 'Empty', '9E', 3, 'Economy'),
-(246, 'Empty', '9F', 3, 'Economy'),
+(246, 'Occupied', '9F', 3, 'Economy'),
 (247, 'Empty', '10A', 3, 'Economy'),
 (248, 'Empty', '10B', 3, 'Economy'),
 (249, 'Empty', '10C', 3, 'Economy'),
 (250, 'Empty', '10D', 3, 'Economy'),
 (251, 'Empty', '10E', 3, 'Economy'),
-(252, 'Empty', '10F', 3, 'Economy'),
+(252, 'Occupied', '10F', 3, 'Economy'),
 (253, 'Empty', '11A', 3, 'Economy'),
 (254, 'Empty', '11B', 3, 'Economy'),
 (255, 'Empty', '11C', 3, 'Economy'),
@@ -977,13 +993,13 @@ INSERT INTO `ticket` (`TicketID`, `State`, `SeatCode`, `FlightID`, `Class`) VALU
 (597, 'Empty', '5C', 1, 'Economy'),
 (598, 'Empty', '5D', 1, 'Economy'),
 (599, 'Empty', '5E', 1, 'Economy'),
-(600, 'Empty', '5F', 1, 'Economy'),
+(600, 'Occupied', '5F', 1, 'Economy'),
 (601, 'Empty', '6A', 1, 'Economy'),
 (602, 'Empty', '6B', 1, 'Economy'),
 (603, 'Empty', '6C', 1, 'Economy'),
 (604, 'Empty', '6D', 1, 'Economy'),
 (605, 'Empty', '6E', 1, 'Economy'),
-(606, 'Empty', '6F', 1, 'Economy'),
+(606, 'Occupied', '6F', 1, 'Economy'),
 (607, 'Empty', '7A', 1, 'Economy'),
 (608, 'Empty', '7B', 1, 'Economy'),
 (609, 'Empty', '7C', 1, 'Economy'),
@@ -1215,17 +1231,15 @@ ALTER TABLE `member`
 ALTER TABLE `orderdetails`
   ADD PRIMARY KEY (`OrderID`,`TicketID`),
   ADD KEY `BaggageID` (`BaggageID`),
-  ADD KEY `TicketID` (`TicketID`);
+  ADD KEY `orderdetails_ibfk_3` (`TicketID`);
 
 --
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`OrderID`),
-  ADD KEY `FlightID` (`FlightID`),
-  ADD KEY `orders_ibfk_3` (`EmployeeID`),
-  ADD KEY `ReturnFlight` (`ReturnFlight`),
-  ADD KEY `orders_ibfk_2` (`MemberID`);
+  ADD KEY `orders_ibfk_2` (`MemberID`),
+  ADD KEY `orders_ibfk_3` (`EmployeeID`);
 
 --
 -- Indexes for table `plane`
@@ -1272,7 +1286,7 @@ ALTER TABLE `member`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `ticket`
@@ -1323,15 +1337,14 @@ ALTER TABLE `flightpath`
 ALTER TABLE `orderdetails`
   ADD CONSTRAINT `orderdetails_ibfk_1` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`OrderID`),
   ADD CONSTRAINT `orderdetails_ibfk_2` FOREIGN KEY (`BaggageID`) REFERENCES `baggage` (`BaggageID`) ON DELETE SET NULL,
-  ADD CONSTRAINT `orderdetails_ibfk_3` FOREIGN KEY (`TicketID`) REFERENCES `ticket` (`TicketID`);
+  ADD CONSTRAINT `orderdetails_ibfk_3` FOREIGN KEY (`TicketID`) REFERENCES `ticket` (`TicketID`) ON DELETE NO ACTION;
 
 --
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`EmployeeID`) REFERENCES `employee` (`EmployeeID`) ON DELETE SET NULL ON UPDATE SET NULL,
-  ADD CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`ReturnFlight`) REFERENCES `flight` (`FlightID`) ON DELETE SET NULL ON UPDATE SET NULL;
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`) ON DELETE SET NULL,
+  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`EmployeeID`) REFERENCES `employee` (`EmployeeID`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `ticket`

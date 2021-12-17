@@ -1,13 +1,19 @@
 <?php require_once("../../class/order.php");
 require_once("../../class/flight.php");
+require_once("../../class/flightpath.php");
 session_start();
 $OrderInfo = $_POST["OrderDetails"];
 $FlightID = $OrderInfo["StartFlight"];
 $Quantity = count($OrderInfo["CustomerInfo"]);
 $Flight = $FlightObject->SearchFlight(" and FlightID = '$FlightID'")[0];
-$Flight2 = 'null';
+$StartFlightPath = $FlightPathObject->GetFlightPath(" where PathID = '" . $Flight["PathID"] . "'")[0];
+$StartFlightPathString = $StartFlightPath["CN1"] . " (" . $StartFlightPath["StartAirport"] . ") - " . $StartFlightPath["CN2"] . " (" . $StartFlightPath["EndAirport"] . ")";
+$Flight2 = $ReturnDate = $EndFlightPathString = $EndFlightPath = 'null';
 if (isset($OrderInfo["ReturnFlight"])) {
     $Flight2 = $FlightObject->SearchFlight(" and FlightID = '" . $OrderInfo["ReturnFlight"] . "'")[0];
+    $EndFlightPath = $FlightPathObject->GetFlightPath(" where PathID = '" . $Flight2["PathID"] . "'")[0];
+    $EndFlightPathString = $EndFlightPath["CN1"] . " (" . $EndFlightPath["StartAirport"] . ") - " . $EndFlightPath["CN2"] . " (" . $EndFlightPath["EndAirport"] . ")";
+    $ReturnDate = $Flight2["StartDate"];
 }
 $PriceDetails = [];
 $TotalPrice = $TotalWeight = 0;
@@ -72,9 +78,9 @@ $ContactEmail = $OrderInfo["ContactEmail"];
 $ContactName = $OrderInfo["ContactName"];
 $Address = $OrderInfo["Address"];
 $OrderArray = array(
-    'FlightID' => $FlightID, 'Quantity' => $Quantity, 'TotalPrice' => $TotalPrice, 'State' => "Chưa thanh toán",
+    "StartDate" => $Flight["StartDate"], "ReturnDate" => $ReturnDate, 'StartFlight' => $StartFlightPathString, 'Quantity' => $Quantity, 'TotalPrice' => $TotalPrice, 'State' => "Chưa thanh toán",
     'EmployeeID' => 'null', 'OrderDate' => $OrderDate, 'MemberID' => $MemberID, 'ContactEmail' => $ContactEmail,
-    'ContactName' => $ContactName, 'Address' => $Address, 'TotalWeight' => $TotalWeight, "ReturnFlight" => $Flight2["FlightID"]
+    'ContactName' => $ContactName, 'Address' => $Address, 'TotalWeight' => $TotalWeight, "ReturnFlight" => $EndFlightPathString
 );
 $i = $OrderCheck = $OrderDetailCheck = 0;
 $Order = $OrderObject->addOrder($OrderArray);
@@ -96,4 +102,4 @@ $OrderDetail = $OrderObject->AddOrderDetails($OrderDetailsArray);
 if ($OrderDetail == 1) {
     $OrderDetailCheck = 1;
 }
-die(json_encode(array("OrderCheck" => $OrderCheck, "OrderDetailCheck" => $OrderDetailCheck, "OrderArray" => $Order, "OrderDetail" => $OrderDetail)));
+die(json_encode(array("OrderCheck" => $OrderCheck, "OrderDetailCheck" => $OrderDetailCheck)));

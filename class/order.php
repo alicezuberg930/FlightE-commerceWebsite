@@ -1,6 +1,20 @@
 <?php require_once("../../connection.php");
 class order
 {
+    public function DeleteOrder($ID)
+    {
+        $connect  = connection();
+        $query = mysqli_query($connect, "delete from orders where OrderID = '" . $ID . "'");
+        $connect->close();
+        return $query;
+    }
+    public function DeleteOrderDetail($ID)
+    {
+        $connect  = connection();
+        $query = mysqli_query($connect, "delete from orderdetails where OrderID = '" . $ID . "'");
+        $connect->close();
+        return $query;
+    }
     public function GetOrder($SQL)
     {
         $connect = connection();
@@ -15,7 +29,7 @@ class order
     public function GetOrderDetail($ID)
     {
         $connect = connection();
-        $query = mysqli_query($connect, "SELECT * FROM orderdetail, vegetable WHERE orderdetail.OrderID = '" . $ID . "'");
+        $query = mysqli_query($connect, "SELECT * FROM orderdetails WHERE OrderID = '" . $ID . "'");
         $DetailArray = array();
         while ($Row = mysqli_fetch_assoc($query)) {
             $DetailArray[] = $Row;
@@ -26,7 +40,7 @@ class order
     public function AddOrder($order)
     {
         $Connect = connection();
-        $FlightID = $order["FlightID"];
+        $StartFlight = $order["StartFlight"];
         $Quantity = $order["Quantity"];
         $TotalPrice = $order["TotalPrice"];
         $State  = $order["State"];
@@ -37,10 +51,11 @@ class order
         $ContactName = $order["ContactName"];
         $Address = $order["Address"];
         $TotalWeight = $order["TotalWeight"];
-        $ReturnFlight = $order["ReturnFlight"];
-        $query = mysqli_query($Connect, "INSERT INTO orders(FlightID,Quantity,TotalPrice,State,EmployeeID,OrderDate,MemberID,ContactEmail,ContactName,Address,TotalWeight,ReturnFlight) 
-        VALUES('" . $FlightID . "','" . $Quantity . "','" . $TotalPrice . "','" . $State . "',$EmployeeID,'" . $OrderDate . "','" . $MemberID . "','" . $ContactEmail . "',
-        '" . $ContactName . "','" . $Address . "','" . $TotalWeight . "',$ReturnFlight)");
+        $StartDate = $order["StartDate"];
+        $ReturnDate = $order["ReturnDate"];
+        $query = mysqli_query($Connect, "INSERT INTO orders(StartDate,ReturnDate,StartFlight,Quantity,TotalPrice,State,EmployeeID,OrderDate,MemberID,ContactEmail,ContactName,Address,TotalWeight) 
+        VALUES('" . $StartDate . "',$ReturnDate,'" . $StartFlight . "','" . $Quantity . "','" . $TotalPrice . "','" . $State . "',$EmployeeID,'" . $OrderDate . "','" . $MemberID . "','" . $ContactEmail . "',
+        '" . $ContactName . "','" . $Address . "','" . $TotalWeight . "')");
         $Connect->close();
         return $query;
     }

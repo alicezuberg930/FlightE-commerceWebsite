@@ -187,9 +187,8 @@ main {
 }
 
 .charts {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  display: flex;
+  flex-direction: column;
   margin-top: 50px;
 }
 
@@ -222,7 +221,7 @@ main {
 }
 
 .charts__right {
-  padding: 25px;
+  padding: 0 25px 10rem;
   border-radius: 5px;
   background-color: #ffffff;
   box-shadow: 5px 5px 13px #ededed, -5px -5px, 13px #ffffff;
@@ -240,12 +239,19 @@ main {
   color: #a5aaad;
 }
 
-.charts__right__title > i {
-  color: #ffffff;
-  font-size: 20px;
-  background-color: #39447a;
-  border-radius: 200px 0 200px 200px;
-  border: 0 solid black;
+#choose-stat {
+  display: block;
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  outline: none;
+  border-radius: 0.25rem;
 }
 
 .charts__right__cards {
@@ -292,8 +298,6 @@ main {
 }
 #sidebar {
   grid-area: sidebar;
-  /* height: 100vh; */
-  /* position: fixed; */
   transition: all 0.5s;
   background-color: rgba(15, 15, 15, 0.966);
   overflow-y: auto;

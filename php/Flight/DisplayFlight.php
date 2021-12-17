@@ -15,8 +15,8 @@ foreach ($FlightList as $Flight) {
         <td>' . number_format($Flight["AdultPrice"]) . ' VND</td>
         <td>' . number_format($Flight["ChildrenPrice"]) . ' VND</td>
         <td>' . number_format($Flight["ToddlerPrice"]) . ' VND</td>
-        <td><button id="Delete" class="btn btn-danger btn-sm">Xóa</button></td>
-        <td><button id="Edit" class="btn btn-warning btn-sm">Sửa</button></td>
+        <td><button id="Delete" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
+        <td><button id="Edit" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></button></td>
     </tr>';
 }
 $NumberOfPages = ceil(mysqli_num_rows(Query("select * from flight")) / 10);
