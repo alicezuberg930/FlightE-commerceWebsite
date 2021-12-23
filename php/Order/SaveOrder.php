@@ -18,3 +18,6 @@ if ($OrderObject->AddOrder($_SESSION["Order"]) == 1) {
 } else {
     die(0);
 }
+unset($_SESSION["Payment"]);
+unset($_SESSION["Order"]);
+unset($_SESSION["OrderDetail"]);

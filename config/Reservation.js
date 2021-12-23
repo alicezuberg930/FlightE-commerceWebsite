@@ -138,6 +138,7 @@ $(document).on("click", "#pay", function () {
             Age = customerinfo[cus].children[0].children[0].children[0].value,
             BaggagePrice = baggage[cus].children[1].children[0].children[0].value.split('-')[0],
             BaggageWeight = baggage[cus].children[1].children[0].children[0].value.split('-')[1],
+            BaggageID = baggage[cus].children[1].children[0].children[0].value.split('-')[2],
             SeatCode = baggage[cus].children[0].children[0].children[0].value,
             Class = baggage[cus].children[0].children[0].children[0].getAttribute("data-class"),
             Type = customerinfo[cus].getAttribute("data-type")
@@ -148,7 +149,7 @@ $(document).on("click", "#pay", function () {
         PassengerName.style.border = "1px solid #ced4da"
         OrderDetails.CustomerInfo.push({
             TicketID: TicketID, PassengerName: PassengerName.value, Age: Age, BaggagePrice: BaggagePrice,
-            BaggageWeight: BaggageWeight, SeatCode: SeatCode, Class: Class, Type: Type
+            BaggageWeight: BaggageWeight, SeatCode: SeatCode, Class: Class, Type: Type, BaggageID: BaggageID
         })
     }
     let ContactEmail = contactinfo.children[0].children[0].children[0].value, e = 0,

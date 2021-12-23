@@ -95,3 +95,29 @@
     text-decoration: none;
   }
 }
+.href-choose-place {
+  font-size: 1.2rem;
+  .vmb-href {
+    border-bottom: 2px solid black;
+    a {
+      color: black;
+    }
+  }
+}
+.choose-us {
+  background-color: aliceblue;
+  .choose-us-title {
+    background-color: #e6be50;
+    text-align: center;
+  }
+  .container {
+    .reason-section {
+      p {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+.section-title {
+  font-size: 1.8rem;
+}

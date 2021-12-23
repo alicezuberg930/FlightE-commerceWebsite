@@ -1,6 +1,11 @@
 <?php require_once("../../class/order.php");
 require_once("../../class/flight.php");
-$OrderList = $OrderObject->GetOrder('');
+session_start();
+if (isset($_SESSION["Member"])) {
+    $OrderList = $OrderObject->GetOrder(' where MemberID = "' . $_SESSION["Member"][0]["MemberID"] . '"');
+} else {
+    $OrderList = $OrderObject->GetOrder('');
+}
 $Total = 0;
 $Array = array("Header" => array_keys($OrderList[0]), "Row" => []);
 $TempArray = array();

@@ -37,7 +37,7 @@ class order
     public function GetOrderDetail($ID)
     {
         $connect = connection();
-        $query = mysqli_query($connect, "SELECT * FROM orderdetails WHERE OrderID = '" . $ID . "'");
+        $query = mysqli_query($connect, "SELECT * FROM orderdetails o left join baggage b on o.BaggageID =  b.BaggageID where o.OrderID = '" . $ID . "'");
         $DetailArray = array();
         while ($Row = mysqli_fetch_assoc($query)) {
             $DetailArray[] = $Row;
@@ -77,23 +77,22 @@ class order
             $PassengerName = $detail["PassengerName"];
             $Age = $detail["Age"];
             $TicketPrice = $detail["TicketPrice"];
-            $BaggagePrice = $detail["BaggagePrice"];
-            $BaggageWeight = $detail["BaggageWeight"];
+            $BaggageID = $detail["BaggageID"];
             $SeatCode = $detail["SeatCode"];
             $Class = $detail["Class"];
             $Type = $detail["Type"];
             mysqli_query($connect, "UPDATE ticket SET State = 'Occupied' WHERE TicketID = '" . $TicketID . "'");
-            $query = mysqli_query($connect, "INSERT INTO orderdetails(OrderID,TicketID,PassengerName,Age,TicketPrice,BaggagePrice,BaggageWeight,SeatCode,Class,Type) 
-            VALUES('" . $OrderID . "','" . $TicketID . "','" . $PassengerName . "','" . $Age . "','" . $TicketPrice . "','" . $BaggagePrice . "','" . $BaggageWeight . "',
-            '" . $SeatCode . "','" . $Class . "','" . $Type . "')");
+            $query = mysqli_query($connect, "INSERT INTO orderdetails(OrderID,TicketID,PassengerName,Age,TicketPrice,SeatCode,Class,Type,BaggageID) 
+            VALUES('" . $OrderID . "','" . $TicketID . "','" . $PassengerName . "','" . $Age . "','" . $TicketPrice . "','" . $SeatCode . "',
+            '" . $Class . "','" . $Type . "',$BaggageID)");
         }
         $connect->close();
         return $query;
     }
-    public function ChangeStatus($State, $ID)
+    public function ChangeStatus($State, $ID, $EmployeeID)
     {
         $connect  = connection();
-        $query = mysqli_query($connect, "update orders set State = '" . $State . "' where OrderID = '" . $ID . "'");
+        $query = mysqli_query($connect, "update orders set EmployeeID = '" . $EmployeeID . "' , State = '" . $State . "' where OrderID = '" . $ID . "'");
         $connect->close();
         return $query;
     }

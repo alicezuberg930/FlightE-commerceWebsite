@@ -11,6 +11,6 @@ $.ajax({
     url: "../php/Order/SaveOrder.php",
     method: "get",
     success: function (data) {
-
+        console.log(data)
     }
 })

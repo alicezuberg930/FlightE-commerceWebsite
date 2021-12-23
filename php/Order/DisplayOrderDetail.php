@@ -9,14 +9,19 @@ foreach ($OrderDetailList as $OrderDetail) {
     } else {
         $Age  = "Em bé";
     }
+    if ($OrderDetail["BaggageID"] != '') {
+        $Weight =  $OrderDetail["Weight"];
+    } else {
+        $Weight = 0;
+    }
     $OrderDetailHTML .= "<tr data-orderid='" . $OrderDetail["OrderID"] . "'>
         <td>" . $OrderDetail["OrderID"] . "</td>
         <td>" . $OrderDetail["TicketID"] . "</td>
         <td>" . $OrderDetail["PassengerName"] . "</td>
         <td>" . $Age . "</td>
         <td>" . number_format($OrderDetail["TicketPrice"]) . " VND</td>
-        <td>" . number_format($OrderDetail["BaggagePrice"]) . " VND</td>
-        <td>" . $OrderDetail["BaggageWeight"] . " Kg</td>
+        <td>" . number_format($OrderDetail["Price"]) . " VND</td>
+        <td>" . $Weight . " Kg</td>
         <td>" . $OrderDetail["SeatCode"] . "</td>
         <td>" . $OrderDetail["Class"] . "</td>
         <td>" . $OrderDetail["Type"] . "</td>

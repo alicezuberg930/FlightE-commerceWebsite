@@ -81,3 +81,6 @@ $(document).on("click", "#cancel", function () {
     })
 })
 export { GetDetails }
+import { ExportOrder, ExportOrderDetail } from "./EmployeeOrder.js"
+ExportOrder()
+ExportOrderDetail()

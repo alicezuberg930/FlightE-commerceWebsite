@@ -86,10 +86,15 @@ $OrderArray = array(
 $i = 0;
 $OrderDetailsArray = array();
 foreach ($OrderInfo["CustomerInfo"] as $o) {
+    if ($o["BaggageID"] == '') {
+        $BaggageID = 'null';
+    } else {
+        $BaggageID = $o["BaggageID"];
+    }
     $Bruh = array(
         "OrderID" => $OrderID, "TicketID" => $o['TicketID'], "PassengerName" => $o["PassengerName"],
-        "Age" => $o["Age"], "TicketPrice" => $PriceDetails[$i], "BaggagePrice" => $o["BaggagePrice"],
-        "BaggageWeight" => $o["BaggageWeight"], "SeatCode" => $o["SeatCode"], "Class" => $o["Class"], "Type" => $o["Type"]
+        "Age" => $o["Age"], "TicketPrice" => $PriceDetails[$i], "SeatCode" => $o["SeatCode"],
+        "Class" => $o["Class"], "Type" => $o["Type"], "BaggageID" => $BaggageID
     );
     $OrderDetailsArray[] = $Bruh;
     $i++;

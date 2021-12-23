@@ -5,11 +5,17 @@ $Start = ($_POST["p"] - 1) * 5;
 $Array = array("CardBody" => '', 'CardFooter' => '');
 $OrderList = $OrderObject->GetOrder(" ORDER BY OrderID ASC LIMIT $Start, 5");
 $States = [
-    "Đã Thanh Toán",
-    "Đang Chuyển",
-    "Đã Giao"
+    "Đã thanh toán",
+    "Đang chuyển",
+    "Đã giao"
 ];
 foreach ($OrderList as $Order) {
+    if ($Order["State"] == 'Đã giao') {
+        $Disabled = "disabled='disabled'";
+    } else {
+        $Disabled = '';
+    }
+    $State .= "<option selected value='" . $Order["State"] . "'>" . $Order["State"] . "</option>";
     foreach ($States as $s) {
         if ($Order["State"] == $s)
             continue;
@@ -32,10 +38,7 @@ foreach ($OrderList as $Order) {
         <td>" . $Order["ReturnFlight"] . "</td>
         <td>" . $ReturnDate  . "</td>
         <td>
-            <select id='state' class='form-control'>
-                <option value='" . $Order["State"] . "' selected>" . $Order["State"] . "</option>
-            " . $State . "
-            </select>
+            <select " . $Disabled . " id='state' class='form-control'>'" . $State . "'</select>
         </td>
         <td>
             <p>Địa chỉ: " . $Order["ContactEmail"] . "</p>
@@ -54,5 +57,5 @@ for ($i = 1; $i <= $NumberOfPages; $i++) {
     $Array['CardFooter'] .= '<span>' . $i . '</span> ';
 }
 $Array['CardFooter'] .= "</div>
-<button class='excel-export btn bg-primary'>Xuất hóa đơn</button>";
+<button id='export-orders' class='btn bg-primary'>Xuất hóa đơn</button>";
 die(json_encode($Array));

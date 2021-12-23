@@ -13,10 +13,22 @@
     <link rel="stylesheet" href="../library/sweetalert2/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="../boostrap/css/bootstrap.css">
     <script src="../boostrap/js/bootstrap.min.js"></script>
+    <script lang="javascript" src="../library/xlsx/dist/xlsx.full.min.js"></script>
 </head>
 
 <body>
     <style>
+        .order-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .button-container {
+            padding-left: 2.5rem;
+            margin: -1rem 0 2rem 0;
+        }
+
         #myModal {
             width: 95%;
             margin: 1.75rem auto;
@@ -32,8 +44,7 @@
 
         .table {
             width: 95%;
-            margin: 0 auto 5rem;
-
+            margin: 0 auto 2rem;
         }
 
         h2 {
@@ -43,25 +54,30 @@
     </style>
     <nav class="nav-bar"></nav>
     <h2>Danh sách đơn hàng</h2>
-    <table id="orders" class="table table table-hover">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Ngày đặt</th>
-                <th>Tổng tiền</th>
-                <th>Hành lý</th>
-                <th>Số người</th>
-                <th>Chuyến bay đi</th>
-                <th>Ngày đi</th>
-                <th>Chuyến bay về</th>
-                <th>Ngày về</th>
-                <th>Trạng thái</th>
-                <th>Hủy vé</th>
-                <th>Chi tiết</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+    <div class="order-container">
+        <table id="orders" class="table table table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Ngày đặt</th>
+                    <th>Tổng tiền</th>
+                    <th>Hành lý</th>
+                    <th>Số người</th>
+                    <th>Chuyến bay đi</th>
+                    <th>Ngày đi</th>
+                    <th>Chuyến bay về</th>
+                    <th>Ngày về</th>
+                    <th>Trạng thái</th>
+                    <th>Hủy vé</th>
+                    <th>Chi tiết</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div class="button-container">
+            <button class="btn btn-info" id="export-orders">Xuất hóa đơn</button>
+        </div>
+    </div>
     <div class="modal fade" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -92,6 +108,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Thoát</button>
+                    <button type="button" id="export-details" class="btn btn-info">Xuất chi tiết</button>
                 </div>
             </div>
         </div>
