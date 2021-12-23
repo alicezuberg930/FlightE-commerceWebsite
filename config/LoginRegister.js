@@ -1,3 +1,4 @@
+import { isEmailValid, isPasswordValid, isPhonenumberValid } from "./Regex.js"
 const verify = document.querySelector(".verify");
 const login_side = document.getElementById("login-slider");
 const register_side = document.getElementById("register-slider");
@@ -16,18 +17,6 @@ document.querySelectorAll('form').forEach(data => {
         e.preventDefault();
     });
 });
-function isEmailValid(email) {
-    const emailRegexp = new RegExp(
-        /^[a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-zA-Z0-9]@[a-zA-Z0-9][-\.]{0,1}([a-zA-Z][-\.]{0,1})*[a-zA-Z0-9]\.[a-zA-Z0-9]{1,}([\.\-]{0,1}[a-zA-Z]){0,}[a-zA-Z0-9]{0,}$/i
-    )
-    return emailRegexp.test(email)
-}
-function isPasswordValid(str) {
-    return /(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,16})$/.test(str)
-}
-function isPhonenumberValid(str) {
-    return /^[0][0-9]{9}$/.test(str);
-}
 let ErrorNotification = (Circle, Circle2, Border, Span, Text) => {
     Circle.css("visibility", "visible")
     Circle.css("color", "#cf1414")
@@ -57,6 +46,16 @@ $("#login").click(() => {
             if (Obj.Password != "") { ErrorNotification($("#l-password-error"), $("#l-password-success"), $(".l-password"), $(".form-box").find("span").eq(1), Obj.Password) }
             else { SuccessNotification($("#l-password-success"), $("#l-password-error"), $(".l-password"), $(".form-box").find("span").eq(1)) }
             if (Obj.Email == "" && Obj.Password == "") {
+                if (Obj.State == 0) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        html: '<h3>Tài khoản của bạn đã bị khóa</h3>',
+                        showConfirmButton: false,
+                    })
+                    $.ajax({ url: "../php/LoginRegister/Logout.php" })
+                    return
+                }
                 let welcome = "<h3>Chào mừng " + Obj.Username + "<h3>"
                 Swal.fire({
                     position: 'center',
@@ -76,9 +75,9 @@ $("#register").click(() => {
     let password = $(".r-password").val()
     let checkpassword = $(".r-check-password").val()
     let phonenumber = $(".r-phone-number").val()
-    let gender = $(".r-gender").val()
+    let gender = $("input:radio[name=gender]:checked").val()
     let a = 0, b = 0, c = 0, d = 0, e = 0
-    if (username.length < 10) {
+    if (username.length < 7) {
         ErrorNotification($("#r-username-error"), $("#r-username-success"), $(".r-username"), $(".form-box").find("span").eq(2), "Tên người dùng không hợp lệ")
     } else {
         SuccessNotification($("#r-username-success"), $("#r-username-error"), $(".r-username"), $(".form-box").find("span").eq(2))
@@ -122,7 +121,15 @@ $("#register").click(() => {
                     SuccessNotification($("#r-phone-number-success"), $("#r-phone-number-error"), $(".r-phone-number"), $(".form-box").find("span").eq(6))
                 }
                 if (Obj.Response == "Success") {
-                    window.location.href = "index.php"
+                    let welcome = "<h3>Chào mừng " + username + "<h3>"
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        html: welcome,
+                        showConfirmButton: false,
+                        timer: 1400
+                    })
+                    setTimeout(() => { window.location.href = "./index.html" }, 1400)
                 }
             }
         })

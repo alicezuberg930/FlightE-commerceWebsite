@@ -23,17 +23,6 @@ class flight
         $connect->close();
         return $arr;
     }
-    public function Countries()
-    {
-        $connect = connection();
-        $arr = array();
-        $query = mysqli_query($connect, "select * from country order by CountryName desc");
-        while ($Row = mysqli_fetch_array($query)) {
-            $arr[] = $Row;
-        }
-        $connect->close();
-        return $arr;
-    }
     public function CitiesAndAirports($StartAirport)
     {
         $connect = connection();
@@ -63,13 +52,14 @@ class flight
         $connect->close();
         return $query;
     }
-    public function EditFlight($Obj)
+    public function UpdateFlight($Obj)
     {
         $connect = connection();
+        $ID = $Obj["FlightID"];
         $StartDate = $Obj["StartDate"];
         $StartTime = $Obj["StartTime"];
         $EndTime = $Obj["EndTime"];
-        $PlaneID = $Obj["PlaneID"];
+        // $PlaneID = $Obj["PlaneID"];
         $AirlineID = $Obj["AirlineID"];
         $PathID = $Obj["PathID"];
         $EndDate = $Obj["EndDate"];
@@ -77,8 +67,8 @@ class flight
         $ChildrenPrice = $Obj["ChildrenPrice"];
         $ToddlerPrice = $Obj["ToddlerPrice"];
         $query = mysqli_query($connect, "update flight set StartDate='$StartDate', StartTime='$StartTime', EndTime='$EndTime',
-        PlaneID='$PlaneID', AirlineID='$AirlineID', PathID='$PathID', EndDate='$EndDate', AdultPrice 
-        AdultPrice='$AdultPrice', ChildrenPrice='$ChildrenPrice', ToddlerPrice='$ToddlerPrice'");
+        AirlineID='$AirlineID', PathID='$PathID', EndDate='$EndDate', AdultPrice='$AdultPrice', ChildrenPrice='$ChildrenPrice', 
+        ToddlerPrice='$ToddlerPrice' where FlightID = '" . $ID . "'");
         $connect->close();
         return $query;
     }

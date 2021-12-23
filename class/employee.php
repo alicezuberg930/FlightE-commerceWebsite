@@ -4,12 +4,12 @@ class employee
     public function GetEmployee($Start, $Quantity)
     {
         $query = mysqli_query($connect = connection(), "SELECT * FROM employee ORDER BY EmployeeID ASC LIMIT $Start, $Quantity");
-        $UserArray = array();
+        $arr = array();
         while ($Row = mysqli_fetch_assoc($query)) {
-            $UserArray[] = $Row;
+            $arr[] = $Row;
         }
         $connect->close();
-        return $UserArray;
+        return $arr;
     }
     public function AddEmployee($Fullname, $Email, $Password, $Phonenumber, $Gender)
     {

@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+i {
+  color: white;
+}
+
 ::-webkit-scrollbar {
   width: 5px;
   height: 6px;
@@ -44,7 +48,7 @@ body {
 .containers {
   display: grid;
   height: 100vh;
-  grid-template-columns: 0.6fr 1fr 1fr 1fr;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr;
   grid-template-rows: 0.2fr 3fr;
   grid-template-areas:
     "sidebar nav nav nav"
@@ -116,7 +120,7 @@ main {
 }
 
 .main__container {
-  padding: 0 30px;
+  padding: 0 15px;
 }
 
 .main__title {
@@ -175,7 +179,7 @@ main {
   flex-direction: column;
   justify-content: space-around;
   height: 70px;
-  padding: 25px;
+  padding: 60px 25px;
   background-color: #ffffff;
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
@@ -184,6 +188,7 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 10px;
 }
 
 .charts {
@@ -418,4 +423,12 @@ main {
   #sidebar {
     width: 50%;
   }
+}
+
+option {
+  background-color: aliceblue;
+}
+
+.card-body {
+  word-break: break-all;
 }

@@ -129,20 +129,20 @@ function BodyHTML($FlightList, $FPO)
             </div>
             <ul class="box-item-flight">
                 <li>
-                    <img src="../icon/' . $Flight["AirlineID"] . '.gif">
+                    <img src="../icon/' . $Flight["AirlineImage"] . '">
                     <p>' . $Flight["AirlineName"] . '</p>
                 </li>
                 <li>
                     <span><b>' . $Flightpath["CN1"] . ' - ' . $Flightpath["StartAirport"] . '</b></span>
                     <span><i>Sân bay ' . $Flightpath["AN1"] . '</i></span>
                     <span>Cất cánh: <b>' . date("H:i", strtotime($Flight["StartTime"])) . '</b></span>
-                    <span>Ngày: <b>' . date("d-m-Y", strtotime($Flight["StartDate"])) . '</b></span>
+                    <span>Ngày đi: <b>' . date("d-m-Y", strtotime($Flight["StartDate"])) . '</b></span>
                 </li>
                 <li>
                     <span><b>' . $Flightpath["CN2"] . ' - ' . $Flightpath["EndAirport"] . '</b></span>
                     <span><i>Sân bay ' . $Flightpath["AN2"] . '</i></span>
                     <span>Hạ cánh: <b>' . date("H:i", strtotime($Flight["EndTime"])) . '</b></span>
-                    <span>Ngày: <b>' . date("d-m-Y", strtotime($Flight["EndDate"])) . '</b></span>
+                    <span>Ngày đến: <b>' . date("d-m-Y", strtotime($Flight["EndDate"])) . '</b></span>
                 </li>
                 <li>
                     <span>Chuyến bay: <b>' . $Flight["AirlineID"] . $Flight["FlightID"] . '</b></span>

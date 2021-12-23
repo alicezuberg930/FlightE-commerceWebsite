@@ -5,7 +5,7 @@
 .flight-container {
   padding: 10vh 0;
   margin: 0;
-  background-color: #e6be50;
+  background-color: #ffca39;
 }
 
 .flight-container .search-form {
@@ -13,7 +13,7 @@
   margin: 0 auto;
   border-radius: 10px;
   -webkit-box-shadow: 0 5px 8px #aaa5a5;
-          box-shadow: 0 5px 8px #aaa5a5;
+  box-shadow: 0 5px 8px #aaa5a5;
 }
 
 .flight-container .fa-plane {
@@ -25,8 +25,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .flight-container .checkbox input {
@@ -40,8 +40,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
 .flight-container .filter-search-position .filter-search-passenger {
@@ -59,11 +59,11 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   border: 1px solid gray;
   padding: 4px 4px;
   color: #d8a649;
@@ -71,33 +71,59 @@
   border-radius: 5px;
 }
 
-.flight-container .filter-search-position .filter-search-passenger .object .fa-plus,
-.flight-container .filter-search-position .filter-search-passenger .object .fa-minus {
+.flight-container
+  .filter-search-position
+  .filter-search-passenger
+  .object
+  .fa-plus,
+.flight-container
+  .filter-search-position
+  .filter-search-passenger
+  .object
+  .fa-minus {
   border-radius: inherit;
   padding: 1px;
   border: 2px solid #ee9d41;
   cursor: pointer;
 }
 
-.flight-container .filter-search-position .filter-search-passenger .tooltip-adult,
-.flight-container .filter-search-position .filter-search-passenger .tooltip-toddler,
-.flight-container .filter-search-position .filter-search-passenger .tooltip-children {
+.flight-container
+  .filter-search-position
+  .filter-search-passenger
+  .tooltip-adult,
+.flight-container
+  .filter-search-position
+  .filter-search-passenger
+  .tooltip-toddler,
+.flight-container
+  .filter-search-position
+  .filter-search-passenger
+  .tooltip-children {
   display: none;
   position: absolute;
   color: #cea04a;
   top: -40px;
   left: -60px;
   -webkit-box-shadow: 0 3px 7px rgba(58, 55, 55, 0.5);
-          box-shadow: 0 3px 7px rgba(58, 55, 55, 0.5);
+  box-shadow: 0 3px 7px rgba(58, 55, 55, 0.5);
   text-align: center;
   padding: 5px 0;
   background-color: white;
   border-radius: 5px;
 }
 
-.flight-container .filter-search-position .filter-search-passenger .tooltip-adult::after,
-.flight-container .filter-search-position .filter-search-passenger .tooltip-children::after,
-.flight-container .filter-search-position .filter-search-passenger .tooltip-toddler::after {
+.flight-container
+  .filter-search-position
+  .filter-search-passenger
+  .tooltip-adult::after,
+.flight-container
+  .filter-search-position
+  .filter-search-passenger
+  .tooltip-children::after,
+.flight-container
+  .filter-search-position
+  .filter-search-passenger
+  .tooltip-toddler::after {
   content: "";
   position: absolute;
   width: 10px;
@@ -105,19 +131,31 @@
   bottom: -4px;
   right: 43px;
   -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
+  transform: rotate(45deg);
   background-color: white;
 }
 
-.flight-container .filter-search-position .filter-search-passenger .adult:hover + .tooltip-adult {
+.flight-container
+  .filter-search-position
+  .filter-search-passenger
+  .adult:hover
+  + .tooltip-adult {
   display: block;
 }
 
-.flight-container .filter-search-position .filter-search-passenger .children:hover + .tooltip-children {
+.flight-container
+  .filter-search-position
+  .filter-search-passenger
+  .children:hover
+  + .tooltip-children {
   display: block;
 }
 
-.flight-container .filter-search-position .filter-search-passenger .toddler:hover + .tooltip-toddler {
+.flight-container
+  .filter-search-position
+  .filter-search-passenger
+  .toddler:hover
+  + .tooltip-toddler {
   display: block;
 }
 

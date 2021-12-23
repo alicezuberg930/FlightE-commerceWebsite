@@ -80,12 +80,13 @@
                     <i id="r-phone-number-error" class="fas fa-exclamation-circle"></i>
                 </div>
                 <div class="form-control">
-                    <select class="user-id r-gender">
-                        <option disabled selected hidden>Chọn giới tính</option>
-                        <option value="Khác">Khác</option>
-                        <option value="Nam">Nam</option>
-                        <option value="Nữ">Nữ</option>
-                    </select>
+                    <div class="r-gender">
+                        <p>Chọn giới tính: </p>
+                        <div class="gender">
+                            <input class="gender-radio" type="radio" name="gender" value="Nam" checked> Nam
+                            <input class="gender-radio" type="radio" name="gender" value="Nữ"> Nữ
+                        </div>
+                    </div>
                 </div>
                 <div class="term">
                     <input type="checkbox" class="check-box">
@@ -98,7 +99,7 @@
     <div class="description"></div>
     <script src="../config/HeaderFooter.js"></script>
     <script src="../library/sweetalert2/dist/sweetalert2.min.js"></script>
-    <script src="../config/LoginRegister.js"></script>
+    <script type="module" src="../config/LoginRegister.js"></script>
     <script src="../config/UserState.js"></script>
 </body>
 

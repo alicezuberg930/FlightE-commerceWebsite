@@ -1,6 +1,6 @@
 <?php session_start();
 require_once("../../class/member.php");
-$Array = array("Email" => '', "Password" => '', "Username" => '');
+$Array = array("Email" => '', "Password" => '', "Username" => '', "State" => 1);
 $email = $_POST["email"];
 $password = $_POST["password"];
 $User = $MemberObject->Login($email, "member");
@@ -18,6 +18,7 @@ if (!empty($User)) {
         $Array["Password"] = '';
         $_SESSION["Member"] = $User;
         $Array["Username"]  = $User[0]["Fullname"];
+        $Array["State"] = $User[0]["State"];
     }
 }
 if (!empty($Employee)) {

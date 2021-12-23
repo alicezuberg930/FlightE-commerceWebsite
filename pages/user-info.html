@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Thông tin người dùng</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <script src="../library/jquery/jquery.min.js"></script>
+    <link rel="shortcut icon" href="../icon/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="../style/header.css">
+    <link rel="stylesheet" type="text/css" href="../style/footer.css">
+    <link rel="stylesheet" href="../library/sweetalert2/dist/sweetalert2.min.css">
+
+    <link rel="stylesheet" type="text/css" href="../style/index.css">
+    <link rel="stylesheet" href="../boostrap/css/bootstrap.css">
+    <script src="../boostrap/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <style>
+        .check {
+            visibility: hidden;
+            color: red;
+        }
+    </style>
+    <nav class="nav-bar"></nav>
+    <div class="container mt-5">
+        <form enctype="multipart/form-data" class="search-form bg-light p-3" action="../php/User/UpdateMember.php"
+            method="post">
+            <div class="form-row mb-3">
+                <div
+                    class="mb-4 col-md-12 d-flex justify-content-start align-items-center border-bottom border-warning pb-2">
+                    <i class="fa fa-user mr-3"></i>
+                    <h3 class="m-0">Thông tin người dùng</h3>
+                </div>
+            </div>
+            <div class="form-row mb-3">
+                <div class="col-md-12">
+                    <lable>Họ tên</lable>
+                    <input title="" class="form-control" id="Fullname" type="text">
+                    <span class="check1 check">Tên không hợp lệ</span>
+                </div>
+            </div>
+            <div class="form-row mb-3">
+                <div class="col-md-12">
+                    <lable>Thư điện tử</lable>
+                    <input class="form-control" type="text" id="Email" name="gender">
+                    <span class="check2 check">Email không hợp lệ</span>
+                </div>
+            </div>
+            <div class="form-row mb-3">
+                <div class="col-md-12">
+                    <lable>Số điện thoại</lable>
+                    <input class="form-control" type="text" id="Phonenumber" name="gender">
+                    <span class="check3 check">Số điện thoại không hợp lệ</span>
+                </div>
+            </div>
+            <div class="form-row mb-3">
+                <div class="col-md-12 d-flex justify-content-between">
+                    <lable>Chọn giới tính</lable>
+                    <div class="radio-container d-flex" style="padding-right: 50%;">
+                        <div class="gender-radio pr-5">
+                            <input class="gender" type="radio" value="Nam" name="gender"> Nam
+                        </div>
+                        <div class="gender-radio">
+                            <input class="gender" type="radio" value="Nữ" name="gender"> Nữ
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row mb-3">
+                <div class="col-md-12">
+                    <button id="SaveChange" class="btn btn-md bg-info">Lưu thay đổi</button>
+                    <button id="DeleteAccount" class="btn btn-md bg-danger">Xóa tài khoản</button>
+                    <button id="ChangePassword" class="btn btn-md bg-warning">Đổi mật khẩu</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Đổi mật khẩu</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form enctype="multipart/form-data" class="w-100" action="" method="post" id="Form">
+                        <input type="number" id="EmployeeID" hidden>
+                        <div class="form-row mb-2">
+                            <div class="col-md-12">
+                                <lable>Mật khẩu hiện tại</lable>
+                                <input class="form-control" type="password" id="CurrentPassword">
+                                <span class="check4 check">Mật khẩu không trùng</span>
+                            </div>
+                        </div>
+                        <div class="form-row mb-2">
+                            <div class="col-md-12">
+                                <lable>Mật khẩu mới</lable>
+                                <input class="form-control" type="password" id="NewPassword">
+                                <span class="check5 check">Mật khẩu không hợp lệ</span>
+                            </div>
+                        </div>
+                        <div class="form-row mb-2">
+                            <div class="col-md-12">
+                                <lable>Nhập lại mật khẩu</lable>
+                                <input class="form-control" type="password" id="RetypePassword">
+                                <span class="check6 check">Mật khẩu không trùng</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger" id="Confirm">Cập nhật</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../config/HeaderFooter.js"></script>
+    <script src="../library/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script type="module" src="../config/UserInfo.js"></script>
+    <script src="../config/UserState.js"></script>
+</body>
+
+</html>

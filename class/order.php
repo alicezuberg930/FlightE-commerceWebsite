@@ -3,14 +3,22 @@ class order
 {
     public function DeleteOrder($ID)
     {
-        $connect  = connection();
+        $connect = connection();
         $query = mysqli_query($connect, "delete from orders where OrderID = '" . $ID . "'");
         $connect->close();
         return $query;
     }
     public function DeleteOrderDetail($ID)
     {
-        $connect  = connection();
+        $TicketArray = array();
+        $connect = connection();
+        $query = mysqli_query($connect, "select TicketID from orderdetails where OrderID = '" . $ID . "'");
+        while ($row = mysqli_fetch_assoc($query)) {
+            $TicketArray[] = $row;
+        }
+        foreach ($TicketArray as $Ticket) {
+            mysqli_query($connect, "update ticket set State = 'Empty' where TicketID = '" . $Ticket["TicketID"] . "'");
+        }
         $query = mysqli_query($connect, "delete from orderdetails where OrderID = '" . $ID . "'");
         $connect->close();
         return $query;
@@ -40,6 +48,7 @@ class order
     public function AddOrder($order)
     {
         $Connect = connection();
+        $OrderID = $order["OrderID"];
         $StartFlight = $order["StartFlight"];
         $Quantity = $order["Quantity"];
         $TotalPrice = $order["TotalPrice"];
@@ -53,8 +62,8 @@ class order
         $TotalWeight = $order["TotalWeight"];
         $StartDate = $order["StartDate"];
         $ReturnDate = $order["ReturnDate"];
-        $query = mysqli_query($Connect, "INSERT INTO orders(StartDate,ReturnDate,StartFlight,Quantity,TotalPrice,State,EmployeeID,OrderDate,MemberID,ContactEmail,ContactName,Address,TotalWeight) 
-        VALUES('" . $StartDate . "',$ReturnDate,'" . $StartFlight . "','" . $Quantity . "','" . $TotalPrice . "','" . $State . "',$EmployeeID,'" . $OrderDate . "','" . $MemberID . "','" . $ContactEmail . "',
+        $query = mysqli_query($Connect, "INSERT INTO orders(OrderID,StartDate,ReturnDate,StartFlight,Quantity,TotalPrice,State,EmployeeID,OrderDate,MemberID,ContactEmail,ContactName,Address,TotalWeight) 
+        VALUES('" . $OrderID . "','" . $StartDate . "',$ReturnDate,'" . $StartFlight . "','" . $Quantity . "','" . $TotalPrice . "','" . $State . "',$EmployeeID,'" . $OrderDate . "','" . $MemberID . "','" . $ContactEmail . "',
         '" . $ContactName . "','" . $Address . "','" . $TotalWeight . "')");
         $Connect->close();
         return $query;
@@ -78,6 +87,13 @@ class order
             VALUES('" . $OrderID . "','" . $TicketID . "','" . $PassengerName . "','" . $Age . "','" . $TicketPrice . "','" . $BaggagePrice . "','" . $BaggageWeight . "',
             '" . $SeatCode . "','" . $Class . "','" . $Type . "')");
         }
+        $connect->close();
+        return $query;
+    }
+    public function ChangeStatus($State, $ID)
+    {
+        $connect  = connection();
+        $query = mysqli_query($connect, "update orders set State = '" . $State . "' where OrderID = '" . $ID . "'");
         $connect->close();
         return $query;
     }

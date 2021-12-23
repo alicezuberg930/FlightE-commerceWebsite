@@ -1,0 +1,22 @@
+{
+  "name": "onlineflightmanagementwebsite",
+  "version": "1.0.0",
+  "description": "online flight website",
+  "main": "CRUS.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alicezuberg930/OnlineFlightManagementWebsite.git"
+  },
+  "keywords": [
+    "bruh"
+  ],
+  "author": "alice",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alicezuberg930/OnlineFlightManagementWebsite/issues"
+  },
+  "homepage": "https://github.com/alicezuberg930/OnlineFlightManagementWebsite#readme"
+}

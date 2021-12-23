@@ -97,14 +97,6 @@ if (DayofMonth < 10) {
     DayofMonth = "0" + DayofMonth
 }
 let CurrentDate = DateObject.getFullYear() + "-" + (DateObject.getMonth() + 1) + "-" + DayofMonth
-// , CurrentDate = new Date(MyDate)
-// $(document).on('change', "input[type='date']", function () {
-//     let ChosenDate = new Date($(this).val())
-//     if (ChosenDate < CurrentDate) {
-//         alert("Không được chọn ngày trước ngày hiện tại")
-//         $(this).val("")
-//     }
-// });
 let SearchInfo = {}
 $("#StartDate").val(CurrentDate)
 $("#StartDate").attr('min', CurrentDate)
@@ -130,3 +122,4 @@ $("#SearchButton").click((e) => {
         window.location.href = "flight-result.html"
     }
 })
+export { ListOfDestinations }

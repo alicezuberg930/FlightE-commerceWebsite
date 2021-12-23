@@ -35,15 +35,15 @@ class ticket
 $TicketObject  = new ticket();
 
 
-// for ($row = 1; $row <= 32; $row++) {
+// for ($row = 1; $row <= 29; $row++) {
 //     $letter = "A";
-//     if ($row <= 4) {
+//     if ($row <= 3) {
 //         $Class = 'Business';
 //     } else {
 //         $Class =  'Economy';
 //     }
 //     for ($column = 0; $column < 6; $column++) {
-//         $Array = array("State" => 'Empty', "SeatCode" => $row . $letter, "FlightID" => 1, "Class" => $Class);
+//         $Array = array("State" => 'Empty', "SeatCode" => $row . $letter, "FlightID" => 6, "Class" => $Class);
 //         // $Array["SeatCode"] = $row . $letter;
 //         $TicketObject->AddTicket($Array);
 //         $letter++;

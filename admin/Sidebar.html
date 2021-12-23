@@ -1,47 +1,48 @@
 <div id="sidebar">
     <div class="sidebar__title">
-        <a class="sidebar__img" href="../home/index.php">
+        <a class="sidebar__img" href="../pages/index.html">
             <i class="fas fa-plane-departure"></i>
             <h1>Công Ty Khỉ</h1>
         </a>
         <i class="fa fa-times" id="sidebarClose"></i>
     </div>
     <div class="sidebar__menu">
-        <div class="sidebar__link active_menu_link">
-            <i class="fa fa-home"></i>
-            <a href="AdminSite.php">Thống kê</a>
-        </div>
         <div class="sidebar__link">
-            <i class="fas fa-plane"></i>
+            <i class="fas fa-plane-departure"></i>
             <a href="ManageFlight.php">Quản Lí Chuyến Bay</a>
         </div>
-        <div class="sidebar__link">
+        <div id="manage-employee" class="sidebar__link">
             <i class="fa fa-wrench"></i>
             <a href="ManageEmployee.php">Quản Lí Nhân Viên</a>
         </div>
         <div class="sidebar__link">
             <i class="fa fa-user"></i>
-            <a href="user.html">Quản Lí Người Dùng</a>
+            <a href="ManageUser.php">Quản Lí Người Dùng</a>
         </div>
         <div class="sidebar__link">
             <i class="fa fa-archive"></i>
-            <a href="#">Hóa Đơn</a>
+            <a href="ManageOrder.php">Quản Lý Hóa Đơn</a>
         </div>
         <div class="sidebar__link">
-            <i class="fas fa-ticket-alt"></i>
-            <a href="#">Đặt vé</a>
+            <i class="fas fa-broadcast-tower"></i>
+            <a href="ManageAirport.php">Quản Lý Sân Bay</a>
         </div>
         <div class="sidebar__link">
-            <i class="fa fa-user-secret"></i>
-            <a href="#">Ban Quản Trị</a>
+            <i class="fas fa-road"></i>
+            <a href="ManageFlightpath.php">Quản Lý Đường Bay</a>
         </div>
         <div class="sidebar__link">
             <i class="fa fa-handshake"></i>
-            <a href="#">Hợp Đồng</a>
+            <a href="ManageAirline.php">Quản Lí hàng không</a>
         </div>
         <div class="sidebar__link">
-            <i class="fa fa-question"></i>
-            <a href="#">Câu Hỏi</a>
+            <i class="fas fa-plane"></i>
+            <a href="ManagePlane.php">Quản Lý Máy Bay</a>
+        </div>
+        <div class="sidebar__link">
+            <i class="fa fa-home"></i>
+            <a href="AdminSite.php">Thống kê</a>
         </div>
     </div>
 </div>
+<script src="../config/UserState.js"></script>

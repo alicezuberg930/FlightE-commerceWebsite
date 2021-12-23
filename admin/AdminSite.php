@@ -11,9 +11,15 @@
     <link rel="stylesheet" href="../style/admin.css">
     <script src="../library/jquery/jquery.min.js"></script>
     <script src="../library/chart.js/dist/chart.js"></script>
+    <link rel="stylesheet" href="../boostrap/css/bootstrap.css">
 </head>
 
 <body>
+    <style>
+        .sidebar__link:nth-child(9) {
+            background-color: rgba(38, 107, 197, 0.5);
+        }
+    </style>
     <div class="containers">
         <?php require_once("./Navbar.html") ?>
         <main>
@@ -57,21 +63,11 @@
                 </div>
                 <div class="charts">
                     <div class="charts__left">
-                        <div class="chars__left__title">
-                            <div>
-                                <h1>Báo Cáo Thường Niên</h1>
-                            </div>
-                            <i class="fa fa-usd"></i>
-                            <canvas id="Chart"></canvas>
-                        </div>
-                        <div id="apex1"></div>
-                    </div>
-                    <div class="charts__right">
                         <div class="charts___right__title">
                             <div>
                                 <h1>Chọn thông tin cần thống kê</h1>
                             </div>
-                            <select id="choose-stat">
+                            <select class="form-control" id="choose-stat">
                                 <option value="" disabled selected hidden>Chọn thông tin cần thống kê</option>
                                 <option value="income">Thống kê thu nhập</option>
                                 <option value="orders">Thống kê đơn hàng đã đặt</option>
@@ -79,6 +75,17 @@
                                 <option value="ticket-type">Thống kê loại vé đã bán</option>
                             </select>
                         </div>
+                    </div>
+                    <div class="charts__right">
+                        <div class="chars__left__title">
+                            <div>
+                                <h1>Báo Cáo Thường Niên</h1>
+                            </div>
+                            <i class="fa fa-usd"></i>
+                            <canvas id="Chart"></canvas>
+                            <canvas id="Blank"></canvas>
+                        </div>
+                        <div id="apex1"></div>
                     </div>
                 </div>
             </div>

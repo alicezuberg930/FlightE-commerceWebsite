@@ -3,35 +3,57 @@ class plane
 {
     public function AddPlane($Obj)
     {
-        $State = $Obj["State"];
-        $SeatCode = $Obj["SeatCode"];
-        $FlightID = $Obj["FlightID"];
-        $Class = $Obj["Class"];
-        $query = mysqli_query($connect = connection(), "insert into ticket(State,SeatCode,FlightID,Class) 
-        values('$State','$SeatCode','$FlightID','$Class')");
+        $connect = connection();
+        $PlaneID = $Obj["PlaneID"];
+        $PlaneName = $Obj["PlaneName"];
+        $Rows = $Obj["Rows"];
+        $Columns = $Obj["Columns"];
+        $BusinessRow = $Obj["BusinessRow"];
+        $SeatAmount = $Obj["SeatAmount"];
+        $query = mysqli_query($connect, "insert into `plane`(`PlaneID`, `PlaneName`, `SeatAmount`, `Rows`, `Columns`, `BusinessClassRow`) 
+        values('" . $PlaneID . "', '" . $PlaneName . "','" . $SeatAmount . "','" . $Rows . "','" . $Columns . "','" . $BusinessRow . "')");
         $connect->close();
         return $query;
     }
     public function DeletePlane($ID)
     {
         $connect = connection();
-        $query = mysqli_query($connect, "delete from ticket where FlightID = '$ID'");
+        $query = mysqli_query($connect, "delete from plane where PlaneID = '$ID'");
         $connect->close();
         return $query;
     }
-    public function EditPlane($ID)
+    public function UpdatePlane($Obj)
     {
         $connect = connection();
-        $query = mysqli_query($connect, "delete from ticket where FlightID = '$ID'");
+        $PlaneID = $Obj["PlaneID"];
+        $PlaneName = $Obj["PlaneName"];
+        $Rows = $Obj["Rows"];
+        $Columns = $Obj["Columns"];
+        $BusinessRow = $Obj["BusinessRow"];
+        $SeatAmount = $Obj["SeatAmount"];
+        $HiddenPlaneID = $Obj["HiddenPlaneID"];
+        $query = mysqli_query($connect, "UPDATE `plane` SET `PlaneID`='" . $PlaneID . "',`PlaneName`='" . $PlaneName . "',`SeatAmount`='" . $SeatAmount . "',
+        `Rows`='" . $Rows . "',`Columns`='" . $Columns . "',`BusinessClassRow`='" . $BusinessRow . "' WHERE `PlaneID`='" . $HiddenPlaneID . "'");
         $connect->close();
         return $query;
     }
-    public function GetPlane($SQL)
+    public function SearchPlane($SQL)
     {
         $connect = connection();
         $arr = array();
         $query = mysqli_query($connect, "select * from plane " . $SQL);
         while ($Row = mysqli_fetch_array($query)) {
+            $arr[] = $Row;
+        }
+        $connect->close();
+        return $arr;
+    }
+    public function GetPlane($StartFrom, $Quantity)
+    {
+        $arr = array();
+        $connect = connection();
+        $query = mysqli_query($connect, "select * from plane order by PlaneID asc limit $StartFrom,$Quantity");
+        while ($Row = mysqli_fetch_assoc($query)) {
             $arr[] = $Row;
         }
         $connect->close();

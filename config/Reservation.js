@@ -166,25 +166,7 @@ $(document).on("click", "#pay", function () {
             method: "post",
             data: { OrderDetails: OrderDetails },
             success: function (data) {
-                let Obj = JSON.parse(data)
-                if (Obj.OrderCheck == 1 && Obj.OrderDetailCheck == 1) {
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'success',
-                        html: '<h4>Đơn đặt hàng của bạn đã thành công</h4>',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                    setTimeout(() => { window.location.href = "member-orders.html" }, 1500)
-                } else {
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'error',
-                        html: '<h4>Đơn đặt hàng của bạn đã thất bại</h4>',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
+                window.location.href = "./checkout.html"
             }
         })
     }

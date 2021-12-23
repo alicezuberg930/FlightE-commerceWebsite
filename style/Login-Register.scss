@@ -3,7 +3,7 @@
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  height: 47rem;
+  height: 52rem;
   .form-box {
     width: 40%;
     height: 70%;
@@ -49,6 +49,15 @@
       transition: 0.5s ease-in-out;
       .form-control {
         position: relative;
+        .r-gender {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          margin-bottom: 1.5rem;
+          p {
+            margin-right: 3rem;
+          }
+        }
         .user-id {
           width: 100%;
           margin: 6px 0;

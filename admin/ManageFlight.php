@@ -11,25 +11,13 @@
     <script src="../library/jquery/jquery.min.js"></script>
     <link rel="stylesheet" href="../boostrap/css/bootstrap.css">
     <script src="../boostrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../library/sweetalert2/dist/sweetalert2.min.css">
 </head>
 
 <body>
     <style>
-        button {
-            width: 130px;
-        }
-
-        option {
-            background-color: aliceblue;
-        }
-
-        #Edit,
-        #Delete {
-            width: 60px;
-        }
-
-        .card-body {
-            word-break: break-all;
+        .sidebar__link:nth-child(1) {
+            background-color: rgba(38, 107, 197, 0.5);
         }
     </style>
     <div class="containers">
@@ -37,20 +25,20 @@
         <main>
             <div class="main__container">
                 <div class="mt-3">
-                    <form enctype="multipart/form-data" class="w-100" action="" method="post" id="Form">
+                    <form enctype="multipart/form-data" action="../php/Flight/AddFlight.php" method="post" id="add-form">
                         <h2>Quản lí thông tin chuyến bay</h2>
                         <div class="form-row mb-2">
                             <div class="col-md-4">
                                 <lable>Ngày khởi hành:</lable>
-                                <input class="form-control" type="date" id="StartDate">
+                                <input class="form-control" type="date" name="StartDate" id="StartDate">
                             </div>
                             <div class="col-md-4">
                                 <lable>Giờ khởi hành:</lable>
-                                <input class="form-control" type="time" id="StartTime">
+                                <input class="form-control" type="time" name="StartTime" id="StartTime">
                             </div>
                             <div class="col-md-4">
                                 <lable>Máy bay:</lable>
-                                <select id="Airplane" class="form-control">
+                                <select id="Airplane" name="Airplane" class="form-control">
                                     <option selected disabled hidden>Chọn máy bay</option>
                                 </select>
                             </div>
@@ -58,13 +46,13 @@
                         <div class="form-row mb-2">
                             <div class="col-md-4">
                                 <lable>Hãng hàng không:</lable>
-                                <select id="Airline" class="form-control">
+                                <select id="Airline" name="Airline" class="form-control">
                                     <option selected disabled hidden>Chọn hãng hàng không</option>
                                 </select>
                             </div>
                             <div class="col-md-8">
                                 <lable>Đường bay:</lable>
-                                <select class="form-control" id="Flightpath">
+                                <select class="form-control" name="Flightpath" id="Flightpath">
                                     <option selected disabled hidden>Chọn đường bay</option>
                                 </select>
                             </div>
@@ -72,17 +60,17 @@
                         <div class="form-row mb-2">
                             <div class="col-md-4">
                                 <lable>Giá vé người lớn:</lable>
-                                <input class="form-control" type="text" id="AdultPrice">
+                                <input min="0" class="form-control" type="number" name="AdultPrice" id="AdultPrice">
                                 <p></p>
                             </div>
                             <div class="col-md-4">
                                 <lable>Giá vé trẻ em:</lable>
-                                <input class="form-control" type="text" id="ChildrenPrice">
+                                <input min="0" class="form-control" type="number" name="ChildrenPrice" id="ChildrenPrice">
                                 <p></p>
                             </div>
                             <div class="col-md-4">
-                                <lable>Giá vé sơ sinh:</lable>
-                                <input class="form-control" type="text" id="ToddlerPrice">
+                                <lable>Giá vé em bé:</lable>
+                                <input min="0" class="form-control" type="number" name="ToddlerPrice" id="ToddlerPrice">
                                 <p></p>
                             </div>
                         </div>
@@ -92,19 +80,20 @@
                 <div class="card mt-5">
                     <div class="card-header">Thông tin chuyến bay</div>
                     <div class="card-body">
-                        <table class="table table-hover">
+                        <table class="table table-hover main-table">
                             <thead>
                                 <th>#</th>
                                 <th>Ngày khởi hành</th>
                                 <th>Giờ khởi hành</th>
                                 <th>Tên máy bay</th>
-                                <th>Hãng Hàng không</th>
+                                <th>Hãng hàng không</th>
                                 <th>Đường bay</th>
-                                <th>Người lớn</th>
-                                <th>Trẻ em</th>
-                                <th>Em bé</th>
+                                <th>Giá người lớn</th>
+                                <th>Giá trẻ em</th>
+                                <th>Giá em bé</th>
                                 <th>Xóa</th>
                                 <th>Sửa</th>
+                                <th>Chi tiết</th>
                             </thead>
                             <tbody></tbody>
                         </table>
@@ -115,7 +104,7 @@
         </main>
         <?php require_once("sidebar.html"); ?>
     </div>
-    <div class="modal" id="myModal">
+    <div class="modal" id="EditModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -123,66 +112,93 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <form enctype="multipart/form-data" class="w-100" action="" method="post" id="Form">
-                        <input type="number" id="EmployeeID" hidden>
+                    <form enctype="multipart/form-data" action="../php/Flight/UpdateFlight.php" method="post" id="edit-form">
+                        <input type="number" name="FlightID" id="FlightID" hidden>
                         <div class="form-row mb-2">
                             <div class="col-md-12">
                                 <lable>Ngày khởi hành:</lable>
-                                <input class="form-control" type="date" id="TempStartDate">
+                                <input class="form-control" type="date" name="TempStartDate" id="TempStartDate">
                             </div>
                         </div>
                         <div class="form-row mb-2">
                             <div class="col-md-12">
                                 <lable>Giờ khởi hành:</lable>
-                                <input class="form-control" type="time" id="TempStartTime">
+                                <input class="form-control" type="time" name="TempStartTime" id="TempStartTime">
                             </div>
                         </div>
                         <div class="form-row mb-2">
                             <div class="col-md-12">
                                 <lable>Hãng hàng không:</lable>
-                                <select id="TempGender" class="form-control">
-                                    <option value="Nữ">Nữ</option>
-                                    <option value="Nam">Nam</option>
+                                <select class="form-control" name="TempAirline" id="TempAirline">
+                                    <option selected disabled hidden>Chọn hãng hàng không</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-row mb-2">
+                        <div class=" form-row mb-2">
                             <div class="col-md-12">
                                 <lable>Đường bay:</lable>
-                                <select id="TempGender" class="form-control">
-                                    <option value="Nữ">Nữ</option>
-                                    <option value="Nam">Nam</option>
+                                <select class="form-control" name="TempFlightpath" id="TempFlightpath">
                                 </select>
                             </div>
                         </div>
                         <div class="form-row mb-2">
                             <div class="col-md-12">
                                 <lable>Giá vé người lớn:</lable>
-                                <input class="form-control" type="text" id="TempAdultPrice">
+                                <input min="0" class="form-control" type="number" name="TempAdultPrice" id="TempAdultPrice">
                             </div>
                         </div>
                         <div class="form-row mb-2">
                             <div class="col-md-12">
                                 <lable>Giá vé trẻ em:</lable>
-                                <input class="form-control" type="text" id="TempChilrenPrice">
+                                <input min="0" class="form-control" type="number" name="TempChilrenPrice" id="TempChilrenPrice">
                             </div>
                         </div>
                         <div class="form-row mb-2">
                             <div class="col-md-12">
                                 <lable>Giá vé em bé:</lable>
-                                <input class="form-control" type="text" id="TempToddler">
+                                <input min="0" class="form-control" type="number" name="TempToddlerPrice" id="TempToddlerPrice">
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-danger" id="Confirm">Cập nhật</button>
+                    <button type="button" class="btn btn-warning" id="Confirm">Cập nhật</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="DetailModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Thông tin chi tiết chuyến bay</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-hover detail-table">
+                        <thead>
+                            <tr>
+                                <th>Thành phố đi</th>
+                                <th>Thành phố đến</th>
+                                <th>Sân bay đi</th>
+                                <th>Sân bay đến</th>
+                                <th>Giờ hạ cánh</th>
+                                <th>Ngày hạ cánh</th>
+                                <th>Thời gian bay</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
                 </div>
             </div>
         </div>
     </div>
     <script src="../config/AdminResponsive.js"></script>
+    <script src="../library/sweetalert2/dist/sweetalert2.min.js"></script>
     <script type="module" src="../config/ManageFlight.js"></script>
 </body>
 

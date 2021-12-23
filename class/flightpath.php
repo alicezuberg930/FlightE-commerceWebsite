@@ -17,5 +17,34 @@ class flightpath
         $connect->close();
         return $arr;
     }
+    public function AddFlightpath($Obj)
+    {
+        $connect = connection();
+        $PathID = $Obj["PathID"];
+        $StartAirport = $Obj["StartAirport"];
+        $EndAirport = $Obj["EndAirport"];
+        $Time = $Obj["Time"];
+        $query = mysqli_query($connect, "INSERT INTO `flightpath`(`PathID`, `StartAirport`, `EndAirport`, `Time`) VALUES ('" . $PathID . "','" . $StartAirport . "','" . $EndAirport . "','" . $Time . "')");
+        $connect->close();
+        return $query;
+    }
+    public function DeleteFlightpath($ID)
+    {
+        $connect = connection();
+        $query = mysqli_query($connect, "delete from airline where AirlineID = '$ID'");
+        $connect->close();
+        return $query;
+    }
+    public function UpdateFlightpath($Obj)
+    {
+        $connect = connection();
+        $PathID = $Obj["PathID"];
+        $StartAirport = $Obj["StartAirport"];
+        $EndAirport = $Obj["EndAirport"];
+        $Time = $Obj["Time"];
+        $query = mysqli_query($connect, "UPDATE `flightpath` SET `StartAirport`='" . $StartAirport . "',`EndAirport`='" . $EndAirport . "',`Time`='" . $Time . "' WHERE PathID='" . $PathID . "'");
+        $connect->close();
+        return $query;
+    }
 }
 $FlightPathObject = new flightpath();

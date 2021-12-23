@@ -4,9 +4,7 @@ $UserID = $OrderHTML = $ReturnDate  = '';
 $i = 1;
 if (isset($_SESSION["Member"]))
     $UserID = $_SESSION["Member"][0]["MemberID"];
-if (isset($_SESSION["Employee"]))
-    $UserID = $_SESSION["Employee"][0]["EmployeeID"];
-$OrderList = $OrderObject->GetOrder(" where MemberID = '" . $UserID . "'");
+$OrderList = $OrderObject->GetOrder(" where MemberID = '" . $UserID . "' order by OrderID asc");
 foreach ($OrderList as $Order) {
     if (!empty($Order["ReturnDate"])) {
         $ReturnDate = date("d-m-Y", strtotime($Order["ReturnDate"]));
@@ -23,8 +21,9 @@ foreach ($OrderList as $Order) {
         <td>" . date("d-m-Y", strtotime($Order["StartDate"]))  . "</td>
         <td>" . $Order["ReturnFlight"] . "</td>
         <td>" . $ReturnDate  . "</td>
-        <td><button id='cancel' class='btn bg-warning btn-sm'>Hủy Vé</button></td>
-        <td><button id='detail' class='btn bg-info btn-sm'>Chi tiết</button></td>
+        <td>" . $Order["State"] . "</td>
+        <td><button id='cancel' class='btn bg-danger btn-sm'><i class='fas fa-trash-alt'></i></button></td>
+        <td><button id='detail' class='btn bg-info btn-sm'><i class='fas fa-info-circle'></i></button></td>
     </tr>";
     $i++;
 }

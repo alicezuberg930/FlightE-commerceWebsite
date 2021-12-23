@@ -3,7 +3,7 @@
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  height: 47rem;
+  height: 52rem;
 }
 
 .container .form-box {
@@ -63,6 +63,23 @@
 
 .container .form-box .input-group .form-control {
   position: relative;
+}
+
+.container .form-box .input-group .form-control .r-gender {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.container .form-box .input-group .form-control .r-gender p {
+  margin-right: 3rem;
 }
 
 .container .form-box .input-group .form-control .user-id {

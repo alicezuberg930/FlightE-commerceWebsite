@@ -20,10 +20,10 @@ class member
         $connect->close();
         return $query;
     }
-    public function Getmember($Position, $Start, $Quantity)
+    public function GetMember($Start, $Quantity)
     {
         $connect = connection();
-        $query = mysqli_query($connect, "SELECT * FROM member WHERE Position = '$Position' ORDER BY ID ASC LIMIT $Start, $Quantity");
+        $query = mysqli_query($connect, "SELECT * FROM member ORDER BY MemberID ASC LIMIT $Start, $Quantity");
         $memberArray = array();
         while ($Row = mysqli_fetch_assoc($query)) {
             $memberArray[] = $Row;
@@ -31,20 +31,52 @@ class member
         $connect->close();
         return $memberArray;
     }
-    public function Editmember($ID, $Fullname, $Email, $Password, $Phonenumber, $Gender)
+    public function UpdateMember($User, $Table, $IDType)
     {
+        $ID = $User["ID"];
+        $Fullname = $User["Fullname"];
+        $Email = $User["Email"];
+        $Phonenumber = $User["Phonenumber"];
+        $Gender = $User["Gender"];
         $connect = connection();
-        $query = mysqli_query($connect, "UPDATE employee SET Fullname='$Fullname', Email='$Email', Password='$Password', 
-        Phonenumber='$Phonenumber', Gender='$Gender' WHERE ID='$ID'");
+        $query = mysqli_query($connect, "UPDATE $Table SET Fullname='$Fullname', Email='$Email', 
+        Phonenumber='$Phonenumber', Gender='$Gender' WHERE $IDType='$ID'");
         $connect->close();
         return $query;
     }
-    public function Deletemember($ID)
+    public function ChangePassword($User, $Table, $IDType)
     {
+        $ID = $User["ID"];
+        $Password = $User["Password"];
         $connect = connection();
-        $query = mysqli_query($connect, "DELETE FROM employee WHERE ID = '$ID'");
+        $query = mysqli_query($connect, "UPDATE $Table SET Password = '$Password' WHERE $IDType='$ID'");
         $connect->close();
         return $query;
+    }
+    public function DeleteMember($ID)
+    {
+        $connect = connection();
+        $query = mysqli_query($connect, "DELETE FROM member WHERE MemberID = '$ID'");
+        $connect->close();
+        return $query;
+    }
+    public function LockUnlock($ID, $State)
+    {
+        $connect = connection();
+        $query = mysqli_query($connect, "update member set State = '" . $State . "' WHERE MemberID = '" . $ID . "' ");
+        $connect->close();
+        return $query;
+    }
+    public function GetSpecificMember($ID, $Table, $IDType)
+    {
+        $connect = connection();
+        $query = mysqli_query($connect, "SELECT * FROM $Table WHERE $IDType='$ID'");
+        $Array = array();
+        while ($Row = mysqli_fetch_assoc($query)) {
+            $Array[] = $Row;
+        }
+        $connect->close();
+        return $Array;
     }
 }
 $MemberObject = new member();

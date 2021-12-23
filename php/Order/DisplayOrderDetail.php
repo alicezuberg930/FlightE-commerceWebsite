@@ -1,9 +1,6 @@
 <?php require_once("../../class/order.php");
-if (isset($_POST["OrderID"])) {
-    setcookie("OrderID", $_POST["OrderID"]);
-}
 $OrderDetailHTML = $Age = '';
-$OrderDetailList = $OrderObject->GetOrderDetail($_COOKIE["OrderID"]);
+$OrderDetailList = $OrderObject->GetOrderDetail($_POST["OrderID"]);
 foreach ($OrderDetailList as $OrderDetail) {
     if ($OrderDetail["Age"] == "Adult") {
         $Age = "Người lớn";
@@ -12,7 +9,7 @@ foreach ($OrderDetailList as $OrderDetail) {
     } else {
         $Age  = "Em bé";
     }
-    $OrderDetailHTML .= "<tr>
+    $OrderDetailHTML .= "<tr data-orderid='" . $OrderDetail["OrderID"] . "'>
         <td>" . $OrderDetail["OrderID"] . "</td>
         <td>" . $OrderDetail["TicketID"] . "</td>
         <td>" . $OrderDetail["PassengerName"] . "</td>

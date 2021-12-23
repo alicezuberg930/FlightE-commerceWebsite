@@ -9,7 +9,7 @@ if (isset($_SESSION["Employee"])) {
     die("MemberLogin");
 }
 $TicketList = $TicketObject->GetTicket("where FlightID = '" . $_POST["FlightID"] . "'");
-$Plane = $PlaneObject->GetPlane("where PlaneID = '" . $_POST["PlaneID"] . "'")[0];
+$Plane = $PlaneObject->SearchPlane("where PlaneID = '" . $_POST["PlaneID"] . "'")[0];
 $FlightList = $FlightObject->SearchFlight(" and FlightID = '" . $_POST["FlightID"] . "'");
 $String = '
 <div class="fare-wrapper">
@@ -21,7 +21,7 @@ foreach ($FlightList as $Flight) {
       <div id="" class="flight-item">
         <ul class="flight-info">
             <li>
-                <img src="../icon/' . $Flight["AirlineID"] . '.gif">
+                <img src="../icon/' . $Flight["AirlineImage"] . '">
                 <p>' . $Flight["AirlineName"] . '</p>
             </li>
             <li>

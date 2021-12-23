@@ -14,12 +14,17 @@
 </head>
 
 <body>
+    <style>
+        .sidebar__link:nth-child(2) {
+            background-color: rgba(38, 107, 197, 0.5);
+        }
+    </style>
     <div class="containers">
         <?php require_once("Navbar.html") ?>
         <main>
             <div class="main__container">
                 <div class="mt-3">
-                    <form enctype="multipart/form-data" class="w-100" action="" method="post" id="Form">
+                    <form enctype="multipart/form-data" action="" method="post" id="Form">
                         <h2>Quản lí thông tin nhân viên</h2>
                         <div class="form-row mb-2">
                             <div class="col-md-4">
@@ -54,7 +59,7 @@
                 <div class="card mt-5">
                     <div class="card-header">Thông tin nhân viên</div>
                     <div class="card-body">
-                        <table class="table table-hover">
+                        <table class="table table-hover main-table">
                             <thead>
                                 <th>#</th>
                                 <th>Họ tên</th>
@@ -121,7 +126,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-danger" id="Confirm">Cập nhật</button>
+                    <button type="button" class="btn btn-warning" id="Confirm">Cập nhật</button>
                 </div>
             </div>
         </div>

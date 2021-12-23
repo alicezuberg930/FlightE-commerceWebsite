@@ -21,7 +21,8 @@ function connection()
 
 function Query($sql)
 {
-    $query = mysqli_query($connect = connection(), $sql);
+    $connect = connection();
+    $query = mysqli_query(connection(), $sql);
     $connect->close();
     return $query;
 }

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2021 at 06:36 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.0
+-- Generation Time: Dec 23, 2021 at 08:22 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,19 +28,20 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `airline` (
-  `AirlineID` char(3) COLLATE utf8_vietnamese_ci NOT NULL,
-  `AirlineName` varchar(25) COLLATE utf8_vietnamese_ci NOT NULL,
-  `CountryID` char(3) COLLATE utf8_vietnamese_ci DEFAULT NULL
+  `AirlineID` varchar(5) COLLATE utf8_vietnamese_ci NOT NULL,
+  `AirlineName` varchar(50) COLLATE utf8_vietnamese_ci NOT NULL,
+  `CountryID` char(3) COLLATE utf8_vietnamese_ci NOT NULL,
+  `AirlineImage` varchar(50) COLLATE utf8_vietnamese_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
 -- Dumping data for table `airline`
 --
 
-INSERT INTO `airline` (`AirlineID`, `AirlineName`, `CountryID`) VALUES
-('BL', 'Pacific Airlines', 'VN'),
-('VJ', 'Vietjet Air', 'VN'),
-('VN', 'Vietnam Airlines', 'VN');
+INSERT INTO `airline` (`AirlineID`, `AirlineName`, `CountryID`, `AirlineImage`) VALUES
+('BL', 'Pacific Airlines', 'VN', 'BL.gif'),
+('VJ', 'Vietjet Air', 'VN', 'VJ.gif'),
+('VN', 'Vietnam Airlines', 'VN', 'VN.gif');
 
 -- --------------------------------------------------------
 
@@ -52,25 +53,24 @@ CREATE TABLE `airport` (
   `AirportID` char(10) COLLATE utf8_vietnamese_ci NOT NULL,
   `AirportName` varchar(50) COLLATE utf8_vietnamese_ci NOT NULL,
   `CityID` char(10) COLLATE utf8_vietnamese_ci NOT NULL,
-  `State` varchar(20) COLLATE utf8_vietnamese_ci DEFAULT NULL,
-  `Length` int(11) DEFAULT NULL
+  `Length` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
 -- Dumping data for table `airport`
 --
 
-INSERT INTO `airport` (`AirportID`, `AirportName`, `CityID`, `State`, `Length`) VALUES
-('BKK', 'Suvarnabhumi', 'BK', 'Hoạt động', 4),
-('DAD', 'Đà Nẵng', 'DN', 'Hoạt động', 4),
-('DEL', 'Indira Gandhi', 'NDH', 'Hoạt động', 4),
-('DMK', 'Don Mueang', 'BK', 'Hoạt động', 4),
-('HAN', 'Nội Bài', 'HN', 'Hoạt động', 4),
-('HND', 'Haneda', 'TKY', 'Hoạt động', 4),
-('ICN', 'Incheon', 'SEO', 'Hoạt động', 4),
-('NRT', 'Narita', 'TKY', 'Hoạt động', 4),
-('SGN', 'Tân Sơn Nhất', 'TPHCM', 'Hoạt động', 4),
-('VCS', 'Côn Đảo', 'BRVT', 'Hoạt động', 4);
+INSERT INTO `airport` (`AirportID`, `AirportName`, `CityID`, `Length`) VALUES
+('BKK', 'Suvarnabhumi', 'BK', 4.5),
+('DAD', 'Đà Nẵng', 'DN', 6.6),
+('DEL', 'Indira Gandhi', 'NDH', 4),
+('DMK', 'Don Mueang', 'BK', 4),
+('HAN', 'Nội Bài', 'HN', 4),
+('HND', 'Haneda', 'TKY', 4),
+('ICN', 'Incheon', 'SEO', 4),
+('NRT', 'Narita', 'TKY', 4),
+('SGN', 'Tân Sơn Nhất', 'TPHCM', 4),
+('VCS', 'Côn Đảo', 'BRVT', 3.5);
 
 -- --------------------------------------------------------
 
@@ -170,12 +170,12 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`EmployeeID`, `Fullname`, `Email`, `Password`, `Phonenumber`, `Gender`) VALUES
-(1, 'Minh Híu', 'hiu123@vemaybay.com', 'hieu123', '0943028493', 'Nam'),
+(1, 'Minh Híu', 'nhanvien1@vemaybay.com', 'minhhieu12', '0934538292', 'Nam'),
 (2, 'Nguyễn Vĩnh Tiến', 'tien23851@vemaybay.com', 'tien123', '0932430072', 'Nữ'),
 (3, 'Lê Ngọc Toàn', 'nhanvien2@vemaybay.com', 'toan123', '0924559304', 'Nữ'),
 (4, 'trí bi benh', 'tri652@vemaybay.com', 'tri123', '0932430071', 'Nam'),
 (5, 'trí bi benh', 'benh652@vemaybay.com', 'tri123', '0932430071', 'Nam'),
-(10, 'wer3rq34', 'starbutterfly652@gmail.com', 'ercfref', '0932430072', 'Nữ'),
+(10, 'Vinh Tien', 'admin@vemaybay.com', 'admin', '0932430072', 'Nữ'),
 (11, 'Vinh Tien', 'tien231@gmail.com', 'vinhtien1234', '0932430072', 'Nam'),
 (12, 'Nguyen Vinh Tien', 'tien231@gmail.com', 'vinhtien1234', '0932430072', 'Nam');
 
@@ -207,7 +207,9 @@ INSERT INTO `flight` (`FlightID`, `StartDate`, `StartTime`, `EndTime`, `PlaneID`
 (1, '2021-12-18', '04:00:00', '07:00:00', 'ABA321', 'VN', 'DAD-HAN', '2021-12-18', 1200000, 900000, 500000),
 (2, '2021-12-18', '23:00:00', '03:15:00', 'ABA330', 'VJ', 'DAD-HAN', '2021-12-19', 990000, 750000, 340000),
 (3, '2021-12-18', '05:30:00', '08:30:00', 'ABA321', 'BL', 'DAD-HAN', '2021-12-18', 1200000, 950000, 350000),
-(4, '2021-12-20', '07:40:00', '10:40:00', 'ABA330', 'VJ', 'HAN-DAD', '2021-12-20', 970000, 515000, 340000);
+(4, '2021-12-20', '07:40:00', '10:40:00', 'ABA330', 'VJ', 'HAN-DAD', '2021-12-20', 970000, 515000, 340000),
+(6, '2021-12-23', '19:30:00', '22:30:00', 'BOE787', 'BL', 'HAN-DAD', '2021-12-23', 1200000, 860000, 320000),
+(7, '2021-12-31', '20:05:00', '23:05:00', 'BOE787', 'BL', 'DAD-HAN', '2021-12-31', 1250000, 760000, 436000);
 
 -- --------------------------------------------------------
 
@@ -217,8 +219,8 @@ INSERT INTO `flight` (`FlightID`, `StartDate`, `StartTime`, `EndTime`, `PlaneID`
 
 CREATE TABLE `flightpath` (
   `PathID` char(20) COLLATE utf8_vietnamese_ci NOT NULL,
-  `StartAirport` char(10) COLLATE utf8_vietnamese_ci DEFAULT NULL,
-  `EndAirport` char(10) COLLATE utf8_vietnamese_ci DEFAULT NULL,
+  `StartAirport` char(10) COLLATE utf8_vietnamese_ci NOT NULL,
+  `EndAirport` char(10) COLLATE utf8_vietnamese_ci NOT NULL,
   `Time` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
@@ -229,7 +231,10 @@ CREATE TABLE `flightpath` (
 INSERT INTO `flightpath` (`PathID`, `StartAirport`, `EndAirport`, `Time`) VALUES
 ('DAD-HAN', 'DAD', 'HAN', '03:00:00'),
 ('DAD-SGN', 'DAD', 'SGN', '04:15:00'),
-('HAN-DAD', 'HAN', 'DAD', '03:10:00');
+('DEL-HND', 'DEL', 'HND', '03:25:00'),
+('DEL-ICN', 'DEL', 'ICN', '05:00:00'),
+('HAN-DAD', 'HAN', 'DAD', '03:10:00'),
+('NRT-ICN', 'NRT', 'BKK', '07:15:00');
 
 -- --------------------------------------------------------
 
@@ -243,19 +248,22 @@ CREATE TABLE `member` (
   `Email` varchar(50) COLLATE utf8_vietnamese_ci NOT NULL,
   `Password` varchar(50) COLLATE utf8_vietnamese_ci NOT NULL,
   `Phonenumber` char(11) COLLATE utf8_vietnamese_ci NOT NULL,
-  `Gender` char(4) COLLATE utf8_vietnamese_ci NOT NULL
+  `Gender` char(4) COLLATE utf8_vietnamese_ci NOT NULL,
+  `State` tinyint(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
 -- Dumping data for table `member`
 --
 
-INSERT INTO `member` (`MemberID`, `Fullname`, `Email`, `Password`, `Phonenumber`, `Gender`) VALUES
-(1, 'Nguyễn Vĩnh Tiến', 'tien23851@gmail.com', 'vinhtien123', '0932430072', 'Nam'),
-(2, 'Ngyen Vinh TIen', 'tien231@gmail.com', 'vinhtien123', '0933445684', 'Nam'),
-(3, 'e42fgrtnryj bfv ', 'tienervwer231@gmail.com', 'vinhtien123', '0965331211', 'Nam'),
-(4, 'nguyen vinh tien', 'tien34@gmail.com', 'vinhtien123', '0945568333', 'Nam'),
-(5, 'nguyenvinhtien', 'tien33424@gmail.com', 'vinhtien123', '0945678432', 'Nam');
+INSERT INTO `member` (`MemberID`, `Fullname`, `Email`, `Password`, `Phonenumber`, `Gender`, `State`) VALUES
+(1, 'Nguyễn Vĩnh Tiến', 'tien23851@gmail.com', 'vinhtien123', '0932430072', 'Nam', 1),
+(2, 'Ngyen Vinh TIen', 'tien231@gmail.com', 'vinhtien123', '0933445684', 'Nam', 1),
+(3, 'e42fgrtnryj bfv ', 'tienervwer231@gmail.com', 'vinhtien123', '0965331211', 'Nam', 1),
+(4, 'nguyen vinh tien', 'tien34@gmail.com', 'vinhtien123', '0945568333', 'Nam', 1),
+(5, 'nguyenvinhtien', 'tien33424@gmail.com', 'vinhtien123', '0945678432', 'Nam', 1),
+(6, 'f3rewvrf', 'wefa@gmail.com', 'vinhtien123', '0922538281', 'Nam', 1),
+(9, 'f3rewvrf', 'fr2wrfa@gmail.com', 'vinhtien123', '0952435655', 'Nam', 1);
 
 -- --------------------------------------------------------
 
@@ -264,7 +272,7 @@ INSERT INTO `member` (`MemberID`, `Fullname`, `Email`, `Password`, `Phonenumber`
 --
 
 CREATE TABLE `orderdetails` (
-  `OrderID` int(11) NOT NULL,
+  `OrderID` bigint(11) NOT NULL,
   `TicketID` int(11) NOT NULL,
   `PassengerName` varchar(50) COLLATE utf8_vietnamese_ci NOT NULL,
   `Age` varchar(10) COLLATE utf8_vietnamese_ci NOT NULL,
@@ -300,11 +308,15 @@ INSERT INTO `orderdetails` (`OrderID`, `TicketID`, `PassengerName`, `Age`, `Tick
 (31, 234, 'fr3geweqca', 'Adult', 1200000, 165000, 15, '7F', 'Economy', 'Chuyến đi', NULL),
 (31, 390, 'n bdfcrdrfd', 'Children', 1900000, 0, 0, '1F', 'Business', 'Chuyến Về', NULL),
 (31, 606, 'cvbt2gqfe', 'Adult', 1200000, 0, 0, '6F', 'Economy', 'Chuyến đi', NULL),
-(33, 600, 'dvgbnher', 'Adult', 1200000, 187000, 20, '5F', 'Economy', 'Chuyến đi', NULL),
 (34, 231, 'edgthtgfed', 'Adult', 1200000, 165000, 15, '7C', 'Economy', 'Chuyến đi', NULL),
 (34, 237, 'wretyrrfetr', 'Children', 950000, 0, 0, '8C', 'Economy', 'Chuyến đi', NULL),
 (35, 246, '4tbwgfrcsds', 'Adult', 1200000, 251000, 25, '9F', 'Economy', 'Chuyến đi', NULL),
-(35, 252, 'tvrget vwrc', 'Adult', 1200000, 165000, 15, '10F', 'Economy', 'Chuyến đi', NULL);
+(35, 252, 'tvrget vwrc', 'Adult', 1200000, 165000, 15, '10F', 'Economy', 'Chuyến đi', NULL),
+(2147483647, 960, 'Tấn Phúc', 'Children', 0, 165000, 15, '4F', 'Economy', 'Chuyến đi', NULL),
+(20211222014717, 966, 'g2435nybtvwrc', 'Adult', 1250000, 251000, 25, '5F', 'Economy', 'Chuyến đi', NULL),
+(20211222014857, 972, 'vtbrnyrmjnhg', 'Adult', 1250000, 187000, 20, '6F', 'Economy', 'Chuyến đi', NULL),
+(20211222015951, 959, 'cefvrgbtgv', 'Adult', 1250000, 187000, 20, '4E', 'Economy', 'Chuyến đi', NULL),
+(20211222020856, 965, 'dẻrft3hyt', 'Adult', 1250000, 165000, 15, '5E', 'Economy', 'Chuyến đi', NULL);
 
 -- --------------------------------------------------------
 
@@ -313,13 +325,13 @@ INSERT INTO `orderdetails` (`OrderID`, `TicketID`, `PassengerName`, `Age`, `Tick
 --
 
 CREATE TABLE `orders` (
-  `OrderID` int(11) NOT NULL,
+  `OrderID` bigint(11) NOT NULL,
   `StartFlight` varchar(50) COLLATE utf8_vietnamese_ci NOT NULL,
   `Quantity` int(11) NOT NULL,
   `TotalPrice` int(11) NOT NULL,
   `State` varchar(20) COLLATE utf8_vietnamese_ci NOT NULL,
   `EmployeeID` int(11) DEFAULT NULL,
-  `OrderDate` date NOT NULL,
+  `OrderDate` datetime NOT NULL,
   `MemberID` int(11) DEFAULT NULL,
   `ContactEmail` varchar(100) COLLATE utf8_vietnamese_ci NOT NULL,
   `ContactName` varchar(100) COLLATE utf8_vietnamese_ci NOT NULL,
@@ -335,15 +347,47 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`OrderID`, `StartFlight`, `Quantity`, `TotalPrice`, `State`, `EmployeeID`, `OrderDate`, `MemberID`, `ContactEmail`, `ContactName`, `Address`, `TotalWeight`, `ReturnFlight`, `StartDate`, `ReturnDate`) VALUES
-(1, 'Đà Nẵng (DAD) - Hà Nội (HAN) ', 2, 4465000, 'Đã Thanh Toán', NULL, '2021-11-11', 4, 'tiene@gmail.com', 'Lê Ngọc Tòn', '4trtt4r34tr', 15, '', '2021-12-18', NULL),
-(23, 'Đà Nẵng (DAD) - Hà Nội (HAN) ', 2, 4465000, 'Đã Thanh Toán', NULL, '2021-12-11', 5, 'nhanvien2@vemaybay.com', 'Lê Ngọc Tòn', '4trtt4r34tr', 15, '', '2021-12-18', NULL),
-(26, 'Đà Nẵng (DAD) - Hà Nội (HAN) ', 2, 4051000, 'Đã Thanh Toán', NULL, '2021-12-11', 5, 'tien231@gmail.com', 'fghtwgq4', '4trtt4r34tr', 25, '', '2021-12-18', NULL),
-(27, 'Đà Nẵng (DAD) - Hà Nội (HAN) ', 2, 1465000, 'Đã Thanh Toán', NULL, '2021-10-12', 5, 'tien231@gmail.com', '4gbh2q34g', '34gbwt4gea', 15, '', '2021-12-18', NULL),
-(28, 'Đà Nẵng (DAD) - Hà Nội (HAN) ', 1, 2145000, 'Đã Thanh Toán', NULL, '2021-12-14', 5, 'tien231@gmail.com', '4t56h3g', 'f4vr4rvr', 15, '', '2021-12-18', NULL),
-(31, 'Đà Nẵng (DAD) - Hà Nội (HAN) ', 2, 3965000, 'Chưa thanh toán', NULL, '2021-12-15', 1, 'starbutterfly652@gmail.com', 'wer3rq34', 'bhnehvrsae', 15, 'Hà Nội (HAN) - Đà Nẵng (DAD)', '2021-12-18', '2021-12-20'),
-(33, 'Đà Nẵng (DAD) - Hà Nội (HAN)', 1, 1387000, 'Chưa thanh toán', NULL, '2021-11-17', 1, 'tien23851@gmail.com', 'Nguyễn Vĩnh Tiến', 'frgthy46jgw', 20, NULL, '2021-12-18', NULL),
-(34, 'Đà Nẵng (DAD) - Hà Nội (HAN)', 2, 2315000, 'Chưa thanh toán', NULL, '2021-09-17', 1, 'tien23851@gmail.com', 'Nguyễn Vĩnh Tiến', 'frgty', 15, NULL, '2021-12-18', NULL),
-(35, 'Đà Nẵng (DAD) - Hà Nội (HAN)', 2, 2816000, 'Chưa thanh toán', NULL, '2021-10-17', 1, 'tien23851@gmail.com', 'Nguyễn Vĩnh Tiến', 'vwbvgrfedc', 40, NULL, '2021-12-18', NULL);
+(1, 'Đà Nẵng (DAD) - Hà Nội (HAN) ', 2, 4465000, 'Đang Chuyển', NULL, '2021-11-11 00:00:00', 4, 'tiene@gmail.com', 'Lê Ngọc Tòn', '4trtt4r34tr', 15, '', '2021-12-18', NULL),
+(23, 'Đà Nẵng (DAD) - Hà Nội (HAN) ', 2, 4465000, 'Đã Thanh Toán', NULL, '2021-12-11 00:00:00', 5, 'toan@gmail.com', 'Lê Ngọc Tòn', '4trtt4r34tr', 15, '', '2021-12-18', NULL),
+(26, 'Đà Nẵng (DAD) - Hà Nội (HAN) ', 2, 4051000, 'Đã Thanh Toán', NULL, '2021-12-11 00:00:00', 5, 'tien231@gmail.com', 'fghtwgq4', '4trtt4r34tr', 25, '', '2021-12-18', NULL),
+(27, 'Đà Nẵng (DAD) - Hà Nội (HAN) ', 2, 1465000, 'Đã Giao', NULL, '2021-10-12 00:00:00', 5, 'tien231@gmail.com', '4gbh2q34g', '34gbwt4gea', 15, '', '2021-12-18', NULL),
+(28, 'Đà Nẵng (DAD) - Hà Nội (HAN) ', 1, 2145000, 'Đang Chuyển', NULL, '2021-12-14 00:00:00', 5, 'tien231@gmail.com', '4t56h3g', 'f4vr4rvr', 15, '', '2021-12-18', NULL),
+(31, 'Đà Nẵng (DAD) - Hà Nội (HAN) ', 2, 3965000, 'Đã Thanh Toán', NULL, '2021-12-15 00:00:00', 1, 'starbutterfly652@gmail.com', 'wer3rq34', 'bhnehvrsae', 15, 'Hà Nội (HAN) - Đà Nẵng (DAD)', '2021-12-18', '2021-12-20'),
+(34, 'Đà Nẵng (DAD) - Hà Nội (HAN)', 2, 2315000, 'Đã Thanh Toán', NULL, '2021-09-17 00:00:00', 1, 'tien23851@gmail.com', 'Nguyễn Vĩnh Tiến', 'frgty', 15, NULL, '2021-12-18', NULL),
+(35, 'Đà Nẵng (DAD) - Hà Nội (HAN)', 2, 2816000, 'Đã Thanh Toán', NULL, '2021-10-17 00:00:00', 1, 'tien23851@gmail.com', 'Nguyễn Vĩnh Tiến', 'vwbvgrfedc', 40, NULL, '2021-12-18', NULL),
+(2147483647, 'Đà Nẵng (DAD) - Hà Nội (HAN)', 1, 925000, 'Đã thanh toán', NULL, '2021-12-21 11:58:49', 1, 'tien23851@gmail.com', 'Tấn Phúc', 'r4tg52q4fd', 15, NULL, '2021-12-31', NULL),
+(20211222014717, 'Đà Nẵng (DAD) - Hà Nội (HAN)', 1, 1501000, 'Đã thanh toán', NULL, '2021-12-22 07:44:25', 1, 'tien23851@gmail.com', 'Nguyễn Vĩnh Tiến', 'g2f4q3gt4fr', 25, NULL, '2021-12-31', NULL),
+(20211222014857, 'Đà Nẵng (DAD) - Hà Nội (HAN)', 1, 1437000, 'Đã thanh toán', NULL, '2021-12-22 07:47:48', 1, 'starbutterfly652@gmail.com', 'wer3rq34', 'gbt3vfrdq', 20, NULL, '2021-12-31', NULL),
+(20211222015951, 'Đà Nẵng (DAD) - Hà Nội (HAN)', 1, 1437000, 'Đã thanh toán', NULL, '2021-12-22 08:00:16', 1, 'starbutterfly652@gmail.com', 'wer3rq34', 'c3rwfsxfrc', 20, NULL, '2021-12-31', NULL),
+(20211222020856, 'Đà Nẵng (DAD) - Hà Nội (HAN)', 1, 1415000, 'Đã thanh toán', NULL, '2021-12-22 08:00:16', 1, 'tien23851@gmail.com', 'Nguyễn Vĩnh Tiến', 'rftrbevwac', 15, NULL, '2021-12-31', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `PaymentID` int(11) NOT NULL,
+  `OrderID` bigint(11) DEFAULT NULL,
+  `Total` int(11) NOT NULL,
+  `Note` varchar(255) CHARACTER SET utf32 COLLATE utf32_vietnamese_ci DEFAULT NULL,
+  `vnp_response_code` varchar(5) NOT NULL,
+  `code_vnpay` varchar(255) NOT NULL COMMENT '\r\n\r\n',
+  `BankCode` varchar(255) NOT NULL,
+  `PaymentTime` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`PaymentID`, `OrderID`, `Total`, `Note`, `vnp_response_code`, `code_vnpay`, `BankCode`, `PaymentTime`) VALUES
+(1, 2147483647, 925000, 'Thanh toan ve may bay', '00', '13658322', 'NCB', '2021-12-21 11:58:49'),
+(13, 20211222014717, 925000, 'Thanh toan ve may bay', '00', '13659288', 'NCB', '2021-12-22 07:44:25'),
+(14, 20211222014857, 1501000, 'Thanh toan ve may bay', '00', '13659290', 'NCB', '2021-12-22 07:47:48'),
+(18, 20211222015951, 1437000, 'Thanh toan ve may bay', '00', '13659298', 'NCB', '2021-12-22 08:00:16'),
+(19, 20211222015951, 1437000, 'Thanh toan ve may bay', '00', '13659298', 'NCB', '2021-12-22 08:00:16');
 
 -- --------------------------------------------------------
 
@@ -354,26 +398,25 @@ INSERT INTO `orders` (`OrderID`, `StartFlight`, `Quantity`, `TotalPrice`, `State
 CREATE TABLE `plane` (
   `PlaneID` char(10) COLLATE utf8_vietnamese_ci NOT NULL,
   `PlaneName` varchar(30) COLLATE utf8_vietnamese_ci NOT NULL,
-  `State` varchar(20) COLLATE utf8_vietnamese_ci NOT NULL,
   `SeatAmount` int(11) NOT NULL,
-  `Rows` int(11) DEFAULT NULL,
-  `Columns` int(11) DEFAULT NULL,
-  `BusinessClassRow` int(11) DEFAULT NULL
+  `Rows` int(11) NOT NULL,
+  `Columns` int(11) NOT NULL,
+  `BusinessClassRow` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
 -- Dumping data for table `plane`
 --
 
-INSERT INTO `plane` (`PlaneID`, `PlaneName`, `State`, `SeatAmount`, `Rows`, `Columns`, `BusinessClassRow`) VALUES
-('ABA321', 'Airbus A321', 'Active', 192, 32, 6, 4),
-('ABA330', 'Airbus A330', 'Active', 186, 31, 6, 4),
-('ABA350', 'Airbus A350', 'Active', 30, NULL, NULL, NULL),
-('ATR72', 'ATR72-500', 'Active', 30, NULL, NULL, NULL),
-('BOE737M', 'Boeing 737 MAX', 'Active', 30, NULL, NULL, NULL),
-('BOE787', 'Boeing 787', 'Active', 261, 29, 9, 3),
-('BOE7879', 'Boeing 787-9 Dreamliner', 'Active', 30, NULL, NULL, 4),
-('EME195', 'Embrear E195', 'Active', 30, NULL, NULL, NULL);
+INSERT INTO `plane` (`PlaneID`, `PlaneName`, `SeatAmount`, `Rows`, `Columns`, `BusinessClassRow`) VALUES
+('ABA321', 'Airbus A321', 192, 32, 6, 3),
+('ABA330', 'Airbus A330', 186, 31, 6, 4),
+('ABA350', 'Airbus A350', 130, 26, 5, 3),
+('ATR72', 'ATR72-500', 30, 0, 0, 0),
+('BOE737M', 'Boeing 737 MAX', 30, 0, 0, 0),
+('BOE787', 'Boeing 787', 174, 29, 6, 3),
+('BOE7879', 'Boeing 787-9 Dreamliner', 174, 29, 6, 4),
+('EME195', 'Embrear E195', 80, 16, 5, 3);
 
 -- --------------------------------------------------------
 
@@ -1155,7 +1198,355 @@ INSERT INTO `ticket` (`TicketID`, `State`, `SeatCode`, `FlightID`, `Class`) VALU
 (759, 'Empty', '32C', 1, 'Economy'),
 (760, 'Empty', '32D', 1, 'Economy'),
 (761, 'Empty', '32E', 1, 'Economy'),
-(762, 'Empty', '32F', 1, 'Economy');
+(762, 'Empty', '32F', 1, 'Economy'),
+(763, 'Empty', '1A', 6, 'Business'),
+(764, 'Empty', '1B', 6, 'Business'),
+(765, 'Empty', '1C', 6, 'Business'),
+(766, 'Empty', '1D', 6, 'Business'),
+(767, 'Empty', '1E', 6, 'Business'),
+(768, 'Empty', '1F', 6, 'Business'),
+(769, 'Empty', '2A', 6, 'Business'),
+(770, 'Empty', '2B', 6, 'Business'),
+(771, 'Empty', '2C', 6, 'Business'),
+(772, 'Empty', '2D', 6, 'Business'),
+(773, 'Empty', '2E', 6, 'Business'),
+(774, 'Empty', '2F', 6, 'Business'),
+(775, 'Empty', '3A', 6, 'Business'),
+(776, 'Empty', '3B', 6, 'Business'),
+(777, 'Empty', '3C', 6, 'Business'),
+(778, 'Empty', '3D', 6, 'Business'),
+(779, 'Empty', '3E', 6, 'Business'),
+(780, 'Empty', '3F', 6, 'Business'),
+(781, 'Empty', '4A', 6, 'Economy'),
+(782, 'Empty', '4B', 6, 'Economy'),
+(783, 'Empty', '4C', 6, 'Economy'),
+(784, 'Empty', '4D', 6, 'Economy'),
+(785, 'Empty', '4E', 6, 'Economy'),
+(786, 'Empty', '4F', 6, 'Economy'),
+(787, 'Empty', '5A', 6, 'Economy'),
+(788, 'Empty', '5B', 6, 'Economy'),
+(789, 'Empty', '5C', 6, 'Economy'),
+(790, 'Empty', '5D', 6, 'Economy'),
+(791, 'Empty', '5E', 6, 'Economy'),
+(792, 'Empty', '5F', 6, 'Economy'),
+(793, 'Empty', '6A', 6, 'Economy'),
+(794, 'Empty', '6B', 6, 'Economy'),
+(795, 'Empty', '6C', 6, 'Economy'),
+(796, 'Empty', '6D', 6, 'Economy'),
+(797, 'Empty', '6E', 6, 'Economy'),
+(798, 'Empty', '6F', 6, 'Economy'),
+(799, 'Empty', '7A', 6, 'Economy'),
+(800, 'Empty', '7B', 6, 'Economy'),
+(801, 'Empty', '7C', 6, 'Economy'),
+(802, 'Empty', '7D', 6, 'Economy'),
+(803, 'Empty', '7E', 6, 'Economy'),
+(804, 'Empty', '7F', 6, 'Economy'),
+(805, 'Empty', '8A', 6, 'Economy'),
+(806, 'Empty', '8B', 6, 'Economy'),
+(807, 'Empty', '8C', 6, 'Economy'),
+(808, 'Empty', '8D', 6, 'Economy'),
+(809, 'Empty', '8E', 6, 'Economy'),
+(810, 'Empty', '8F', 6, 'Economy'),
+(811, 'Empty', '9A', 6, 'Economy'),
+(812, 'Empty', '9B', 6, 'Economy'),
+(813, 'Empty', '9C', 6, 'Economy'),
+(814, 'Empty', '9D', 6, 'Economy'),
+(815, 'Empty', '9E', 6, 'Economy'),
+(816, 'Empty', '9F', 6, 'Economy'),
+(817, 'Empty', '10A', 6, 'Economy'),
+(818, 'Empty', '10B', 6, 'Economy'),
+(819, 'Empty', '10C', 6, 'Economy'),
+(820, 'Empty', '10D', 6, 'Economy'),
+(821, 'Empty', '10E', 6, 'Economy'),
+(822, 'Empty', '10F', 6, 'Economy'),
+(823, 'Empty', '11A', 6, 'Economy'),
+(824, 'Empty', '11B', 6, 'Economy'),
+(825, 'Empty', '11C', 6, 'Economy'),
+(826, 'Empty', '11D', 6, 'Economy'),
+(827, 'Empty', '11E', 6, 'Economy'),
+(828, 'Empty', '11F', 6, 'Economy'),
+(829, 'Empty', '12A', 6, 'Economy'),
+(830, 'Empty', '12B', 6, 'Economy'),
+(831, 'Empty', '12C', 6, 'Economy'),
+(832, 'Empty', '12D', 6, 'Economy'),
+(833, 'Empty', '12E', 6, 'Economy'),
+(834, 'Empty', '12F', 6, 'Economy'),
+(835, 'Empty', '13A', 6, 'Economy'),
+(836, 'Empty', '13B', 6, 'Economy'),
+(837, 'Empty', '13C', 6, 'Economy'),
+(838, 'Empty', '13D', 6, 'Economy'),
+(839, 'Empty', '13E', 6, 'Economy'),
+(840, 'Empty', '13F', 6, 'Economy'),
+(841, 'Empty', '14A', 6, 'Economy'),
+(842, 'Empty', '14B', 6, 'Economy'),
+(843, 'Empty', '14C', 6, 'Economy'),
+(844, 'Empty', '14D', 6, 'Economy'),
+(845, 'Empty', '14E', 6, 'Economy'),
+(846, 'Empty', '14F', 6, 'Economy'),
+(847, 'Empty', '15A', 6, 'Economy'),
+(848, 'Empty', '15B', 6, 'Economy'),
+(849, 'Empty', '15C', 6, 'Economy'),
+(850, 'Empty', '15D', 6, 'Economy'),
+(851, 'Empty', '15E', 6, 'Economy'),
+(852, 'Empty', '15F', 6, 'Economy'),
+(853, 'Empty', '16A', 6, 'Economy'),
+(854, 'Empty', '16B', 6, 'Economy'),
+(855, 'Empty', '16C', 6, 'Economy'),
+(856, 'Empty', '16D', 6, 'Economy'),
+(857, 'Empty', '16E', 6, 'Economy'),
+(858, 'Empty', '16F', 6, 'Economy'),
+(859, 'Empty', '17A', 6, 'Economy'),
+(860, 'Empty', '17B', 6, 'Economy'),
+(861, 'Empty', '17C', 6, 'Economy'),
+(862, 'Empty', '17D', 6, 'Economy'),
+(863, 'Empty', '17E', 6, 'Economy'),
+(864, 'Empty', '17F', 6, 'Economy'),
+(865, 'Empty', '18A', 6, 'Economy'),
+(866, 'Empty', '18B', 6, 'Economy'),
+(867, 'Empty', '18C', 6, 'Economy'),
+(868, 'Empty', '18D', 6, 'Economy'),
+(869, 'Empty', '18E', 6, 'Economy'),
+(870, 'Empty', '18F', 6, 'Economy'),
+(871, 'Empty', '19A', 6, 'Economy'),
+(872, 'Empty', '19B', 6, 'Economy'),
+(873, 'Empty', '19C', 6, 'Economy'),
+(874, 'Empty', '19D', 6, 'Economy'),
+(875, 'Empty', '19E', 6, 'Economy'),
+(876, 'Empty', '19F', 6, 'Economy'),
+(877, 'Empty', '20A', 6, 'Economy'),
+(878, 'Empty', '20B', 6, 'Economy'),
+(879, 'Empty', '20C', 6, 'Economy'),
+(880, 'Empty', '20D', 6, 'Economy'),
+(881, 'Empty', '20E', 6, 'Economy'),
+(882, 'Empty', '20F', 6, 'Economy'),
+(883, 'Empty', '21A', 6, 'Economy'),
+(884, 'Empty', '21B', 6, 'Economy'),
+(885, 'Empty', '21C', 6, 'Economy'),
+(886, 'Empty', '21D', 6, 'Economy'),
+(887, 'Empty', '21E', 6, 'Economy'),
+(888, 'Empty', '21F', 6, 'Economy'),
+(889, 'Empty', '22A', 6, 'Economy'),
+(890, 'Empty', '22B', 6, 'Economy'),
+(891, 'Empty', '22C', 6, 'Economy'),
+(892, 'Empty', '22D', 6, 'Economy'),
+(893, 'Empty', '22E', 6, 'Economy'),
+(894, 'Empty', '22F', 6, 'Economy'),
+(895, 'Empty', '23A', 6, 'Economy'),
+(896, 'Empty', '23B', 6, 'Economy'),
+(897, 'Empty', '23C', 6, 'Economy'),
+(898, 'Empty', '23D', 6, 'Economy'),
+(899, 'Empty', '23E', 6, 'Economy'),
+(900, 'Empty', '23F', 6, 'Economy'),
+(901, 'Empty', '24A', 6, 'Economy'),
+(902, 'Empty', '24B', 6, 'Economy'),
+(903, 'Empty', '24C', 6, 'Economy'),
+(904, 'Empty', '24D', 6, 'Economy'),
+(905, 'Empty', '24E', 6, 'Economy'),
+(906, 'Empty', '24F', 6, 'Economy'),
+(907, 'Empty', '25A', 6, 'Economy'),
+(908, 'Empty', '25B', 6, 'Economy'),
+(909, 'Empty', '25C', 6, 'Economy'),
+(910, 'Empty', '25D', 6, 'Economy'),
+(911, 'Empty', '25E', 6, 'Economy'),
+(912, 'Empty', '25F', 6, 'Economy'),
+(913, 'Empty', '26A', 6, 'Economy'),
+(914, 'Empty', '26B', 6, 'Economy'),
+(915, 'Empty', '26C', 6, 'Economy'),
+(916, 'Empty', '26D', 6, 'Economy'),
+(917, 'Empty', '26E', 6, 'Economy'),
+(918, 'Empty', '26F', 6, 'Economy'),
+(919, 'Empty', '27A', 6, 'Economy'),
+(920, 'Empty', '27B', 6, 'Economy'),
+(921, 'Empty', '27C', 6, 'Economy'),
+(922, 'Empty', '27D', 6, 'Economy'),
+(923, 'Empty', '27E', 6, 'Economy'),
+(924, 'Empty', '27F', 6, 'Economy'),
+(925, 'Empty', '28A', 6, 'Economy'),
+(926, 'Empty', '28B', 6, 'Economy'),
+(927, 'Empty', '28C', 6, 'Economy'),
+(928, 'Empty', '28D', 6, 'Economy'),
+(929, 'Empty', '28E', 6, 'Economy'),
+(930, 'Empty', '28F', 6, 'Economy'),
+(931, 'Empty', '29A', 6, 'Economy'),
+(932, 'Empty', '29B', 6, 'Economy'),
+(933, 'Empty', '29C', 6, 'Economy'),
+(934, 'Empty', '29D', 6, 'Economy'),
+(935, 'Empty', '29E', 6, 'Economy'),
+(936, 'Empty', '29F', 6, 'Economy'),
+(937, 'Empty', '1A', 7, 'Business'),
+(938, 'Empty', '1B', 7, 'Business'),
+(939, 'Empty', '1C', 7, 'Business'),
+(940, 'Empty', '1D', 7, 'Business'),
+(941, 'Empty', '1E', 7, 'Business'),
+(942, 'Empty', '1F', 7, 'Business'),
+(943, 'Empty', '2A', 7, 'Business'),
+(944, 'Empty', '2B', 7, 'Business'),
+(945, 'Empty', '2C', 7, 'Business'),
+(946, 'Empty', '2D', 7, 'Business'),
+(947, 'Empty', '2E', 7, 'Business'),
+(948, 'Empty', '2F', 7, 'Business'),
+(949, 'Empty', '3A', 7, 'Business'),
+(950, 'Empty', '3B', 7, 'Business'),
+(951, 'Empty', '3C', 7, 'Business'),
+(952, 'Empty', '3D', 7, 'Business'),
+(953, 'Empty', '3E', 7, 'Business'),
+(954, 'Empty', '3F', 7, 'Business'),
+(955, 'Empty', '4A', 7, 'Economy'),
+(956, 'Empty', '4B', 7, 'Economy'),
+(957, 'Empty', '4C', 7, 'Economy'),
+(958, 'Empty', '4D', 7, 'Economy'),
+(959, 'Occupied', '4E', 7, 'Economy'),
+(960, 'Occupied', '4F', 7, 'Economy'),
+(961, 'Empty', '5A', 7, 'Economy'),
+(962, 'Empty', '5B', 7, 'Economy'),
+(963, 'Empty', '5C', 7, 'Economy'),
+(964, 'Empty', '5D', 7, 'Economy'),
+(965, 'Occupied', '5E', 7, 'Economy'),
+(966, 'Occupied', '5F', 7, 'Economy'),
+(967, 'Empty', '6A', 7, 'Economy'),
+(968, 'Empty', '6B', 7, 'Economy'),
+(969, 'Empty', '6C', 7, 'Economy'),
+(970, 'Empty', '6D', 7, 'Economy'),
+(971, 'Empty', '6E', 7, 'Economy'),
+(972, 'Occupied', '6F', 7, 'Economy'),
+(973, 'Empty', '7A', 7, 'Economy'),
+(974, 'Empty', '7B', 7, 'Economy'),
+(975, 'Empty', '7C', 7, 'Economy'),
+(976, 'Empty', '7D', 7, 'Economy'),
+(977, 'Empty', '7E', 7, 'Economy'),
+(978, 'Occupied', '7F', 7, 'Economy'),
+(979, 'Empty', '8A', 7, 'Economy'),
+(980, 'Empty', '8B', 7, 'Economy'),
+(981, 'Empty', '8C', 7, 'Economy'),
+(982, 'Empty', '8D', 7, 'Economy'),
+(983, 'Empty', '8E', 7, 'Economy'),
+(984, 'Empty', '8F', 7, 'Economy'),
+(985, 'Empty', '9A', 7, 'Economy'),
+(986, 'Empty', '9B', 7, 'Economy'),
+(987, 'Empty', '9C', 7, 'Economy'),
+(988, 'Empty', '9D', 7, 'Economy'),
+(989, 'Empty', '9E', 7, 'Economy'),
+(990, 'Empty', '9F', 7, 'Economy'),
+(991, 'Empty', '10A', 7, 'Economy'),
+(992, 'Empty', '10B', 7, 'Economy'),
+(993, 'Empty', '10C', 7, 'Economy'),
+(994, 'Empty', '10D', 7, 'Economy'),
+(995, 'Empty', '10E', 7, 'Economy'),
+(996, 'Empty', '10F', 7, 'Economy'),
+(997, 'Empty', '11A', 7, 'Economy'),
+(998, 'Empty', '11B', 7, 'Economy'),
+(999, 'Empty', '11C', 7, 'Economy'),
+(1000, 'Empty', '11D', 7, 'Economy'),
+(1001, 'Empty', '11E', 7, 'Economy'),
+(1002, 'Empty', '11F', 7, 'Economy'),
+(1003, 'Empty', '12A', 7, 'Economy'),
+(1004, 'Empty', '12B', 7, 'Economy'),
+(1005, 'Empty', '12C', 7, 'Economy'),
+(1006, 'Empty', '12D', 7, 'Economy'),
+(1007, 'Empty', '12E', 7, 'Economy'),
+(1008, 'Empty', '12F', 7, 'Economy'),
+(1009, 'Empty', '13A', 7, 'Economy'),
+(1010, 'Empty', '13B', 7, 'Economy'),
+(1011, 'Empty', '13C', 7, 'Economy'),
+(1012, 'Empty', '13D', 7, 'Economy'),
+(1013, 'Empty', '13E', 7, 'Economy'),
+(1014, 'Empty', '13F', 7, 'Economy'),
+(1015, 'Empty', '14A', 7, 'Economy'),
+(1016, 'Empty', '14B', 7, 'Economy'),
+(1017, 'Empty', '14C', 7, 'Economy'),
+(1018, 'Empty', '14D', 7, 'Economy'),
+(1019, 'Empty', '14E', 7, 'Economy'),
+(1020, 'Empty', '14F', 7, 'Economy'),
+(1021, 'Empty', '15A', 7, 'Economy'),
+(1022, 'Empty', '15B', 7, 'Economy'),
+(1023, 'Empty', '15C', 7, 'Economy'),
+(1024, 'Empty', '15D', 7, 'Economy'),
+(1025, 'Empty', '15E', 7, 'Economy'),
+(1026, 'Empty', '15F', 7, 'Economy'),
+(1027, 'Empty', '16A', 7, 'Economy'),
+(1028, 'Empty', '16B', 7, 'Economy'),
+(1029, 'Empty', '16C', 7, 'Economy'),
+(1030, 'Empty', '16D', 7, 'Economy'),
+(1031, 'Empty', '16E', 7, 'Economy'),
+(1032, 'Empty', '16F', 7, 'Economy'),
+(1033, 'Empty', '17A', 7, 'Economy'),
+(1034, 'Empty', '17B', 7, 'Economy'),
+(1035, 'Empty', '17C', 7, 'Economy'),
+(1036, 'Empty', '17D', 7, 'Economy'),
+(1037, 'Empty', '17E', 7, 'Economy'),
+(1038, 'Empty', '17F', 7, 'Economy'),
+(1039, 'Empty', '18A', 7, 'Economy'),
+(1040, 'Empty', '18B', 7, 'Economy'),
+(1041, 'Empty', '18C', 7, 'Economy'),
+(1042, 'Empty', '18D', 7, 'Economy'),
+(1043, 'Empty', '18E', 7, 'Economy'),
+(1044, 'Empty', '18F', 7, 'Economy'),
+(1045, 'Empty', '19A', 7, 'Economy'),
+(1046, 'Empty', '19B', 7, 'Economy'),
+(1047, 'Empty', '19C', 7, 'Economy'),
+(1048, 'Empty', '19D', 7, 'Economy'),
+(1049, 'Empty', '19E', 7, 'Economy'),
+(1050, 'Empty', '19F', 7, 'Economy'),
+(1051, 'Empty', '20A', 7, 'Economy'),
+(1052, 'Empty', '20B', 7, 'Economy'),
+(1053, 'Empty', '20C', 7, 'Economy'),
+(1054, 'Empty', '20D', 7, 'Economy'),
+(1055, 'Empty', '20E', 7, 'Economy'),
+(1056, 'Empty', '20F', 7, 'Economy'),
+(1057, 'Empty', '21A', 7, 'Economy'),
+(1058, 'Empty', '21B', 7, 'Economy'),
+(1059, 'Empty', '21C', 7, 'Economy'),
+(1060, 'Empty', '21D', 7, 'Economy'),
+(1061, 'Empty', '21E', 7, 'Economy'),
+(1062, 'Empty', '21F', 7, 'Economy'),
+(1063, 'Empty', '22A', 7, 'Economy'),
+(1064, 'Empty', '22B', 7, 'Economy'),
+(1065, 'Empty', '22C', 7, 'Economy'),
+(1066, 'Empty', '22D', 7, 'Economy'),
+(1067, 'Empty', '22E', 7, 'Economy'),
+(1068, 'Empty', '22F', 7, 'Economy'),
+(1069, 'Empty', '23A', 7, 'Economy'),
+(1070, 'Empty', '23B', 7, 'Economy'),
+(1071, 'Empty', '23C', 7, 'Economy'),
+(1072, 'Empty', '23D', 7, 'Economy'),
+(1073, 'Empty', '23E', 7, 'Economy'),
+(1074, 'Empty', '23F', 7, 'Economy'),
+(1075, 'Empty', '24A', 7, 'Economy'),
+(1076, 'Empty', '24B', 7, 'Economy'),
+(1077, 'Empty', '24C', 7, 'Economy'),
+(1078, 'Empty', '24D', 7, 'Economy'),
+(1079, 'Empty', '24E', 7, 'Economy'),
+(1080, 'Empty', '24F', 7, 'Economy'),
+(1081, 'Empty', '25A', 7, 'Economy'),
+(1082, 'Empty', '25B', 7, 'Economy'),
+(1083, 'Empty', '25C', 7, 'Economy'),
+(1084, 'Empty', '25D', 7, 'Economy'),
+(1085, 'Empty', '25E', 7, 'Economy'),
+(1086, 'Empty', '25F', 7, 'Economy'),
+(1087, 'Empty', '26A', 7, 'Economy'),
+(1088, 'Empty', '26B', 7, 'Economy'),
+(1089, 'Empty', '26C', 7, 'Economy'),
+(1090, 'Empty', '26D', 7, 'Economy'),
+(1091, 'Empty', '26E', 7, 'Economy'),
+(1092, 'Empty', '26F', 7, 'Economy'),
+(1093, 'Empty', '27A', 7, 'Economy'),
+(1094, 'Empty', '27B', 7, 'Economy'),
+(1095, 'Empty', '27C', 7, 'Economy'),
+(1096, 'Empty', '27D', 7, 'Economy'),
+(1097, 'Empty', '27E', 7, 'Economy'),
+(1098, 'Empty', '27F', 7, 'Economy'),
+(1099, 'Empty', '28A', 7, 'Economy'),
+(1100, 'Empty', '28B', 7, 'Economy'),
+(1101, 'Empty', '28C', 7, 'Economy'),
+(1102, 'Empty', '28D', 7, 'Economy'),
+(1103, 'Empty', '28E', 7, 'Economy'),
+(1104, 'Empty', '28F', 7, 'Economy'),
+(1105, 'Empty', '29A', 7, 'Economy'),
+(1106, 'Empty', '29B', 7, 'Economy'),
+(1107, 'Empty', '29C', 7, 'Economy'),
+(1108, 'Empty', '29D', 7, 'Economy'),
+(1109, 'Empty', '29E', 7, 'Economy'),
+(1110, 'Empty', '29F', 7, 'Economy');
 
 --
 -- Indexes for dumped tables
@@ -1205,17 +1596,17 @@ ALTER TABLE `employee`
 --
 ALTER TABLE `flight`
   ADD PRIMARY KEY (`FlightID`),
-  ADD KEY `PlaneID` (`PlaneID`),
   ADD KEY `flight_ibfk_3` (`PathID`),
-  ADD KEY `AirlineID` (`AirlineID`);
+  ADD KEY `flight_ibfk_2` (`PlaneID`),
+  ADD KEY `flight_ibfk_4` (`AirlineID`);
 
 --
 -- Indexes for table `flightpath`
 --
 ALTER TABLE `flightpath`
   ADD PRIMARY KEY (`PathID`),
-  ADD KEY `StartAirport` (`StartAirport`),
-  ADD KEY `EndAirport` (`EndAirport`);
+  ADD KEY `flightpath_ibfk_1` (`StartAirport`),
+  ADD KEY `flightpath_ibfk_2` (`EndAirport`);
 
 --
 -- Indexes for table `member`
@@ -1230,16 +1621,23 @@ ALTER TABLE `member`
 --
 ALTER TABLE `orderdetails`
   ADD PRIMARY KEY (`OrderID`,`TicketID`),
-  ADD KEY `BaggageID` (`BaggageID`),
-  ADD KEY `orderdetails_ibfk_3` (`TicketID`);
+  ADD KEY `orderdetails_ibfk_2` (`TicketID`),
+  ADD KEY `orderdetails_ibfk_1` (`BaggageID`);
 
 --
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`OrderID`),
-  ADD KEY `orders_ibfk_2` (`MemberID`),
-  ADD KEY `orders_ibfk_3` (`EmployeeID`);
+  ADD KEY `orders_ibfk_2` (`EmployeeID`),
+  ADD KEY `orders_ibfk_1` (`MemberID`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`PaymentID`),
+  ADD KEY `payments_ibfk_1` (`OrderID`);
 
 --
 -- Indexes for table `plane`
@@ -1262,37 +1660,37 @@ ALTER TABLE `ticket`
 -- AUTO_INCREMENT for table `baggage`
 --
 ALTER TABLE `baggage`
-  MODIFY `BaggageID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `BaggageID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `EmployeeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `EmployeeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `flight`
 --
 ALTER TABLE `flight`
-  MODIFY `FlightID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `FlightID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `MemberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `MemberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `orders`
+-- AUTO_INCREMENT for table `payments`
 --
-ALTER TABLE `orders`
-  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+ALTER TABLE `payments`
+  MODIFY `PaymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `TicketID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=763;
+  MODIFY `TicketID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1111;
 
 --
 -- Constraints for dumped tables
@@ -1320,37 +1718,43 @@ ALTER TABLE `city`
 -- Constraints for table `flight`
 --
 ALTER TABLE `flight`
-  ADD CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`PlaneID`) REFERENCES `plane` (`PlaneID`),
-  ADD CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`PathID`) REFERENCES `flightpath` (`PathID`),
-  ADD CONSTRAINT `flight_ibfk_4` FOREIGN KEY (`AirlineID`) REFERENCES `airline` (`AirlineID`);
+  ADD CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`PlaneID`) REFERENCES `plane` (`PlaneID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`PathID`) REFERENCES `flightpath` (`PathID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `flight_ibfk_4` FOREIGN KEY (`AirlineID`) REFERENCES `airline` (`AirlineID`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `flightpath`
 --
 ALTER TABLE `flightpath`
-  ADD CONSTRAINT `flightpath_ibfk_1` FOREIGN KEY (`StartAirport`) REFERENCES `airport` (`AirportID`),
-  ADD CONSTRAINT `flightpath_ibfk_2` FOREIGN KEY (`EndAirport`) REFERENCES `airport` (`AirportID`);
+  ADD CONSTRAINT `flightpath_ibfk_1` FOREIGN KEY (`StartAirport`) REFERENCES `airport` (`AirportID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `flightpath_ibfk_2` FOREIGN KEY (`EndAirport`) REFERENCES `airport` (`AirportID`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `orderdetails`
 --
 ALTER TABLE `orderdetails`
-  ADD CONSTRAINT `orderdetails_ibfk_1` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`OrderID`),
-  ADD CONSTRAINT `orderdetails_ibfk_2` FOREIGN KEY (`BaggageID`) REFERENCES `baggage` (`BaggageID`) ON DELETE SET NULL,
-  ADD CONSTRAINT `orderdetails_ibfk_3` FOREIGN KEY (`TicketID`) REFERENCES `ticket` (`TicketID`) ON DELETE NO ACTION;
+  ADD CONSTRAINT `orderdetails_ibfk_1` FOREIGN KEY (`BaggageID`) REFERENCES `baggage` (`BaggageID`),
+  ADD CONSTRAINT `orderdetails_ibfk_2` FOREIGN KEY (`TicketID`) REFERENCES `ticket` (`TicketID`),
+  ADD CONSTRAINT `orderdetails_ibfk_3` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`OrderID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`) ON DELETE SET NULL,
-  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`EmployeeID`) REFERENCES `employee` (`EmployeeID`) ON DELETE SET NULL;
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`) ON DELETE NO ACTION,
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`EmployeeID`) REFERENCES `employee` (`EmployeeID`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `payments`
+--
+ALTER TABLE `payments`
+  ADD CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`OrderID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `ticket`
 --
 ALTER TABLE `ticket`
-  ADD CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`FlightID`) REFERENCES `flight` (`FlightID`);
+  ADD CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`FlightID`) REFERENCES `flight` (`FlightID`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

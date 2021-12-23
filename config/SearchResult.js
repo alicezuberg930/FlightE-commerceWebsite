@@ -18,7 +18,7 @@ $(document).on('click', '.expand-details', function () {
     let details = $(this).parent().parent().parent().find(".flight-box-detail"), arrow = $(this).find(".fa-chevron-down")
     if (details.attr("data-expand") == 0) {
         details.attr("data-expand", 1)
-        details.css("height", "20.5rem")
+        details.css("height", "22rem")
         arrow.addClass("rotate")
     } else {
         details.attr("data-expand", 0)

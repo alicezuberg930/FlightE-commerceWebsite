@@ -72,22 +72,18 @@ foreach ($OrderInfo["CustomerInfo"] as $o) {
         }
     }
 }
-$OrderDate = date("Y-m-d");
+$OrderID = date("Ymdhis");
 $MemberID = $_SESSION["Member"][0]["MemberID"];
 $ContactEmail = $OrderInfo["ContactEmail"];
 $ContactName = $OrderInfo["ContactName"];
 $Address = $OrderInfo["Address"];
 $OrderArray = array(
-    "StartDate" => $Flight["StartDate"], "ReturnDate" => $ReturnDate, 'StartFlight' => $StartFlightPathString, 'Quantity' => $Quantity, 'TotalPrice' => $TotalPrice, 'State' => "Chưa thanh toán",
-    'EmployeeID' => 'null', 'OrderDate' => $OrderDate, 'MemberID' => $MemberID, 'ContactEmail' => $ContactEmail,
-    'ContactName' => $ContactName, 'Address' => $Address, 'TotalWeight' => $TotalWeight, "ReturnFlight" => $EndFlightPathString
+    'OrderID' => $OrderID, "StartDate" => $Flight["StartDate"], "ReturnDate" => $ReturnDate, 'StartFlight' => $StartFlightPathString,
+    'Quantity' => $Quantity, 'TotalPrice' => $TotalPrice, 'State' => "Đã thanh toán", 'EmployeeID' => 'null', 'OrderDate' => '',
+    'MemberID' => $MemberID, 'ContactEmail' => $ContactEmail, 'ContactName' => $ContactName, 'Address' => $Address,
+    'TotalWeight' => $TotalWeight, "ReturnFlight" => $EndFlightPathString
 );
-$i = $OrderCheck = $OrderDetailCheck = 0;
-$Order = $OrderObject->addOrder($OrderArray);
-if ($Order == 1) {
-    $OrderCheck = 1;
-}
-$OrderID = mysqli_fetch_array(Query("select max(OrderID) as OrderID from orders"))[0];
+$i = 0;
 $OrderDetailsArray = array();
 foreach ($OrderInfo["CustomerInfo"] as $o) {
     $Bruh = array(
@@ -98,8 +94,5 @@ foreach ($OrderInfo["CustomerInfo"] as $o) {
     $OrderDetailsArray[] = $Bruh;
     $i++;
 }
-$OrderDetail = $OrderObject->AddOrderDetails($OrderDetailsArray);
-if ($OrderDetail == 1) {
-    $OrderDetailCheck = 1;
-}
-die(json_encode(array("OrderCheck" => $OrderCheck, "OrderDetailCheck" => $OrderDetailCheck)));
+$_SESSION["Order"] = $OrderArray;
+$_SESSION["OrderDetail"] = $OrderDetailsArray;
