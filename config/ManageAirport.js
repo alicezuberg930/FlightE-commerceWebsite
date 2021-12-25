@@ -7,6 +7,14 @@ $(document).on('click', '.card-footer span', function () {
 })
 $("#Add").click((e) => {
     e.preventDefault();
+    if ($("#Length").val() <= 0) {
+        alert("Độ dài không hợp lệ")
+        return
+    }
+    if ($("#CityID").val() == '') {
+        alert("Vui lòng chọn 1 thành phố")
+        return
+    }
     $.ajax({
         url: "../php/Airport/AddAirport.php",
         method: "post",
@@ -14,11 +22,16 @@ $("#Add").click((e) => {
         success: function (a) {
             console.log(a)
             if (a == 1) {
+                Swal.fire({
+                    position: 'bottom-end',
+                    icon: 'success',
+                    html: '<h3>Thêm thành công</h3>'
+                })
                 $("form")[0].reset();
                 DisplayData(CurrentPage, "../php/Airport/DisplayAirport.php")
             } else {
                 Swal.fire({
-                    position: 'center',
+                    position: 'bottom-end',
                     icon: 'warning',
                     html: '<h3>Trùng mã sân bay</h3>'
                 })
@@ -38,6 +51,7 @@ $(document).on('click', '#Delete', function () {
     }).then(re => {
         if (re.isConfirmed) {
             DeleteData(CurrentPage, ID, "../php/Airport/DeleteAirport.php", "../php/Airport/DisplayAirport.php", "<h3>Sân bay đang thuộc 1 (hay nhiều) đường bay</h3>")
+            DisplayData(CurrentPage, "../php/Airport/DisplayAirport.php")
         }
     })
 })
@@ -50,7 +64,16 @@ $(document).on('click', '#Edit', function () {
     $("#AirportIDTemp").val(AirportID)
     $("#EditModal").modal("toggle")
 })
-$("#Confirm").click(() => {
+$("#Confirm").click((e) => {
+    e.preventDefault()
+    if ($("#LengthTemp").val() <= 0) {
+        alert("Độ dài không hợp lệ")
+        return
+    }
+    if ($("#CityIDTemp").val() == '') {
+        alert("Vui lòng chọn 1 thành phố")
+        return
+    }
     $.ajax({
         url: "../php/Airport/UpdateAirport.php",
         method: "post",
@@ -59,7 +82,7 @@ $("#Confirm").click(() => {
             console.log(a)
             if (a == 1) {
                 Swal.fire({
-                    position: 'center',
+                    position: 'bottom-end',
                     icon: 'success',
                     html: '<h3>Cập nhật thành công</h3>'
                 })
@@ -67,7 +90,7 @@ $("#Confirm").click(() => {
                 $("#EditModal").modal("toggle")
             } else {
                 Swal.fire({
-                    position: 'center',
+                    position: 'bottom-end',
                     icon: 'error',
                     html: '<h3>Trùng mã sân bay</h3>'
                 })
@@ -82,4 +105,17 @@ $.ajax({
         $("#CityID").append(a)
         $("#CityIDTemp").append(a)
     }
+})
+$("#search").keyup(function () {
+    if ($(this).val() == '') {
+        DisplayData(CurrentPage, "../php/Airport/DisplayAirport.php")
+    }
+    $.ajax({
+        url: "../php/Airport/SearchAirport.php",
+        method: "post",
+        data: { SearchString: $(this).val() },
+        success: function (a) {
+            $(".main-table tbody").html(a)
+        }
+    })
 })

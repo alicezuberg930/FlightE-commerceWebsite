@@ -59,5 +59,16 @@ class airline
         $connect->close();
         return $arr;
     }
+    public function SearchAirline($SQL)
+    {
+        $arr = array();
+        $connect = connection();
+        $query = mysqli_query($connect, "select * from airline a, country c where c.CountryID = a.CountryID" . $SQL);
+        while ($Row = mysqli_fetch_assoc($query)) {
+            $arr[] = $Row;
+        }
+        $connect->close();
+        return $arr;
+    }
 }
 $AirlineObject = new airline();

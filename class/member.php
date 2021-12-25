@@ -31,6 +31,17 @@ class member
         $connect->close();
         return $memberArray;
     }
+    public function SearchMember($SQL)
+    {
+        $connect = connection();
+        $query = mysqli_query($connect, $SQL);
+        $array = array();
+        while ($Row = mysqli_fetch_assoc($query)) {
+            $array[] = $Row;
+        }
+        $connect->close();
+        return $array;
+    }
     public function UpdateMember($User, $Table, $IDType)
     {
         $ID = $User["ID"];

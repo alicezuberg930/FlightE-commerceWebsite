@@ -33,12 +33,17 @@ $("#Add").click((e) => {
         success: function (a) {
             console.log(a)
             if (a == 1) {
+                Swal.fire({
+                    position: 'bottom-end',
+                    icon: 'success',
+                    html: '<h3>Thêm thành công</h3>',
+                })
                 $("form")[0].reset();
                 DisplayData(CurrentPage, "../php/Flightpath/DisplayFlightpath.php")
             } else {
                 Swal.fire({
-                    position: 'center',
-                    icon: 'warning',
+                    position: 'bottom-end',
+                    icon: 'error',
                     html: '<h3>Đã tồn tại đường bay</h3>',
                 })
             }
@@ -84,7 +89,7 @@ $("#Confirm").click(() => {
             console.log(a)
             if (a == 1) {
                 Swal.fire({
-                    position: 'center',
+                    position: 'bottom-end',
                     icon: 'success',
                     html: '<h3>Cập nhật thành công</h3>'
                 })
@@ -92,11 +97,25 @@ $("#Confirm").click(() => {
                 $("#EditModal").modal("toggle")
             } else {
                 Swal.fire({
-                    position: 'center',
+                    position: 'bottom-end',
                     icon: 'error',
                     html: '<h3>Trùng mã máy bay</h3>'
                 })
             }
+        }
+    })
+})
+$("#search").keyup(function () {
+    if ($(this).val() == '') {
+        DisplayData(CurrentPage, "../php/Flightpath/DisplayFlightpath.php")
+    }
+    $.ajax({
+        url: "../php/Flightpath/SearchFlightpath.php",
+        method: "post",
+        data: { SearchString: $(this).val() },
+        success: function (a) {
+            let Obj = JSON.parse(a)
+            $(".main-table tbody").html(Obj.CardBody)
         }
     })
 })

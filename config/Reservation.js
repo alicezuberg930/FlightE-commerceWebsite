@@ -114,9 +114,7 @@ function AppendCustomer(Element, SeatCode, Ticket, Class, Type) {
         success: function (data) { $(Element + " #customer-info tbody").append(data) }
     })
 }
-function isEmailValid(email) {
-    return /^[a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-zA-Z0-9]@[a-zA-Z0-9][-\.]{0,1}([a-zA-Z][-\.]{0,1})*[a-zA-Z0-9]\.[a-zA-Z0-9]{1,}([\.\-]{0,1}[a-zA-Z]){0,}[a-zA-Z0-9]{0,}$/.test(email)
-}
+import { isEmailValid } from './Regex.js'
 $(document).on("click", "#pay", function () {
     if (i < number || (SearchResult.EndDate != '' && j < number)) {
         alert("Chưa chọn đủ hành khách")
@@ -125,14 +123,13 @@ $(document).on("click", "#pay", function () {
     let OrderDetails = { CustomerInfo: [] }
     if (SearchResult.EndDate != '') {
         OrderDetails.ReturnFlight = $(".flight-main-1 .seat-list").attr("data-flight")
-        i = i + j;
     }
     OrderDetails.StartFlight = $(".flight-main-0 .seat-list").attr("data-flight")
     let customerinfo = document.querySelectorAll(".row-1"),
         baggage = document.querySelectorAll(".row-2"),
         contactinfo = document.querySelector(".row-3")
-    let TicketID, PassengerName, Age, BaggagePrice, BaggageWeight, SeatCode, Class, Type
-    for (cus = 0; cus < i; cus++) {
+    let TicketID, PassengerName, Age, BaggagePrice, BaggageWeight, SeatCode, Class, Type, BaggageID
+    for (let cus = 0; cus < i + j; cus++) {
         TicketID = baggage[cus].getAttribute("data-ticket"),
             PassengerName = customerinfo[cus].children[1].children[0].children[0],
             Age = customerinfo[cus].children[0].children[0].children[0].value,

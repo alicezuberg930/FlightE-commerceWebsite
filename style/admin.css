@@ -32,7 +32,7 @@ body {
 }
 
 #sidebar h1 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 700;
   font-style: italic;
   color: #dbcc45;
@@ -55,7 +55,7 @@ body {
 .containers {
   display: grid;
   height: 100vh;
-  grid-template-columns: 0.5fr 1fr 1fr 1fr;
+  grid-template-columns: 0.6fr 1fr 1fr 1fr;
   grid-template-rows: 0.2fr 3fr;
   grid-template-areas:
     "sidebar nav nav nav"
@@ -137,7 +137,7 @@ main {
 }
 
 .main__title > img {
-  max-height: 100px;
+  border-radius: 50%;
   object-fit: contain;
   margin-right: 20px;
 }
@@ -249,21 +249,6 @@ main {
   font-size: 14px;
   font-weight: 700;
   color: #a5aaad;
-}
-
-#choose-stat {
-  display: block;
-  margin-top: 1rem;
-  width: 100%;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  outline: none;
-  border-radius: 0.25rem;
 }
 
 .charts__right__cards {
@@ -438,4 +423,15 @@ option {
 
 .card-body {
   word-break: break-all;
+}
+
+.search-container {
+  margin-top: 0.5rem;
+}
+
+.search {
+  width: 97%;
+  height: 100%;
+  outline: none;
+  border: none;
 }

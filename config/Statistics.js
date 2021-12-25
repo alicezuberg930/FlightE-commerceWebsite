@@ -36,13 +36,19 @@ function Income(label, labels, data, type) {
         }
     });
 }
-$("#choose-stat").on("change", () => {
+$("#12-month-back").on("change", () => {
+    $("#yearly").val("")
+    if (myChart) {
+        myChart.destroy()
+    }
     let type = $("#choose-stat").val()
     if (type == 'income') {
         $.ajax({
             url: "../php/Statistic/MonthlyIncome.php",
-            method: "get",
+            method: "post",
+            data: { Date: $("#12-month-back").val() },
             success: function (data) {
+                console.log(data)
                 let Obj = JSON.parse(data)
                 if (myChart) {
                     myChart.destroy()
@@ -54,7 +60,8 @@ $("#choose-stat").on("change", () => {
     if (type == 'orders') {
         $.ajax({
             url: "../php/Statistic/MonthlyOrder.php",
-            method: "get",
+            method: "post",
+            data: { Date: $("#12-month-back").val() },
             success: function (data) {
                 let Obj = JSON.parse(data)
                 if (myChart) {
@@ -67,7 +74,8 @@ $("#choose-stat").on("change", () => {
     if (type == "ticket") {
         $.ajax({
             url: "../php/Statistic/MonthlyTicket.php",
-            method: "get",
+            method: "post",
+            data: { Date: $("#12-month-back").val() },
             success: function (data) {
                 let Obj = JSON.parse(data)
                 if (myChart) {
@@ -77,7 +85,61 @@ $("#choose-stat").on("change", () => {
             }
         })
     }
-    if (type == "ticket-type") {
+})
+$("#yearly").on("change", () => {
+    $("#12-month-back").val("")
+    if (myChart) {
+        myChart.destroy()
+    }
+    let type = $("#choose-stat").val()
+    if (type == 'income') {
+        $.ajax({
+            url: "../php/Statistic/MonthlyIncome.php",
+            method: "post",
+            data: { Date: $("#yearly").val() },
+            success: function (data) {
+                console.log(data)
+                let Obj = JSON.parse(data)
+                if (myChart) {
+                    myChart.destroy()
+                }
+                Income('VND', Obj.Date, Obj.Total, 'bar')
+            }
+        })
+    }
+    if (type == 'orders') {
+        $.ajax({
+            url: "../php/Statistic/MonthlyOrder.php",
+            method: "post",
+            data: { Date: $("#yearly").val() },
+            success: function (data) {
+                let Obj = JSON.parse(data)
+                if (myChart) {
+                    myChart.destroy()
+                }
+                Income('Đơn hàng', Obj.Date, Obj.Order, 'line')
+            }
+        })
+    }
+    if (type == "ticket") {
+        $.ajax({
+            url: "../php/Statistic/MonthlyTicket.php",
+            method: "post",
+            data: { Date: $("#yearly").val() },
+            success: function (data) {
+                let Obj = JSON.parse(data)
+                if (myChart) {
+                    myChart.destroy()
+                }
+                Income("Vé máy bay", Obj.Date, Obj.Ticket, 'line')
+            }
+        })
+    }
+})
+$("#choose-stat").on("change", () => {
+    $("#yearly").val("")
+    $("#12-month-back").val("")
+    if ($("#choose-stat").val() == "ticket-type") {
         if (myChart) {
             myChart.destroy()
         }

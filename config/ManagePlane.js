@@ -5,25 +5,35 @@ $(document).on('click', '.card-footer span', function () {
     CurrentPage = $(this).text()
     DisplayData(CurrentPage, "../php/Plane/DisplayPlane.php")
 })
+let a = 1, b = 1
 $("#Add").click((e) => {
+    e.preventDefault();
     $("#add-form input[type='number']").each(function () {
         if ($(this).val() <= 0) {
             alert("Không được nhập số âm")
-            return 0
+            a = 0
+            return
+        } else {
+            a = 1
         }
     })
-    e.preventDefault();
+    if (a == 0) { return }
     $.ajax({
         url: "../php/Plane/AddPlane.php",
         method: "post",
         data: $("#add-form").serialize(),
         success: function (a) {
             if (a == 1) {
+                Swal.fire({
+                    position: 'bottom-end',
+                    icon: 'success',
+                    html: '<h3>Thêm thành công</h3>',
+                })
                 $("form")[0].reset();
                 DisplayData(CurrentPage, "../php/Plane/DisplayPlane.php")
             } else {
                 Swal.fire({
-                    position: 'center',
+                    position: 'bottom-end',
                     icon: 'warning',
                     html: '<h3>Trùng mã máy bay</h3>',
                 })
@@ -56,13 +66,18 @@ $(document).on('click', '#Edit', function () {
     $("#BusinessRowTemp").val(BusinessRow), $("#HiddenPlaneID").val(PlaneID)
     $("#EditModal").modal("toggle")
 })
-$("#Confirm").click(() => {
+$("#Confirm").click((e) => {
+    e.preventDefault()
     $("#edit-form input[type='number']").each(function () {
         if ($(this).val() <= 0) {
             alert("Không được nhập số âm")
-            return 0
+            b = 0
+            return
+        } else {
+            b = 1
         }
     })
+    if (b == 0) { return }
     $.ajax({
         url: "../php/Plane/UpdatePlane.php",
         method: "post",
@@ -71,7 +86,7 @@ $("#Confirm").click(() => {
             console.log(a)
             if (a == 1) {
                 Swal.fire({
-                    position: 'center',
+                    position: 'bottom-end',
                     icon: 'success',
                     html: '<h3>Cập nhật thành công</h3>'
                 })
@@ -79,11 +94,26 @@ $("#Confirm").click(() => {
                 $("#EditModal").modal("toggle")
             } else {
                 Swal.fire({
-                    position: 'center',
+                    position: 'bottom-end',
                     icon: 'error',
                     html: '<h3>Trùng mã máy bay</h3>'
                 })
             }
+        }
+    })
+})
+$("#search").keyup(function () {
+    if ($(this).val() == '') {
+        DisplayData(CurrentPage, "../php/Plane/DisplayPlane.php")
+    }
+    $.ajax({
+        url: "../php/Plane/SearchPlane.php",
+        method: "post",
+        data: { SearchString: $(this).val() },
+        success: function (a) {
+            console.log(a)
+            let Obj = JSON.parse(a)
+            $(".main-table tbody").html(Obj.CardBody)
         }
     })
 })

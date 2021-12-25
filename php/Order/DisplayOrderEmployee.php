@@ -1,9 +1,14 @@
 <?php require_once("../../class/order.php");
-$OrderHTML = $State = $ReturnDate = '';
+$OrderHTML = $State = $Style = $ReturnDate = '';
 $i = 1;
-$Start = ($_POST["p"] - 1) * 5;
+if (isset($_POST["p"])) {
+    $Start = ($_POST["p"] - 1) * 5;
+    $OrderList = $OrderObject->GetOrder(" ORDER BY StartDate desc LIMIT $Start, 5");
+} else if (isset($_POST["MemberID"])) {
+    $Style = "style='display:none;'";
+    $OrderList = $OrderObject->GetOrder(" where MemberID = '" . $_POST["MemberID"] . "'");
+}
 $Array = array("CardBody" => '', 'CardFooter' => '');
-$OrderList = $OrderObject->GetOrder(" ORDER BY OrderID ASC LIMIT $Start, 5");
 $States = [
     "Đã thanh toán",
     "Đang chuyển",
@@ -36,16 +41,20 @@ foreach ($OrderList as $Order) {
         <td>" . $Order["StartFlight"] . "</td>
         <td>" . date("d-m-Y", strtotime($Order["StartDate"]))  . "</td>
         <td>" . $Order["ReturnFlight"] . "</td>
-        <td>" . $ReturnDate  . "</td>
-        <td>
+        <td>" . $ReturnDate  . "</td>";
+    if (isset($_POST["MemberID"])) {
+        $Array["CardBody"] .= "<td>" . $Order["State"] . "</td>";
+    } else {
+        $Array["CardBody"] .= "<td>
             <select " . $Disabled . " id='state' class='form-control'>'" . $State . "'</select>
-        </td>
-        <td>
-            <p>Địa chỉ: " . $Order["ContactEmail"] . "</p>
+        </td>";
+    }
+    $Array["CardBody"] .= "<td>
+            <p>Email: " . $Order["ContactEmail"] . "</p>
             <p>Tên người đặt: " . $Order["ContactName"] . "</p>
             <p>Địa chỉ: " . $Order["Address"] . "</p>
         </td>
-        <td><button id='deletebutton' class='btn bg-danger btn-sm'><i class='fas fa-trash-alt'></i></button></td>
+        <td " . $Style . "><button id='deletebutton' class='btn bg-danger btn-sm'><i class='fas fa-trash-alt'></i></button></td>
         <td><button id='detail' class='btn bg-info btn-sm'><i class='fas fa-info-circle'></i></button></td>
     </tr>";
     $i++;

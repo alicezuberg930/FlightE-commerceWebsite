@@ -1,6 +1,16 @@
 <?php require_once("../../connection.php");
 class employee
 {
+    public function SearchEmployee($SQL)
+    {
+        $query = mysqli_query($connect = connection(), "SELECT * FROM employee where" . $SQL);
+        $array = array();
+        while ($Row = mysqli_fetch_assoc($query)) {
+            $array[] = $Row;
+        }
+        $connect->close();
+        return $array;
+    }
     public function GetEmployee($Start, $Quantity)
     {
         $query = mysqli_query($connect = connection(), "SELECT * FROM employee ORDER BY EmployeeID ASC LIMIT $Start, $Quantity");

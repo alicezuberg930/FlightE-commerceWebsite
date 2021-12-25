@@ -1,10 +1,15 @@
 <?php require_once("../../class/order.php");
 session_start();
+if (isset($_SESSION["Payment"]) && isset($_SESSION["Order"]) && isset($_SESSION["OrderDetail"])) {
+    unset($_SESSION["Payment"]);
+    unset($_SESSION["Order"]);
+    unset($_SESSION["OrderDetail"]);
+}
 $UserID = $OrderHTML = $ReturnDate  = '';
 $i = 1;
 if (isset($_SESSION["Member"]))
     $UserID = $_SESSION["Member"][0]["MemberID"];
-$OrderList = $OrderObject->GetOrder(" where MemberID = '" . $UserID . "' order by OrderID asc");
+$OrderList = $OrderObject->GetOrder(" where MemberID = '" . $UserID . "' order by OrderDate desc");
 foreach ($OrderList as $Order) {
     if (!empty($Order["ReturnDate"])) {
         $ReturnDate = date("d-m-Y", strtotime($Order["ReturnDate"]));

@@ -16,6 +16,7 @@ foreach ($MemberList as $Member) {
         <td>' . $Member["Password"] . '</td>
         <td>' . $Member["Phonenumber"] . '</td>
         <td>' . $Member["Gender"] . '</td>
+        <td><button id="history" class="btn btn-info"><i class="fas fa-history"></i></button></td>
         <td>' . $Lock . '</td>
     </tr>';
     $i++;

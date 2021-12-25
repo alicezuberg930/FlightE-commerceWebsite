@@ -10,7 +10,7 @@ $(".nav-bar").html(`
         </a>
     </li>
     <li id="management" class="nav-link">
-        <a href="../admin/AdminSite.php">
+        <a href="../admin/ManageFlight.php">
             <span>Quản lý</span>
             <i class="fas fa-tasks"></i>
         </a>

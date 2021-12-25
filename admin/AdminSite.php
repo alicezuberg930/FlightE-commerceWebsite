@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html>
 
@@ -11,7 +12,9 @@
     <link rel="stylesheet" href="../style/admin.css">
     <script src="../library/jquery/jquery.min.js"></script>
     <script src="../library/chart.js/dist/chart.js"></script>
-    <link rel="stylesheet" href="../boostrap/css/bootstrap.css">
+    <!-- <link rel="stylesheet" href="../boostrap/css/bootstrap.css"> -->
+
+    <link rel="stylesheet" href="../boostrap/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -25,9 +28,9 @@
         <main>
             <div class="main__container">
                 <div class="main__title">
-                    <img src="icon/hello.svg">
+                    <img src="../icon/rem.jpeg" width="40">
                     <div class="main__greeting">
-                        <h1>Chào Tiến</h1>
+                        <h1><?php echo $_SESSION["Employee"][0]["Fullname"]; ?></h1>
                         <p>Chào mừng đến bảng điều khiển</p>
                     </div>
                 </div>
@@ -67,13 +70,45 @@
                             <div>
                                 <h1>Chọn thông tin cần thống kê</h1>
                             </div>
-                            <select class="form-control" id="choose-stat">
-                                <option value="" disabled selected hidden>Chọn thông tin cần thống kê</option>
-                                <option value="income">Thống kê thu nhập</option>
-                                <option value="orders">Thống kê đơn hàng đã đặt</option>
-                                <option value="ticket">Thống kê vé đã bán</option>
-                                <option value="ticket-type">Thống kê loại vé đã bán</option>
-                            </select>
+                            <div class="form-row">
+                                <div class="col-md-3">
+                                    <select class="form-control" id="yearly">
+                                        <option value="" disabled selected hidden>Theo năm</option>
+                                        <option value="2021-12-31">2021</option>
+                                        <option value="2020-12-31">2020</option>
+                                        <option value="2019-12-31">2019</option>
+                                        <option value="2018-12-31">2018</option>
+                                        <option value="2017-12-31">2017</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-control" id="12-month-back">
+                                        <option value="" disabled selected hidden>Trong 12 tháng trở lại</option>
+                                        <option value="2021-12-31">2021-12</option>
+                                        <option value="2021-11-30">2021-11</option>
+                                        <option value="2021-10-31">2021-10</option>
+                                        <option value="2021-09-30">2021-09</option>
+                                        <option value="2021-08-31">2021-08</option>
+                                        <option value="2021-07-31">2021-07</option>
+                                        <option value="2021-06-30">2021-06</option>
+                                        <option value="2021-05-31">2021-05</option>
+                                        <option value="2021-04-30">2021-04</option>
+                                        <option value="2021-03-31">2021-03</option>
+                                        <option value="2021-02-28">2021-02</option>
+                                        <option value="2021-01-31">2021-01</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-control" id="choose-stat">
+                                        <option value="" disabled selected hidden>Chọn thông tin cần thống kê</option>
+                                        <option value="income">Thống kê thu nhập</option>
+                                        <option value="orders">Thống kê đơn hàng đã đặt</option>
+                                        <option value="ticket">Thống kê vé đã bán</option>
+                                        <option value="ticket-type">Thống kê loại vé đã bán</option>
+                                    </select>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div class="charts__right">
@@ -92,7 +127,7 @@
         </main>
         <?php require_once("sidebar.html"); ?>
     </div>
-    <script src="../config/Statistics.js"></script>
+    <script async src="../config/Statistics.js"></script>
     <script src="../config/AdminResponsive.js"></script>
 </body>
 

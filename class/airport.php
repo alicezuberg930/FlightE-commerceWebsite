@@ -1,6 +1,17 @@
 <?php require_once("../../connection.php");
 class airport
 {
+    public function SearchAirport($SQL)
+    {
+        $query = mysqli_query($connect = connection(), "SELECT * FROM airport a, city c, country ctr where a.CityID = c.CityID and 
+        c.CountryID = ctr.CountryID" . $SQL);
+        $arr = array();
+        while ($Row = mysqli_fetch_assoc($query)) {
+            $arr[] = $Row;
+        }
+        $connect->close();
+        return $arr;
+    }
     public function GetAirport($Start, $Quantity)
     {
         $query = mysqli_query($connect = connection(), "SELECT * FROM airport a, city c, country ctr where a.CityID = c.CityID and 

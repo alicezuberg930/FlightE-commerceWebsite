@@ -19,9 +19,25 @@ function AddData(CurrentPage, DataObject, url, displayurl) {
         data: { Object: DataObject },
         success: function (result) {
             if (result == 1) {
-                alert(result);
+                Swal.fire({
+                    text: 'Thêm thông tin thành công',
+                    position: "bottom-end",
+                    timer: 1500,
+                    icon: 'success',
+                    timerProgressBar: true,
+                    showConfirmButton: false
+                })
                 $("form")[0].reset();
                 DisplayData(CurrentPage, displayurl);
+            } else {
+                Swal.fire({
+                    text: 'Trùng thông tin',
+                    position: "bottom-end",
+                    timer: 1500,
+                    icon: 'error',
+                    timerProgressBar: true,
+                    showConfirmButton: false
+                })
             }
         }
     })
@@ -34,36 +50,56 @@ function UpdateData(CurrentPage, DataObject, url, displayurl) {
         data: { Employee: DataObject },
         success: function (result) {
             if (result == 1) {
+                Swal.fire({
+                    text: 'Sửa thông tin thành công',
+                    position: "bottom-end",
+                    icon: 'success',
+                    timer: 1500,
+                    timerProgressBar: true,
+                    showConfirmButton: false
+                })
                 DisplayData(CurrentPage, displayurl);
                 $("#myModal").modal("toggle")
-                alert(result)
+            } else {
+                Swal.fire({
+                    text: 'Sửa thông tin thất bại',
+                    position: "bottom-end",
+                    icon: 'error',
+                    timer: 1500,
+                    timerProgressBar: true,
+                    showConfirmButton: false
+                })
             }
         }
     })
 }
 
-function DeleteData(CurrentPage, DataObject, url, displayurl, Notification) {
+function DeleteData(CurrentPage, DataObject, url, Notification) {
     $.ajax({
         url: url,
         method: "post",
         data: {
             ID: DataObject
         },
-        success: function (result) {
-            if (result == 1) {
+        success: function (data) {
+            if (data == 1) {
                 Swal.fire({
-                    position: 'center',
-                    icon: 'warning',
-                    html: '<h3>Xóa thành công</h3>',
-                    showConfirmButton: false,
+                    text: 'Xóa thông tin thành công',
+                    position: "bottom-end",
+                    icon: 'success',
+                    timer: 1500,
+                    timerProgressBar: true,
+                    showConfirmButton: false
                 })
                 DisplayData(CurrentPage, displayurl)
             } else {
                 Swal.fire({
-                    position: 'center',
-                    icon: 'warning',
-                    html: Notification,
-                    showConfirmButton: false,
+                    text: Notification,
+                    position: "bottom-end",
+                    icon: 'error',
+                    timer: 1500,
+                    timerProgressBar: true,
+                    showConfirmButton: false
                 })
             }
         }

@@ -189,7 +189,7 @@ $String .= '</div>
                         </td>
                     </tr>
                     <tr class="row-4">  
-                        <td><button id="pay" class="btn" style="background-color: #ffca39;">Thanh toán</button></td>    
+                        <td><button id="pay" class="btn" style="background-color: #ffca39;">Đặt vé</button></td>    
                     </tr>
                 </tbody>
             </table>

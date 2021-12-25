@@ -23,11 +23,16 @@ $("#Add").click((e) => {
                 data: a + "&" + $("#add-form").serialize(),
                 success: function (data) {
                     if (data == 1) {
+                        Swal.fire({
+                            position: 'bottom-end',
+                            icon: 'success',
+                            html: '<h3>Thêm thành công</h3>'
+                        })
                         $("form")[0].reset();
                         DisplayData(CurrentPage, "../php/Airline/DisplayAirline.php")
                     } else {
                         Swal.fire({
-                            position: 'center',
+                            position: 'bottom-end',
                             icon: 'warning',
                             html: '<h3>Trùng mã hãng hàng không</h3>'
                         })
@@ -49,6 +54,7 @@ $(document).on('click', '#Delete', function () {
     }).then(re => {
         if (re.isConfirmed) {
             DeleteData(CurrentPage, ID, "../php/Airline/DeleteAirline.php", "../php/Airline/DisplayAirline.php", "<h3>Hãng hàng không đã lập chuyến bay</h3>")
+            DisplayData(CurrentPage, "../php/Airline/DisplayAirline.php")
         }
     })
 })
@@ -104,4 +110,19 @@ $.ajax({
         $("#CountryID").append(a)
         $("#CountryIDTemp").append(a)
     }
+})
+$("#search").keyup(function () {
+    if ($(this).val() == '') {
+        DisplayData(CurrentPage, "../php/Airline/DisplayAirline.php")
+    }
+    $.ajax({
+        url: "../php/Airline/SearchAirline.php",
+        method: "post",
+        data: { SearchString: $(this).val() },
+        success: function (a) {
+            console.log(a)
+            let Obj = JSON.parse(a)
+            $(".main-table tbody").html(Obj.CardBody)
+        }
+    })
 })

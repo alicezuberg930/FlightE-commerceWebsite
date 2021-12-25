@@ -531,7 +531,7 @@
   position: absolute;
   content: ">";
   right: -2px;
-  top: -13px;
+  top: -0.67rem;
 }
 
 .container .flight-container .flight-list .flight-item .flight-info li .expand-details .fa-chevron-down {

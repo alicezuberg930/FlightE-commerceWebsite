@@ -26,7 +26,13 @@
         <main>
             <div class="main__container">
                 <div class="emp-orders card mt-5">
-                    <div class="card-header">Danh sách hóa đơn</div>
+                    <div class="card-header">
+                        <span>Danh sách hóa đơn</span>
+                        <div class="search-container form-control">
+                            <i class="fas fa-search text-dark"></i>
+                            <input id="search" class="search" placeholder="Tìm kiếm">
+                        </div>
+                    </div>
                     <div class="card-body">
                         <table class="table table-hover main-table">
                             <thead>

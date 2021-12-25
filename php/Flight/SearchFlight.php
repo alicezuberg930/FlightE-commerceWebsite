@@ -1,7 +1,14 @@
 <?php require_once("../../class/flight.php");
+$SearchString = str_replace([' ', 'VND', ','], '', $_POST["SearchString"]);
 $Array = array('CardBody' => '', 'CardFooter' => '', 'Page' => '');
-$Start = ($_POST["p"] - 1) * 10;
-$FlightList = $FlightObject->SearchFlight(" ");
+$Query = " and ((PlaneName LIKE '%" . $SearchString . "%' and AirlineName not like '%" . $SearchString . "%' and AdultPrice not like '%" . $SearchString . "%' and ChildrenPrice not like '%" . $SearchString . "%' and ToddlerPrice not like '%" . $SearchString . "%' and StartDate not like '%" . $SearchString . "%' and StartTime not like '%" . $SearchString . "%') or
+(PlaneName not LIKE '%" . $SearchString . "%' and AirlineName like '%" . $SearchString . "%' and AdultPrice not like '%" . $SearchString . "%' and ChildrenPrice not like '%" . $SearchString . "%' and ToddlerPrice not like '%" . $SearchString . "%' and StartDate not like '%" . $SearchString . "%' and StartTime not like '%" . $SearchString . "%') or
+(PlaneName not LIKE '%" . $SearchString . "%' and AirlineName not like '%" . $SearchString . "%' and AdultPrice like '%" . $SearchString . "%' and ChildrenPrice not like '%" . $SearchString . "%' and ToddlerPrice not like '%" . $SearchString . "%' and StartDate not like '%" . $SearchString . "%' and StartTime not like '%" . $SearchString . "%') or
+(PlaneName not LIKE '%" . $SearchString . "%' and AirlineName not like '%" . $SearchString . "%' and AdultPrice not like '%" . $SearchString . "%' and ChildrenPrice like '%" . $SearchString . "%' and ToddlerPrice not like '%" . $SearchString . "%' and StartDate not like '%" . $SearchString . "%' and StartTime not like '%" . $SearchString . "%') or
+(PlaneName not LIKE '%" . $SearchString . "%' and AirlineName not like '%" . $SearchString . "%' and AdultPrice not like '%" . $SearchString . "%' and ChildrenPrice not like '%" . $SearchString . "%' and ToddlerPrice like '%" . $SearchString . "%' and StartDate not like '%" . $SearchString . "%' and StartTime not like '%" . $SearchString . "%') or
+(PlaneName not LIKE '%" . $SearchString . "%' and AirlineName not like '%" . $SearchString . "%' and AdultPrice not like '%" . $SearchString . "%' and ChildrenPrice not like '%" . $SearchString . "%' and ToddlerPrice not like '%" . $SearchString . "%' and StartDate like '%" . $SearchString . "%' and StartTime not like '%" . $SearchString . "%') or
+(PlaneName not LIKE '%" . $SearchString . "%' and AirlineName not like '%" . $SearchString . "%' and AdultPrice not like '%" . $SearchString . "%' and ChildrenPrice not like '%" . $SearchString . "%' and ToddlerPrice not like '%" . $SearchString . "%' and StartDate not like '%" . $SearchString . "%' and StartTime like '%" . $SearchString . "%'))";
+$FlightList = $FlightObject->SearchFlight($Query);
 foreach ($FlightList as $Flight) {
     $CurrentDateClass = new DateTime($Flight["StartDate"]);
     $Array['CardBody'] .= '<tr class="FlightRow" data-airlineID="' . $Flight["AirlineID"] . '">
@@ -20,9 +27,4 @@ foreach ($FlightList as $Flight) {
         <td><button id="detail" class="btn bg-info btn-sm"><i class="fas fa-info-circle"></i></button></td>
     </tr>';
 }
-$NumberOfPages = ceil(mysqli_num_rows(Query("select * from flight")) / 10);
-for ($i = 1; $i <= $NumberOfPages; $i++) {
-    $Array['CardFooter'] .= '<span>' . $i . '</span> ';
-}
-$Array['Page'] = $NumberOfPages;
 die(json_encode($Array));

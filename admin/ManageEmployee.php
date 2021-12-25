@@ -11,6 +11,7 @@
     <script src="../library/jquery/jquery.min.js"></script>
     <link rel="stylesheet" href="../boostrap/css/bootstrap.css">
     <script src="../boostrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../library/sweetalert2/dist/sweetalert2.min.css">
 </head>
 
 <body>
@@ -57,7 +58,13 @@
                     </form>
                 </div>
                 <div class="card mt-5">
-                    <div class="card-header">Thông tin nhân viên</div>
+                    <div class="card-header">
+                        <span>Thông tin nhân viên</span>
+                        <div class="search-container form-control">
+                            <i class="fas fa-search text-dark"></i>
+                            <input id="search" class="search" placeholder="Tìm kiếm">
+                        </div>
+                    </div>
                     <div class="card-body">
                         <table class="table table-hover main-table">
                             <thead>
@@ -132,6 +139,7 @@
         </div>
     </div>
     <script src="../config/AdminResponsive.js"></script>
+    <script src="../library/sweetalert2/dist/sweetalert2.min.js"></script>
     <script type="module" src="../config/ManageEmployee.js"></script>
 </body>
 

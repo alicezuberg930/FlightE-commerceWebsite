@@ -5,9 +5,4 @@ $Email = $User["Email"];
 $Password = $User["Password"];
 $Phonenumber = $User["Phonenumber"];
 $Gender = $User["Gender"];
-$Query = $EmployeeObject->AddEmployee($Fullname, $Email, $Password, $Phonenumber, $Gender);
-if ($Query == 1) {
-    die("Thêm nhân viên thành công");
-} else {
-    die("Thêm nhân viên thất bại");
-}
+die($EmployeeObject->AddEmployee($Fullname, $Email, $Password, $Phonenumber, $Gender));

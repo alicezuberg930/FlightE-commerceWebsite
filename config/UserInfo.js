@@ -64,15 +64,16 @@ $("#DeleteAccount").click((e) => {
     e.preventDefault()
     Swal.fire({
         position: 'center',
-        icon: 'success',
+        icon: 'warning',
         html: '<h4>Bạn có chắc chắn không?</h4>',
         showConfirmButton: true,
+        showCancelButton: true,
         cancelButtonText: "Từ chối",
         confirmButtonText: "Đồng ý"
     }).then(promise => {
         if (promise.isConfirmed) {
             $.ajax({
-                url: "../php/User/DeleteMember.php",
+                url: "../php/User/DeleteUser.php",
                 method: "get",
                 success: function (data) {
                     if (data == 1) {
@@ -85,6 +86,7 @@ $("#DeleteAccount").click((e) => {
                         })
                         setTimeout(() => { window.location.href = "index.html" }, 1500)
                     }
+                    console.log(data)
                 }
             })
         }

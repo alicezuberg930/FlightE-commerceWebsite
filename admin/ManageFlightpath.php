@@ -54,7 +54,13 @@
                     </form>
                 </div>
                 <div class="card mt-5">
-                    <div class="card-header">Thông tin đường bay</div>
+                    <div class="card-header">
+                        <span>Thông tin đường bay</span>
+                        <div class="search-container form-control">
+                            <i class="fas fa-search text-dark"></i>
+                            <input id="search" class="search" placeholder="Tìm kiếm">
+                        </div>
+                    </div>
                     <div class="card-body">
                         <table class="table table-hover main-table">
                             <thead>

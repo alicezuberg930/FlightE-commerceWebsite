@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Manage Staff</title>
+    <title>Quản lý sân bay</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../style/admin.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
@@ -43,7 +43,7 @@
                             </div>
                             <div class="col-md-3">
                                 <lable>Thành phố:</lable>
-                                <select class="form-control" type="number" id="CityID" name="CityID">
+                                <select class="form-control" id="CityID" name="CityID">
                                     <option value="">Chọn thành phố</option>
                                 </select>
                             </div>
@@ -52,7 +52,13 @@
                     </form>
                 </div>
                 <div class="card mt-5">
-                    <div class="card-header">Thông tin sân bay</div>
+                    <div class="card-header">
+                        <span> Thông tin sân bay</span>
+                        <div class="search-container form-control">
+                            <i class="fas fa-search text-dark"></i>
+                            <input id="search" class="search" placeholder="Tìm kiếm">
+                        </div>
+                    </div>
                     <div class="card-body">
                         <table class="table table-hover main-table">
                             <thead>

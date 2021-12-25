@@ -7,38 +7,28 @@ $(document).on('click', '.card-footer span', function () {
 })
 $("#Add").click((e) => {
     e.preventDefault();
-    let Plane = $("#Airplane").val()
-    AddData(CurrentPage, {
-        FlightTime: $("#Time").text(),
-        StartDate: $("#StartDate").val(),
-        StartTime: $("#StartTime").val(),
-        PlaneDetails: Plane,
-        AirlineID: $("#Airline").val(),
-        PathID: $("#Flightpath").val(),
-        AdultPrice: $("#AdultPrice").val(),
-        ChildrenPrice: $("#ChildrenPrice").val(),
-        ToddlerPrice: $("#ToddlerPrice").val(),
-        SeatAmount: $("#Airplane").val().split("-")[1]
-    }, "../php/Flight/AddFlight.php", "../php/Flight/DisplayFlight.php")
-    setTimeout(() => {
-        $.ajax({
-            url: "../php/Ticket/AddTicket.php",
-            method: "post",
-            data: { PlaneDetails: Plane },
-            success: function (result) {
-                alert(result)
-            }
-        })
-    }, 2000)
+    $("#add-form input[type='number']").each(function () {
+        if ($(this).val() <= 0) {
+            alert("Không được nhập số âm")
+            return 0
+        }
+    })
+    $.ajax({
+        url: "../php/Flight/AddFlight.php",
+        method: "post",
+        data: $("#add-form").serialize(),
+        success: function (data) {
+            Swal.fire({
+                position: 'bottom-end',
+                icon: 'success',
+                html: data,
+                showCancelButton: false,
+            })
+            DisplayData(CurrentPage, "../php/Flight/DisplayFlight.php");
+        }
+    })
 })
 $(document).on('click', '#Delete', function () {
-    // let StartDate = $(this).parent().parent().find('td:nth-child(3)').text().split("-")
-    // let StartTime = $(this).parent().parent().find('td:nth-child(4)').text().split(":")
-    // let FlightDate = new Date(StartDate[2] + "-" + StartDate[1] + "-" + StartDate[0] + "T" + StartTime[0] + ":" + StartTime[1] + ":" + StartTime[2])
-    // if (FlightDate > new Date()) {
-    //     alert("Vẫn chưa qua ngày khởi hành")
-    //     return
-    // }
     let ID = $(this).parent().parent().find('td:nth-child(2)').text()
     let c = "<h3>Bạn có muốn xóa chuyến bay thứ " + ID + "?<h3>"
     Swal.fire({
@@ -50,7 +40,8 @@ $(document).on('click', '#Delete', function () {
         confirmButtonText: "Đồng ý"
     }).then(re => {
         if (re.isConfirmed) {
-            DeleteData(CurrentPage, ID, "../php/Flight/DeleteFlight.php", "../php/Employee/DisplayFlight.php", "<h3>Chuyến bay đã được đặt chỗ</h3>")
+            DeleteData(CurrentPage, ID, "../php/Flight/DeleteFlight.php", "Chuyến bay đã được đặt chỗ")
+            DisplayData(CurrentPage, "../php/Flight/DisplayFlight.php");
         }
     })
 })
@@ -64,18 +55,29 @@ $(document).on('click', '#Edit', function () {
         ChildrenPrice = $(this).parent().parent().find('td:nth-child(9)').text(),
         ToddlerPrice = $(this).parent().parent().find('td:nth-child(10)').text()
     $("#TempStartDate").val(StartDate[2] + "-" + StartDate[1] + "-" + StartDate[0]), $("#TempStartTime").val(StartTime), $("#TempAirline").val(Airline), $("#TempFlightpath").val(FlightPath)
-    $("#TempAdultPrice").val(AdultPrice), $("#TempChilrenPrice").val(ChildrenPrice), $("#TempToddlerPrice").val(ToddlerPrice), $("#FlightID").val(ID)
+    $("#TempAdultPrice").val(FilterPrice(AdultPrice)), $("#TempChilrenPrice").val(FilterPrice(ChildrenPrice))
+    $("#TempToddlerPrice").val(FilterPrice(ToddlerPrice)), $("#FlightID").val(ID)
     $("#EditModal").modal("toggle")
 })
-$("#Confirm").click(() => {
+let FilterPrice = (Number) => {
+    return parseInt(Number.replace(" ", '').replace("VND", '').replace(',', '').replace(',', ''))
+}
+$("#Confirm").click((e) => {
+    e.preventDefault()
+    $("#edit-form input[type='number']").each(function () {
+        if ($(this).val() <= 0) {
+            alert("Không được nhập số âm")
+            return
+        }
+    })
     $.ajax({
         url: "../php/Flight/UpdateFlight.php",
         method: "post",
         data: $("#edit-form").serialize(),
-        success: function (a) {
+        success: function (a) { console.log(a)
             if (a == 1) {
                 Swal.fire({
-                    position: 'center',
+                    position: 'bottom-end',
                     icon: 'success',
                     html: '<h3>Cập nhật thành công</h3>'
                 })
@@ -130,4 +132,19 @@ $(document).on("click", "#detail", function () {
         }
     })
     $("#DetailModal").modal("toggle")
+})
+$("#search").keyup(function () {
+    if ($(this).val() == '') {
+        DisplayData(CurrentPage, "../php/Flight/DisplayFlight.php");
+    }
+    $.ajax({
+        url: "../php/Flight/SearchFlight.php",
+        method: "post",
+        data: { SearchString: $(this).val() },
+        success: function (data) {
+            console.log(data)
+            let Obj = JSON.parse(data)
+            $(".main-table tbody").html(Obj.CardBody)
+        }
+    })
 })

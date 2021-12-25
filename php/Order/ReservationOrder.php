@@ -8,7 +8,7 @@ $Quantity = count($OrderInfo["CustomerInfo"]);
 $Flight = $FlightObject->SearchFlight(" and FlightID = '$FlightID'")[0];
 $StartFlightPath = $FlightPathObject->GetFlightPath(" where PathID = '" . $Flight["PathID"] . "'")[0];
 $StartFlightPathString = $StartFlightPath["CN1"] . " (" . $StartFlightPath["StartAirport"] . ") - " . $StartFlightPath["CN2"] . " (" . $StartFlightPath["EndAirport"] . ")";
-$Flight2 = $ReturnDate = $EndFlightPathString = $EndFlightPath = 'null';
+$Flight2 = $ReturnDate = $EndFlightPathString = $EndFlightPath = '';
 if (isset($OrderInfo["ReturnFlight"])) {
     $Flight2 = $FlightObject->SearchFlight(" and FlightID = '" . $OrderInfo["ReturnFlight"] . "'")[0];
     $EndFlightPath = $FlightPathObject->GetFlightPath(" where PathID = '" . $Flight2["PathID"] . "'")[0];

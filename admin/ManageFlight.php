@@ -4,7 +4,6 @@
 <head>
     <title>Manage Flight</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../style/admin.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
@@ -12,6 +11,8 @@
     <link rel="stylesheet" href="../boostrap/css/bootstrap.css">
     <script src="../boostrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../library/sweetalert2/dist/sweetalert2.min.css">
+    <script src="../library/sweetalert2/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="../style/admin.css">
 </head>
 
 <body>
@@ -46,13 +47,13 @@
                         <div class="form-row mb-2">
                             <div class="col-md-4">
                                 <lable>Hãng hàng không:</lable>
-                                <select id="Airline" name="Airline" class="form-control">
+                                <select id="Airline" name="AirlineID" class="form-control">
                                     <option selected disabled hidden>Chọn hãng hàng không</option>
                                 </select>
                             </div>
                             <div class="col-md-8">
                                 <lable>Đường bay:</lable>
-                                <select class="form-control" name="Flightpath" id="Flightpath">
+                                <select class="form-control" name="PathID" id="Flightpath">
                                     <option selected disabled hidden>Chọn đường bay</option>
                                 </select>
                             </div>
@@ -78,7 +79,13 @@
                     </form>
                 </div>
                 <div class="card mt-5">
-                    <div class="card-header">Thông tin chuyến bay</div>
+                    <div class="card-header">
+                        <span>Thông tin chuyến bay</span>
+                        <div class="search-container form-control">
+                            <i class="fas fa-search text-dark"></i>
+                            <input id="search" class="search" placeholder="Tìm kiếm">
+                        </div>
+                    </div>
                     <div class="card-body">
                         <table class="table table-hover main-table">
                             <thead>
@@ -117,19 +124,19 @@
                         <div class="form-row mb-2">
                             <div class="col-md-12">
                                 <lable>Ngày khởi hành:</lable>
-                                <input class="form-control" type="date" name="TempStartDate" id="TempStartDate">
+                                <input class="form-control" type="date" name="StartDate" id="TempStartDate">
                             </div>
                         </div>
                         <div class="form-row mb-2">
                             <div class="col-md-12">
                                 <lable>Giờ khởi hành:</lable>
-                                <input class="form-control" type="time" name="TempStartTime" id="TempStartTime">
+                                <input class="form-control" type="time" name="StartTime" id="TempStartTime">
                             </div>
                         </div>
                         <div class="form-row mb-2">
                             <div class="col-md-12">
                                 <lable>Hãng hàng không:</lable>
-                                <select class="form-control" name="TempAirline" id="TempAirline">
+                                <select class="form-control" name="AirlineID" id="TempAirline">
                                     <option selected disabled hidden>Chọn hãng hàng không</option>
                                 </select>
                             </div>
@@ -137,26 +144,26 @@
                         <div class=" form-row mb-2">
                             <div class="col-md-12">
                                 <lable>Đường bay:</lable>
-                                <select class="form-control" name="TempFlightpath" id="TempFlightpath">
+                                <select class="form-control" name="PathID" id="TempFlightpath">
                                 </select>
                             </div>
                         </div>
                         <div class="form-row mb-2">
                             <div class="col-md-12">
                                 <lable>Giá vé người lớn:</lable>
-                                <input min="0" class="form-control" type="number" name="TempAdultPrice" id="TempAdultPrice">
+                                <input min="0" class="form-control" type="number" name="AdultPrice" id="TempAdultPrice">
                             </div>
                         </div>
                         <div class="form-row mb-2">
                             <div class="col-md-12">
                                 <lable>Giá vé trẻ em:</lable>
-                                <input min="0" class="form-control" type="number" name="TempChilrenPrice" id="TempChilrenPrice">
+                                <input min="0" class="form-control" type="number" name="ChilrenPrice" id="TempChilrenPrice">
                             </div>
                         </div>
                         <div class="form-row mb-2">
                             <div class="col-md-12">
                                 <lable>Giá vé em bé:</lable>
-                                <input min="0" class="form-control" type="number" name="TempToddlerPrice" id="TempToddlerPrice">
+                                <input min="0" class="form-control" type="number" name="ToddlerPrice" id="TempToddlerPrice">
                             </div>
                         </div>
                     </form>
@@ -198,7 +205,6 @@
         </div>
     </div>
     <script src="../config/AdminResponsive.js"></script>
-    <script src="../library/sweetalert2/dist/sweetalert2.min.js"></script>
     <script type="module" src="../config/ManageFlight.js"></script>
 </body>
 

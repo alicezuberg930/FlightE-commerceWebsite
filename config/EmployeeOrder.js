@@ -19,7 +19,7 @@ $(document).on("change", "#state", function () {
         success: function (data) {
             if (data != '') {
                 Swal.fire({
-                    position: 'center',
+                    position: 'bottom-end',
                     icon: 'info',
                     html: "<h4>Đã cập nhật trạng thái!</h4>",
                 })
@@ -33,17 +33,17 @@ $(document).on("click", "#deletebutton", function () {
     let EndDate = $(this).parent().parent().children().eq(8).text().split("-")
     if (EndDate.lenth > 0 && new Date(EndDate[2] + "-" + EndDate[1] + "-" + EndDate[0]) > new Date()) {
         Swal.fire({
-            position: 'center',
+            position: 'bottom-end',
             icon: 'error',
-            html: "<h4>Hóa đơn vẫn chưa thanh toán!</h4>",
+            html: "<h4>Vẫn chưa qua ngày bay!</h4>",
         })
         return
     }
     if (new Date(StartDate[2] + "-" + StartDate[1] + "-" + StartDate[0]) > new Date()) {
         Swal.fire({
-            position: 'center',
+            position: 'bottom-end',
             icon: 'error',
-            html: "<h4>Hóa đơn vẫn chưa thanh toán!</h4>",
+            html: "<h4>Vẫn chưa qua ngày bay!</h4>",
         })
         return
     }
@@ -65,7 +65,7 @@ $(document).on("click", "#deletebutton", function () {
                 success: function (data) {
                     if (data != '') {
                         Swal.fire({
-                            position: 'center',
+                            position: 'bottom-end',
                             icon: 'success',
                             html: "<h4>Đơn hàng đã được xóa thành công</h4>",
                             showCancelButton: true
@@ -113,3 +113,19 @@ function ExportOrderDetail() {
 ExportOrder()
 ExportOrderDetail()
 export { ExportOrder, ExportOrderDetail }
+$("#search").keyup(function () {
+    if ($(this).val() == '') {
+        DisplayData(CurrentPage, "../php/Order/DisplayOrderEmployee.php")
+    }
+    $.ajax({
+        url: "../php/Order/SearchOrder.php",
+        method: "post",
+        data: { SearchString: $(this).val() },
+        success: function (a) {
+            console.log(a)
+            let Obj = JSON.parse(a)
+            $(".main-table tbody").html(Obj.CardBody)
+            $(".card-footer").html(Obj.CardFooter)
+        }
+    })
+})

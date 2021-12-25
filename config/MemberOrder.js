@@ -24,15 +24,31 @@ $(document).on("click", "#detail", function () {
     $("#myModal").modal("toggle")
 })
 $(document).on("click", "#cancel", function () {
-    let OrderDate = $(this).parent().parent().children().eq(1).text().split("-")
-    if ((new Date().getTime() - new Date(OrderDate[2] + "-" + OrderDate[1] + "-" + OrderDate[0]).getTime()) / (1000 * 60 * 60) >= 24) {
+    if ($(this).parent().parent().children().eq(9).text() == "Đã giao") {
         Swal.fire({
             position: 'center',
             icon: 'error',
-            html: "<h4>Đã quá 24h</h4>",
+            html: "<h4>Đơn hàng đã giao</h4>",
         })
         return
     }
+    if ($(this).parent().parent().children().eq(9).text() == "Đang chuyển") {
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            html: "<h4>Đơn hàng đang được vận chuyển</h4>",
+        })
+        return
+    }
+    // let OrderDate = $(this).parent().parent().children().eq(1).text().split("-")
+    // if ((new Date().getTime() - new Date(OrderDate[2] + "-" + OrderDate[1] + "-" + OrderDate[0]).getTime()) / (1000 * 60 * 60) >= 24) {
+    //     Swal.fire({
+    //         position: 'center',
+    //         icon: 'error',
+    //         html: "<h4>Đã quá 24h</h4>",
+    //     })
+    //     return
+    // }
     let StartDate = $(this).parent().parent().children().eq(6).text().split("-")
     if (new Date(StartDate[2] + "-" + StartDate[1] + "-" + StartDate[0]) < new Date()) {
         Swal.fire({

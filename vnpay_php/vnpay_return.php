@@ -1,5 +1,6 @@
 <?php ob_start();
 session_start();
+require_once("../connection.php");
 require_once("./config.php");
 $vnp_SecureHash = $_GET['vnp_SecureHash'];
 $inputData = array();
@@ -24,13 +25,20 @@ foreach ($inputData as $key => $value) {
 $secureHash = hash('sha256', $vnp_HashSecret . $hashData);
 if ($secureHash == $vnp_SecureHash) {
     if ($_GET['vnp_ResponseCode'] == '00') {
-        $time = date("Y-m-d h:i:s", strtotime($_GET['vnp_PayDate']));
+        $Time = date("Y-m-d h:i:s", strtotime($_GET['vnp_PayDate']));
+        $_SESSION["Order"]["OrderDate"] = $Time;
         $PaymentArray = array(
-            "OrderID" => $_GET["vnp_TxnRef"], "Total" => $_GET['vnp_Amount'] / 100, "Note" => $_GET['vnp_OrderInfo'], "PaymentTime" => $time,
-            "vnp_response_code" => $_GET['vnp_ResponseCode'], "code_vnpay" => $_GET['vnp_TransactionNo'], "BankCode" => $_GET['vnp_BankCode']
+            "OrderID" => $_GET["vnp_TxnRef"], "Total" => $_GET['vnp_Amount'] / 100, "Note" => $_GET['vnp_OrderInfo'],
+            "PaymentTime" => $Time, "vnp_response_code" => $_GET['vnp_ResponseCode'],
+            "code_vnpay" => $_GET['vnp_TransactionNo'], "BankCode" => $_GET['vnp_BankCode']
         );
         $_SESSION["Payment"] = $PaymentArray;
-        $Result = "Giao dịch thành công";
+        if (mysqli_num_rows(Query("select * from payments where OrderID = '" . $_SESSION["Order"]["OrderID"] . "'")) == 1) {
+            return;
+        }
+        if (AddOrder($_SESSION["Order"]) == 1 && AddPayment($_SESSION["Payment"]) == 1 && AddOrderDetails($_SESSION["OrderDetail"]) == 1) {
+            $Result = "Giao dịch thành công";
+        }
     } else {
         $Result = "Giao dịch không thành công";
     }
@@ -55,7 +63,7 @@ if ($secureHash == $vnp_SecureHash) {
 <body>
     <style>
         .container {
-            margin: 3.4rem auto;
+            margin: 2.5rem auto;
         }
 
         .header {
@@ -67,12 +75,12 @@ if ($secureHash == $vnp_SecureHash) {
         .footer {
             border-top: 1px solid grey;
             text-align: center;
-            margin-top: 9rem;
+            margin-top: 7rem;
         }
     </style>
     <div class="container">
         <div class="header clearfix">
-            <h2 class="text-muted">Thông tin đơn hàng</h2>
+            <h2 class="text-muted">Thông tin hóa đơn</h2>
         </div>
         <div class="table-responsive">
             <div class="form-group">
