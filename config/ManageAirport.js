@@ -10,7 +10,7 @@ $("#Add").click((e) => {
     if ($("#Length").val() <= 0) {
         alert("Độ dài không hợp lệ")
         return
-    }
+    } 
     if ($("#CityID").val() == '') {
         alert("Vui lòng chọn 1 thành phố")
         return

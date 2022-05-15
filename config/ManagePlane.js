@@ -9,6 +9,13 @@ let a = 1, b = 1
 $("#Add").click((e) => {
     e.preventDefault();
     $("#add-form input[type='number']").each(function () {
+        if ($(this).val() == '') {
+            alert("Dữ liệu không được rỗng")
+            a = 0
+            return
+        } else {
+            a = 1
+        }
         if ($(this).val() <= 0) {
             alert("Không được nhập số âm")
             a = 0
