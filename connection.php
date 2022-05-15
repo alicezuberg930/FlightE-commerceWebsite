@@ -4,10 +4,10 @@ const USERNAME = "root";
 const PASSWORD = "";
 const DATABASE = "quanlyvemaybay";
 
-// const HOST = "sql110.epizy.com";
-// const USERNAME = "epiz_30452646";
-// const PASSWORD = "daDx970qVCVa74F";
-// const DATABASE = "epiz_30452646_quanlyvemaybay";
+// const HOST = "sql109.epizy.com";
+// const USERNAME = "epiz_31687397";
+// const PASSWORD = "5XvzmZhUF8DViI";
+// const DATABASE = "epiz_31687397_zippo";
 
 function connection()
 {

@@ -45,26 +45,28 @@
       -ms-flex-align: center;
           align-items: center;
   padding: 5px 0;
+  color: white;
 }
 
 .nav-bar .logo {
-  color: white;
-  font-size: 40px;
   text-align: center;
-  width: 10%;
 }
 
 .nav-bar .nav-links-container {
   margin: 0;
-  line-height: 30px;
+  line-height: 2rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 70%;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  font-size: 18px;
+  width: 80%;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  font-size: 16px;
+}
+
+.nav-bar .nav-links-container .nav-link {
+  padding: 0.5rem 1rem;
 }
 
 .nav-bar .nav-links-container .nav-link a {

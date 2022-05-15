@@ -27,7 +27,7 @@
             <div class="main__container">
                 <div class="mt-3">
                     <form enctype="multipart/form-data" action="../php/Plane/AddPlane.php" method="post" id="add-form">
-                        <h2>Quản lí thông tin nhân viên</h2>
+                        <h2>Quản lí thông tin máy bay</h2>
                         <div class="form-row mb-2">
                             <div class="col-md-4">
                                 <lable>Mã máy bay:</lable>

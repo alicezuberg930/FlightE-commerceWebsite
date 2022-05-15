@@ -1,8 +1,10 @@
 $(".nav-bar").html(`
-<a class="logo" href="index.html">
-    <i class="fas fa-plane"></i>
-</a>
 <ul class="nav-links-container">
+    <li class="nav-link">
+        <a class="logo" href="index.html">
+            <i class="fas fa-plane"></i>
+        </a>
+    </li>   
     <li class="nav-link">
         <a href="thi_cong.html">
             <span>Thông Báo</span>

@@ -7,6 +7,14 @@ $(document).on('click', '.card-footer span', function () {
 })
 $("#Add").click((e) => {
     e.preventDefault();
+    if ($("#CountryID").val() == '') {
+        Swal.fire({
+            position: 'bottom-end',
+            icon: 'warning',
+            html: '<h3>Hãy chọn 1 quốc gia</h3>'
+        })
+        return
+    }
     let image = $("#AirlineImage").prop("files")[0]
     let form = new FormData()
     form.append("AirlineImage", image);
