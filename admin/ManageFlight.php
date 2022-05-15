@@ -22,7 +22,7 @@
         }
     </style>
     <div class="containers">
-        <?php require_once("Navbar.html") ?>
+        <?php require_once("Navbar.html"); ?>
         <main>
             <div class="main__container">
                 <div class="mt-3">

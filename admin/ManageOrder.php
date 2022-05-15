@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-    <script src="../library/jquery/jquery/dist/jquery.min.js"></script>
-    <link rel="stylesheet" href="../boostrap/css/bootstrap.css">
-    <script src="../boostrap/js/bootstrap.min.js"></script>
     <script lang="javascript" src="../library/xlsx/dist/xlsx.full.min.js"></script>
     <link rel="stylesheet" href="../library/sweetalert2/dist/sweetalert2.min.css">
+    <script src="../library/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="../boostrap/css/bootstrap.css">
+    <script src="../boostrap/js/bootstrap.js"></script>
 </head>
 
 <body>
@@ -92,7 +92,7 @@
             </div>
         </div>
         <script src="../config/AdminResponsive.js"></script>
-        <script async type="module" src="../config/EmployeeOrder.js"></script>
+        <script type="module" src="../config/EmployeeOrder.js"></script>
         <script src="../library/sweetalert2/dist/sweetalert2.min.js"></script>
 </body>
 

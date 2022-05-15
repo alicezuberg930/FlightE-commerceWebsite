@@ -75,6 +75,10 @@ $(document).on('click', '#Edit', function () {
 })
 $("#Confirm").click((e) => {
     e.preventDefault()
+    if ($("#CountryIDTemp").val() == '') {
+        alert("Hãy chọn 1 quốc gia")
+        return
+    }
     let image = $("#AirlineImageTemp").prop("files")[0]
     let form = new FormData()
     form.append("AirlineImage", image);

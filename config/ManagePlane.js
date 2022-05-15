@@ -76,6 +76,13 @@ $(document).on('click', '#Edit', function () {
 $("#Confirm").click((e) => {
     e.preventDefault()
     $("#edit-form input[type='number']").each(function () {
+        if ($(this).val() == '') {
+            alert("Dữ liệu không được rỗng")
+            b = 0
+            return
+        } else {
+            b = 1
+        }
         if ($(this).val() <= 0) {
             alert("Không được nhập số âm")
             b = 0
